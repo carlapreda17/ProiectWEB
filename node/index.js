@@ -2,20 +2,14 @@ const express = require('express');
 const cors = require('cors');
 
 const app = express();
-app.use(cors);
+app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 
+const userRoutes = require('./server/userRoutes');
 
-app.post('/api/signUp', (req, res) => {
-    try {
-        const formData = req.body;
-        console.log(formData);
-
-        res.json({ success: true, message: 'Data logged' });
-    } catch(error) {
-        console.error('Error:', error);
-        res.status(500).json({ success: false, message: 'An error occurred' });
-    }
-});
+app.use('/users', userRoutes);
 
 app.listen(3001, ()=> {
     console.log('Server listening on port 3001');

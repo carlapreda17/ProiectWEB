@@ -1,5 +1,6 @@
 import React from "react";
 import {useState} from "react";
+import axios from 'axios';
 
 function SignUp(params){
     const [valueNume, setValueNume] = useState('');
@@ -31,6 +32,8 @@ function SignUp(params){
     }
     const handleSubmit = async (event) => {
 
+        event.preventDefault();
+
         const userData = {
             nume: valueNume,
             prenume: valuePrenume,
@@ -39,7 +42,16 @@ function SignUp(params){
             telefon: valueTelefon,
             facultate: valueFacultate
         };
-        console.log(userData)
+
+        console.log(userData);
+
+        try {
+            const response = await axios.post('http://localhost:3001/users/signUp', userData);
+
+            console.log(response);
+        } catch(error) {
+            console.log(error);
+        }
     }
     return(
         <form onSubmit={handleSubmit}>

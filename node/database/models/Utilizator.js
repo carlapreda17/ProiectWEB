@@ -18,6 +18,7 @@ const Utilizator = sequelize.define('Utilizator', {
         references: {
             model: 'Grup',
             key: 'id_grup',
+            allowNull: true
         }
     },
     }, {
