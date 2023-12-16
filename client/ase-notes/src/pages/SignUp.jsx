@@ -98,7 +98,6 @@ function SignUp(props){
         {
             alert("Errors")
         }
-        console.log(userData)
 
         console.log(userData);
 
