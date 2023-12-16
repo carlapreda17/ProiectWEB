@@ -9,9 +9,7 @@ function Homepage(params){
     }
 
     return(
-
         <button onClick={navigateToSignUp}>Sign up</button>
-
     )
 }
 

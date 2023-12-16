@@ -1,5 +1,6 @@
 import React from "react";
 import {useState} from "react";
+import axios from 'axios';
 
 
 function SignUp(props){
@@ -78,6 +79,8 @@ function SignUp(props){
     };
     const handleSubmit = async (event) => {
 
+        event.preventDefault();
+
         const userData = {
             nume: fields["nume"],
             prenume: fields["prenume"],
@@ -95,7 +98,16 @@ function SignUp(props){
         {
             alert("Errors")
         }
-        console.log(userData)
+
+        console.log(userData);
+
+        try {
+            const response = await axios.post('http://localhost:3001/users/signUp', userData);
+
+            console.log(response);
+        } catch(error) {
+            console.log(error);
+        }
     }
     return(
 

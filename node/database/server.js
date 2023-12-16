@@ -87,7 +87,7 @@ Seminar.hasMany(AtasamentSeminar, {
     foreignKey: 'id_seminar'
 });
 
-sequelize.sync()
+sequelize.sync({force: true})
     .then(() => {
         console.log('Models successfully (re)created');
     }).catch((err) => {
