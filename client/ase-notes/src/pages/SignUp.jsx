@@ -40,7 +40,6 @@ function SignUp(props){
             formErrors["telefon"] = "Cannot be empty";
         }
 
-
         //fara numere in nume/prenume
         if(typeof formFields["nume"] !== "undefined"){
             if(!nameRegex.test(formFields["nume"])){
@@ -99,8 +98,14 @@ function SignUp(props){
         setSelectedFacultate(event.target.value);
     };
     const handleSubmit = async (event) => {
-
         event.preventDefault();
+
+        const isValidForm = handleValidation();
+
+        if (!isValidForm) {
+            alert("Errors in form");
+            return;
+        }
 
         const userData = {
             nume: fields["nume"],
@@ -111,19 +116,17 @@ function SignUp(props){
             facultate: selectedFacultate
         };
 
-        if(handleValidation())
-        {
-            alert("Form submitted");
-        }
-        else
-        {
-            alert("Errors");
-        }
-
         try {
             const response = await axios.post('http://localhost:3001/users/signUp', userData);
 
             console.log(response);
+
+            if(response.status === 201){
+                alert('Form submitted');
+            }
+            else {
+                alert('Errors');
+            }
         } catch (error) {
             if (error.response) {
                 console.error("Eroare de la server:", error.response.data);
@@ -136,7 +139,6 @@ function SignUp(props){
     }
 
     return(
-
         <form onSubmit={handleSubmit}>
             <label>
                 Name:
