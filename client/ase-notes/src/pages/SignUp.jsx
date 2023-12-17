@@ -2,6 +2,7 @@ import React from "react";
 import {useState} from "react";
 import axios from 'axios';
 import { passwordRegex, phoneRegex, nameRegex, mailRegex} from "../utils/constants";
+import './SignUp.css'
 
 
 function SignUp(props){
@@ -139,42 +140,58 @@ function SignUp(props){
     }
 
     return(
-        <form onSubmit={handleSubmit}>
-            <label>
-                Name:
-                <input type="text"  className={"border-2 border-main-pink"} value={fields["nume"]} onChange={e=>handleChange("nume",e.target.value)}/>
-                <span className={"text-red-500"}>{errors["nume"]}</span>
-            </label>
-            <label>
-                Prenume:
-                <input type="text" className={"border-2 border-main-pink"} value={fields["prenume"]} onChange={e=>handleChange("prenume",e.target.value)} />
-                <span className={"text-red-500"}>{errors["prenume"]}</span>
-            </label>
-            <label>
-                Mail:
-                <input type="email" className={"border-2 border-main-pink"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
-                <span className={"text-red-500"}>{errors["email"]}</span>
-            </label>
-            <label>
-                Parola
-                <input type="password" className={"border-2 border-main-pink"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
-                <span className={"text-red-500"} >{errors["parola"]}</span>
-            </label>
-            <label>
-                Telefon
-                <input className={"border-2 border-main-pink"} value={fields["telefon"]} onChange={e=>handleChange("telefon",e.target.value)} />
-                <span className={"text-red-500"} >{errors["telefon"]}</span>
-            </label>
-            <label>
-                Facultate:
-            </label>
-            <select name="facultate" value={selectedFacultate} onChange={handleSelectChange}>
-                <option value="cibe">Cibernetica</option>
-                <option value="info">Informatica economica</option>
-                <option value="stat">Statistica</option>
-            </select>
-            <input type="submit"  value="Submit" />
+        <div className={"form-container"}>
+        <form>
+            <div className={"mb-3"}>
+                <label className={"label-text"}>
+                    Name
+                    <input type="text" placeholder={"Name"} value={fields["nume"]} onChange={e=>handleChange("nume",e.target.value)}/>
+                    <div className={"text-red-500"}>{errors["nume"]}</div>
+                </label>
+            </div>
+            <div className={"mb-3"}>
+                <label className={"label-text"}>
+                    Surrname
+                    <input type="text"  placeholder={"Surrname"} value={fields["prenume"]} onChange={e=>handleChange("prenume",e.target.value)} />
+                    <div className={"text-red-500"}>{errors["prenume"]}</div>
+                </label>
+            </div>
+
+            <div className={"mb-3"}>
+                <label className={"label-text"}>
+                    Email
+                    <input type="email"  placeholder={"Email"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
+                    <div className={"text-red-500"}>{errors["email"]}</div>
+                </label>
+            </div>
+            <div className={"mb-3"}>
+                <label className={"label-text"}>
+                    Password
+                    <input type="password"  placeholder={"Password"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
+                    <div className={"text-red-500"} >{errors["parola"]}</div>
+                </label>
+            </div>
+            <div className={"mb-3"}>
+                <label className={"label-text"}>
+                    Phone Number
+                    <input  placeholder={"Phone number"} value={fields["telefon"]} onChange={e=>handleChange("telefon",e.target.value)} />
+                    <div className={"text-red-500"} >{errors["telefon"]}</div>
+                </label>
+            </div>
+            <div className={"mb-3"}>
+                <label className={"label-text"}>
+                    Univeristy
+                </label>
+                <select className={"bg-white text-base border-solid border-main-pink rounded-lg pl-2"} name="facultate" value={selectedFacultate} onChange={handleSelectChange}>
+                    <option className={"bg-white"} value="cibe">Cibernetica</option>
+                    <option className={"bg-white"} value="info">Informatica economica</option>
+                    <option className={"bg-white"} value="stat">Statistica</option>
+                </select>
+            </div>
+
+           <button onClick={handleSubmit}>Submit</button>
         </form>
+        </div>
     )
 }
 

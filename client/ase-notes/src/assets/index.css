@@ -2,16 +2,98 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    line-height: 1.2;
+  }
+  html,
+  body {
+    max-width: 100vw;
+    scroll-behavior: smooth;
+  }
+  h1 {
+    @apply text-[2.5rem]  mb-6 font-bold;
+  }
+  h2 {
+    @apply text-[2.25rem]  mb-6 font-bold;
+  }
+  h3 {
+    @apply text-[1.75rem] mb-4  font-bold;
+  }
+  p, span, label, ul {
+    @apply text-[1.25rem] font-medium;
+  }
+  p {
+    @apply text-justify whitespace-break-spaces;
+  }
+  ul {
+    @apply pl-6 space-y-1.5;
+  }
+  button {
+    @apply bg-baby-blue border-solid rounded-2xl py-2.5 px-5 ;
+  }
+
+  input{
+    @apply bg-white text-base border-solid border-main-pink rounded-lg pl-2
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  section {
+    @apply shadow-2xl;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  /* Main container */
+  .page-container {
+    @apply w-full h-full bg-dark-shade;
+  }
+  /*Content container */
+  .content-container {
+    @apply max-w-[90rem] w-full mx-auto px-24;
+  }
+  .background-image {
+    @apply absolute -z-10 w-full h-full;
+  }
+  .main-button {
+    @apply bg-primary text-light-shade font-bold py-2.5 px-4 rounded shadow-xl;
+  }
+  .custom-button {
+    @apply relative inline-flex items-center justify-center p-0.5 me-2 overflow-hidden text-sm font-medium text-light-shade rounded-lg hover:text-light-shade focus:ring-4 focus:outline-none focus:ring-green-200;
+  }
+  .custom-span {
+    @apply relative px-5 py-2.5 transition-all ease-in duration-75 bg-dark-shade rounded-md;
+  }
+
+  /* Hero Section */
+
+  /* Hero Section End */
 }
+
+@layer utilities {
+  .absolute-centerY{
+    @apply top-1/2 transform -translate-y-1/2;
+  }
+  .absolute-centerX{
+    @apply right-1/2 transform translate-x-1/2;
+  }
+  .absolute-centerXY{
+    @apply transform right-1/2 top-1/2 -translate-y-1/2 translate-x-1/2;
+  }
+}
+
+
+/* Text Classes */
+.label-text{
+  @apply text-base leading-4
+}
+.button-text{
+  @apply text-[1.125rem]
+}
+/* Text Classes End*/
