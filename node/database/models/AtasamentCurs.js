@@ -10,14 +10,14 @@ const AtasamentCurs = sequelize.define('AtasamentCurs', {
     id_utilizator: {
         type: Sequelize.INTEGER,
         references: {
-            model: 'Utilizator',
+            model: 'Utilizatori',
             key: 'id_utilizator',
         }
     },
     id_notita_curs: {
         type: Sequelize.INTEGER,
         references: {
-            model: 'NotitaCurs',
+            model: 'NotiteCurs',
             key: 'id_notita_curs',
         },
         allowNull: true
@@ -25,7 +25,7 @@ const AtasamentCurs = sequelize.define('AtasamentCurs', {
     id_curs: {
         type: Sequelize.INTEGER,
         references: {
-            model: 'Curs',
+            model: 'Cursuri',
             key: 'id_curs',
         },
         allowNull: true

@@ -10,14 +10,14 @@ const NotitaCurs = sequelize.define('NotitaCurs', {
     id_utilizator: {
         type:Sequelize.INTEGER,
         references: {
-            model: 'Utilizator',
+            model: 'Utilizatori',
             key: 'id_utilizator',
         }
     },
     id_curs:{
         type:Sequelize.INTEGER,
         references: {
-            model: 'Curs',
+            model: 'Cursuri',
             key: 'id_curs',
         }
     },

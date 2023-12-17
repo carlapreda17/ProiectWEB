@@ -1,5 +1,3 @@
-const sequelize = require('./database');
-
 const Grup = require('./models/Grup');
 const Utilizator = require('./models/Utilizator');
 const Materie = require('./models/Materie');
@@ -87,10 +85,14 @@ Seminar.hasMany(AtasamentSeminar, {
     foreignKey: 'id_seminar'
 });
 
-sequelize.sync({force: true})
-    .then(() => {
-        console.log('Models successfully (re)created');
-    }).catch((err) => {
-    console.warn('Error creating models');
-    console.warn(err);
-});
+module.exports = {
+    Grup,
+    Utilizator,
+    Materie,
+    Curs,
+    NotitaCurs,
+    AtasamentCurs,
+    Seminar,
+    NotitaSeminar,
+    AtasamentSeminar
+};

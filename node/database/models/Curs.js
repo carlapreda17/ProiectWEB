@@ -10,7 +10,7 @@ const Curs = sequelize.define('Curs', {
     id_materie: {
         type: Sequelize.INTEGER,
         references: {
-            model: 'Materie',
+            model: 'Materii',
             key: 'id_materie',
         }
     },
