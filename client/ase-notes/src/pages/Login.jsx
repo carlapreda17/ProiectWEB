@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 function Login(props){
     const [fields, setFields] = useState({});
@@ -23,7 +24,6 @@ function Login(props){
             }
         }
         return formIsValid;
-
     }
 
     const handleChange = (field, value) => {
@@ -37,15 +37,38 @@ function Login(props){
     const handleSumbit= async(event) =>
     {
         event.preventDefault();
-        if(handleValidation())
-        {
-            navigate("/main-page");
-        }
-        else
-        {
-            alert("Erori inputuri");
+
+        const isValidForm = handleValidation();
+        if (!isValidForm) {
+            alert("Errors in form");
+            return;
         }
 
+        const loginData = {
+            email: fields['email'],
+            parola: fields['parola'],
+        };
+
+        try {
+            const response = await axios.post('http://localhost:3001/auth/login', loginData);
+
+            console.log(response);
+
+            if(response.status === 200){
+                navigate("/main-page");
+            }
+            else {
+                alert('Errors');
+            }
+        } catch (error) {
+            if (error.response) {
+                console.error("Eroare de la server:", error.response.data);
+            } else if (error.request) {
+                console.error("Cererea a fost trimisă, dar nu s-a primit niciun răspuns");
+            } else {
+                console.error("Eroare la crearea cererii:", error.message);
+            }
+        }
     }
 
     return(

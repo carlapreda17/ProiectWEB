@@ -12,11 +12,11 @@ function SignUp(props){
     const handleValidation = () => {
         const formFields = {...fields};
         const formErrors = {};
-        let formIsValid = true;
+        let isValid = true;
 
         //verificam daca fiecare field e completat
         if(!formFields["nume"] && !formFields["prenume"] && !formFields["email"] && !formFields["parola"] && !formFields["telefon"] && !formFields["facultate"]){
-            formIsValid = false;
+            isValid = false;
             formErrors["nume"] = "Cannot be empty";
             formErrors["prenume"] = "Cannot be empty";
             formErrors["parola"] = "Cannot be empty";
@@ -28,7 +28,7 @@ function SignUp(props){
         //fara numere in nume/prenume
         if(typeof formFields["nume"] !== "undefined" && typeof formFields["prenume"] !== "undefined"){
             if(!nameRegex.test(formFields["nume"] && !nameRegex.test(formFields["prenume"]))){
-                formIsValid = false;
+                isValid = false;
                 formErrors["nume"] = "Only letters";
                 formErrors["prenume"] = "Only letters";
             }
@@ -38,7 +38,7 @@ function SignUp(props){
         {
             if(!mailRegex.test(formFields["email"]))
             {
-                formIsValid = false;
+                isValid = false;
                 formErrors["mail"] = "Invalid mail";
             }
         }
@@ -47,7 +47,7 @@ function SignUp(props){
         if(typeof formFields["parola"] !=="undefined"){
             if(!passwordRegex.test(formFields["parola"]))
             {
-                formIsValid=false;
+                isValid = false;
                 formFields["parola"] ="Invalid password";
             }
         }
@@ -56,13 +56,13 @@ function SignUp(props){
         if(typeof formFields["telefon"] !=="undefined"){
             if(!phoneRegex.test(formFields["telefon"]))
             {
-                formIsValid=false;
+                isValid = false;
                 formFields["telefon"]="Incorrect number";
             }
         }
 
         setErrors(formErrors)
-        return formIsValid;
+        return isValid;
     }
     const handleChange = (field, value) => {
         setFields({
@@ -75,8 +75,14 @@ function SignUp(props){
         setSelectedFacultate(event.target.value);
     };
     const handleSubmit = async (event) => {
-
         event.preventDefault();
+
+        const isValidForm = handleValidation();
+
+        if (!isValidForm) {
+            alert("Errors in form");
+            return;
+        }
 
         const userData = {
             nume: fields["nume"],
@@ -87,19 +93,17 @@ function SignUp(props){
             facultate: selectedFacultate
         };
 
-        if(handleValidation())
-        {
-            alert("Form submitted");
-        }
-        else
-        {
-            alert("Errors");
-        }
-
         try {
             const response = await axios.post('http://localhost:3001/users/signUp', userData);
 
             console.log(response);
+
+            if(response.status === 201){
+                alert('Form submitted');
+            }
+            else {
+                alert('Errors');
+            }
         } catch (error) {
             if (error.response) {
                 console.error("Eroare de la server:", error.response.data);
@@ -112,7 +116,6 @@ function SignUp(props){
     }
 
     return(
-
         <form onSubmit={handleSubmit}>
             <label>
                 Name:

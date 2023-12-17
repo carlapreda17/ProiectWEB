@@ -1,6 +1,5 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const sequelize = require('../database/database');
 
 const router = express.Router();
 
@@ -15,8 +14,8 @@ router.post('/signUp', async (req, res) => {
 
         const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/;
         const phoneRegex=/^07\d{8}$/;
-        const nameRegex=/^[a-zA-Z]+$/
-        const mailRegex=/^[^@\s]+@stud\.ase\.ro$/
+        const nameRegex=/^[A-Za-z]+(?: [A-Za-z]+)*$/;
+        const mailRegex=/^[^@\s]+@stud\.ase\.ro$/;
 
         let errors = [];
 
