@@ -14,7 +14,7 @@ router.post('/signUp', async (req, res) => {
 
         const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/;
         const phoneRegex=/^07\d{8}$/;
-        const nameRegex=/^[A-Za-z]+(?: [A-Za-z]+)*$/;
+        const nameRegex=/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
         const mailRegex=/^[^@\s]+@stud\.ase\.ro$/;
 
         let errors = [];

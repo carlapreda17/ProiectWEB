@@ -12,24 +12,45 @@ function SignUp(props){
     const handleValidation = () => {
         const formFields = {...fields};
         const formErrors = {};
-        let isValid = true;
+        let formIsValid = true;
 
         //verificam daca fiecare field e completat
-        if(!formFields["nume"] && !formFields["prenume"] && !formFields["email"] && !formFields["parola"] && !formFields["telefon"] && !formFields["facultate"]){
-            isValid = false;
+        if (!formFields["nume"]) {
+            formIsValid = false;
             formErrors["nume"] = "Cannot be empty";
+        }
+
+        if (!formFields["prenume"]) {
+            formIsValid = false;
             formErrors["prenume"] = "Cannot be empty";
+        }
+
+        if (!formFields["parola"]) {
+            formIsValid = false;
             formErrors["parola"] = "Cannot be empty";
+        }
+
+        if (!formFields["email"]) {
+            formIsValid = false;
             formErrors["email"] = "Cannot be empty";
+        }
+
+        if (!formFields["telefon"]) {
+            formIsValid = false;
             formErrors["telefon"] = "Cannot be empty";
-            formErrors["facultate"] = "Cannot be empty";
         }
 
         //fara numere in nume/prenume
-        if(typeof formFields["nume"] !== "undefined" && typeof formFields["prenume"] !== "undefined"){
-            if(!nameRegex.test(formFields["nume"] && !nameRegex.test(formFields["prenume"]))){
-                isValid = false;
+        if(typeof formFields["nume"] !== "undefined"){
+            if(!nameRegex.test(formFields["nume"])){
+                formIsValid = false;
                 formErrors["nume"] = "Only letters";
+
+            }
+        }
+        if(typeof formFields["prenume"] !== "undefined"){
+            if(!nameRegex.test(formFields["prenume"])){
+                formIsValid = false
                 formErrors["prenume"] = "Only letters";
             }
         }
@@ -38,31 +59,33 @@ function SignUp(props){
         {
             if(!mailRegex.test(formFields["email"]))
             {
-                isValid = false;
-                formErrors["mail"] = "Invalid mail";
+                formIsValid = false;
+                formErrors["email"] = "Invalid mail";
             }
         }
 
         //parola
-        if(typeof formFields["parola"] !=="undefined"){
+        if(typeof formFields["parola"] !=="undefined")
+        {
             if(!passwordRegex.test(formFields["parola"]))
             {
-                isValid = false;
-                formFields["parola"] ="Invalid password";
+                formIsValid = false;
+                formErrors["parola"] = "Invalid password";
             }
         }
 
         //nr telefon
-        if(typeof formFields["telefon"] !=="undefined"){
+        if(typeof formFields["telefon"] !=="undefined")
+        {
             if(!phoneRegex.test(formFields["telefon"]))
             {
-                isValid = false;
-                formFields["telefon"]="Incorrect number";
+                formIsValid = false;
+                formErrors["telefon"] = "Invalid number";
             }
         }
 
         setErrors(formErrors)
-        return isValid;
+        return formIsValid;
     }
     const handleChange = (field, value) => {
         setFields({
@@ -120,27 +143,27 @@ function SignUp(props){
             <label>
                 Name:
                 <input type="text"  className={"border-2 border-main-pink"} value={fields["nume"]} onChange={e=>handleChange("nume",e.target.value)}/>
-                <span>{errors["nume"]}</span>
+                <span className={"text-red-500"}>{errors["nume"]}</span>
             </label>
             <label>
                 Prenume:
                 <input type="text" className={"border-2 border-main-pink"} value={fields["prenume"]} onChange={e=>handleChange("prenume",e.target.value)} />
-                <span>{errors["prenume"]}</span>
+                <span className={"text-red-500"}>{errors["prenume"]}</span>
             </label>
             <label>
                 Mail:
                 <input type="email" className={"border-2 border-main-pink"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
-                <span>{errors["email"]}</span>
+                <span className={"text-red-500"}>{errors["email"]}</span>
             </label>
             <label>
                 Parola
                 <input type="password" className={"border-2 border-main-pink"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
-                <span>{errors["parola"]}</span>
+                <span className={"text-red-500"} >{errors["parola"]}</span>
             </label>
             <label>
                 Telefon
                 <input className={"border-2 border-main-pink"} value={fields["telefon"]} onChange={e=>handleChange("telefon",e.target.value)} />
-                <span>{errors["telefon"]}</span>
+                <span className={"text-red-500"} >{errors["telefon"]}</span>
             </label>
             <label>
                 Facultate:
