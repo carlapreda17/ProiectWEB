@@ -7,6 +7,7 @@ app.use(cors({
     origin: 'http://localhost:3000'
 }));
 
+const relations = require('./database/modelsRelations');
 const userRoutes = require('./server/userRoutes');
 
 app.use('/users', userRoutes);

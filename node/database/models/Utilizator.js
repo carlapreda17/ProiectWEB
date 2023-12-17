@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const sequelize = require('../database');
 
-const Utilizator = sequelize.define('Utilizator', {
+const Utilizator = sequelize.define('Utilizatori', {
     id_utilizator: {
         type: Sequelize.INTEGER,
         primaryKey: true,
@@ -16,7 +16,7 @@ const Utilizator = sequelize.define('Utilizator', {
     id_grup: {
         type: Sequelize.INTEGER,
         references: {
-            model: 'Grup',
+            model: 'Grupuri',
             key: 'id_grup',
             allowNull: true
         }

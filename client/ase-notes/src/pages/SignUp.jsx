@@ -1,6 +1,7 @@
 import React from "react";
 import {useState} from "react";
 import axios from 'axios';
+import { passwordRegex, phoneRegex, nameRegex, mailRegex} from "../utils/constants";
 
 
 function SignUp(props){
@@ -12,20 +13,16 @@ function SignUp(props){
         const formFields = {...fields};
         const formErrors = {};
         let formIsValid = true;
-        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/;
-        const phoneRegex=/^07\d{8}$/;
-        const nameRegex=/^[a-zA-Z]+$/
-        const mailRegex=/^[^@\s]+@stud\.ase\.ro$/
 
         //verificam daca fiecare field e completat
         if(!formFields["nume"] && !formFields["prenume"] && !formFields["email"] && !formFields["parola"] && !formFields["telefon"] && !formFields["facultate"]){
             formIsValid = false;
             formErrors["nume"] = "Cannot be empty";
-            formErrors["prenume"] = "Cannot be empty"
-            formErrors["parola"] = "Cannot be empty"
-            formErrors["email"] = "Cannot be empty"
-            formErrors["telefon"] = "Cannot be empty"
-            formErrors["facultate"] = "Cannot be empty"
+            formErrors["prenume"] = "Cannot be empty";
+            formErrors["parola"] = "Cannot be empty";
+            formErrors["email"] = "Cannot be empty";
+            formErrors["telefon"] = "Cannot be empty";
+            formErrors["facultate"] = "Cannot be empty";
         }
 
         //fara numere in nume/prenume
@@ -51,7 +48,7 @@ function SignUp(props){
             if(!passwordRegex.test(formFields["parola"]))
             {
                 formIsValid=false;
-                formFields["parola"] ="Invalid password"
+                formFields["parola"] ="Invalid password";
             }
         }
 
@@ -60,7 +57,7 @@ function SignUp(props){
             if(!phoneRegex.test(formFields["telefon"]))
             {
                 formIsValid=false;
-                formFields["telefon"]="Incorrect number"
+                formFields["telefon"]="Incorrect number";
             }
         }
 
@@ -92,23 +89,28 @@ function SignUp(props){
 
         if(handleValidation())
         {
-            alert("Form submitted")
+            alert("Form submitted");
         }
         else
         {
-            alert("Errors")
+            alert("Errors");
         }
-
-        console.log(userData);
 
         try {
             const response = await axios.post('http://localhost:3001/users/signUp', userData);
 
             console.log(response);
-        } catch(error) {
-            console.log(error);
+        } catch (error) {
+            if (error.response) {
+                console.error("Eroare de la server:", error.response.data);
+            } else if (error.request) {
+                console.error("Cererea a fost trimisă, dar nu s-a primit niciun răspuns");
+            } else {
+                console.error("Eroare la crearea cererii:", error.message);
+            }
         }
     }
+
     return(
 
         <form onSubmit={handleSubmit}>
