@@ -89,11 +89,11 @@ function SignUp(props){
 
         if(handleValidation())
         {
-            alert("Form submitted")
+            alert("Form submitted");
         }
         else
         {
-            alert("Errors")
+            alert("Errors");
         }
 
         try {
