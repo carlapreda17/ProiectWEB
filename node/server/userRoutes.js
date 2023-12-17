@@ -13,10 +13,10 @@ router.post('/signUp', async (req, res) => {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(parola, salt);
 
-        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/;
+        const  passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]{8,}$/;
         const phoneRegex=/^07\d{8}$/;
-        const nameRegex=/^[a-zA-Z]+$/
-        const mailRegex=/^[^@\s]+@stud\.ase\.ro$/
+        const nameRegex=/^[\w'\-,.][^0-9_!¡?÷?¿/\\+=@#$%ˆ&*(){}|~<>;:[\]]{2,}$/;
+        const mailRegex=/^[^@\s]+@stud\.ase\.ro$/;
 
         let errors = [];
 
