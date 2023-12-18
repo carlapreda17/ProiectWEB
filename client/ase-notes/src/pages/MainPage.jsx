@@ -1,8 +1,8 @@
 import React from "react";
-
+import Navbar from "../components/Navbar";
 function MainPage(props){
     return(
-        <div>Welcome!</div>
+        <Navbar isMainPage={true}></Navbar>
     )
 }
 

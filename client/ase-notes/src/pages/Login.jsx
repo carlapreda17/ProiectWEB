@@ -83,19 +83,30 @@ function Login(props){
     }
 
     return(
-       <form onSubmit={handleSumbit}>
-           <label>
-               Mail:
-               <input type="email" className={"border-2 border-main-pink"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
-               <span className={"text-red-500"}>{errors["email"]}</span>
-           </label>
-           <label>
-               Parola
-               <input type="password" className={"border-2 border-main-pink"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
-               <span className={"text-red-500"} >{errors["parola"]}</span>
-           </label>
-           <input type="submit"  value="Submit" />
-       </form>
+        <div className={"flex justify-center items-center h-screen"}>
+            <form className={"bg-main-pink py-20 px-20 rounded-xl shadow-box"}>
+
+                <div className={"mb-3"}>
+                    <label className={"label-text mr-11"}>
+                        Email
+                    </label>
+                    <input type="email"  placeholder={"Email"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
+                    <div className={"error-text"} >{errors["email"]}</div>
+                </div>
+
+                <div className={"mb-3"}>
+                    <label className={"label-text mr-3"}>
+                        Password
+                    </label>
+                    <input type="password"  placeholder={"Password"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
+                    <div className={"error-text"} >{errors["parola"]}</div>
+                </div>
+                <div className={"flex justify-center mt-8"}>
+                    <button className={"form-button button-text"} onClick={handleSumbit}>Submit</button>
+                </div>
+
+            </form>
+        </div>
     )
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
-
+import Navbar from "../components/Navbar";
 function Homepage(params){
 
     const navigate=useNavigate();
@@ -8,14 +8,11 @@ function Homepage(params){
         navigate('/sign-up')
     }
 
-    const navigateToLogIn = () => {
-        navigate('/login')
-    }
-
     return(
         <div>
+            <Navbar isHomepage={true}></Navbar>
             <button onClick={navigateToSignUp}>Sign up</button>
-            <button onClick={navigateToLogIn}>Log in</button>
+
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React from "react";
 import {useState} from "react";
 import axios from 'axios';
 import { passwordRegex, phoneRegex, nameRegex, mailRegex} from "../utils/constants";
-import './SignUp.css'
+
 
 
 function SignUp(props){
@@ -140,59 +140,66 @@ function SignUp(props){
     }
 
     return(
-        <div className={"form-container"}>
-        <form>
+        <div className={"flex justify-center items-center h-screen"}>
+        <form className={"bg-main-pink py-20 px-20 rounded-xl shadow-box"}>
             <div className={"mb-3"}>
-                <label className={"label-text"}>
-                    Name
-                    <input type="text" placeholder={"Name"} value={fields["nume"]} onChange={e=>handleChange("nume",e.target.value)}/>
-                    <div className={"text-red-500"}>{errors["nume"]}</div>
+                <label className={"label-text mr-3"}>
+                    First Name
                 </label>
-            </div>
-            <div className={"mb-3"}>
-                <label className={"label-text"}>
-                    Surrname
-                    <input type="text"  placeholder={"Surrname"} value={fields["prenume"]} onChange={e=>handleChange("prenume",e.target.value)} />
-                    <div className={"text-red-500"}>{errors["prenume"]}</div>
-                </label>
+                <input type="text"  placeholder={"First name"} value={fields["prenume"]} onChange={e=>handleChange("prenume",e.target.value)} />
+                <div className={"error-text"}>{errors["prenume"]}</div>
             </div>
 
             <div className={"mb-3"}>
-                <label className={"label-text"}>
+                <label className={"label-text mr-3"}>
+                    Last Name
+                </label>
+                    <input type="text" placeholder={"Last Name"} value={fields["nume"]} onChange={e=>handleChange("nume",e.target.value)}/>
+                    <div className={"error-text"} >{errors["nume"]}</div>
+            </div>
+
+            <div className={"mb-3"}>
+                <label className={"label-text mr-3"}>
                     Email
+                </label>
                     <input type="email"  placeholder={"Email"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
-                    <div className={"text-red-500"}>{errors["email"]}</div>
-                </label>
+                    <div className={"error-text"} >{errors["email"]}</div>
             </div>
+
             <div className={"mb-3"}>
-                <label className={"label-text"}>
+                <label className={"label-text mr-3"}>
                     Password
+                </label>
                     <input type="password"  placeholder={"Password"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
-                    <div className={"text-red-500"} >{errors["parola"]}</div>
+                    <div className={"error-text"} >{errors["parola"]}</div>
+            </div>
+
+            <div className={"mb-3"}>
+                <label className={"label-text mr-3"}>
+                    Phone
                 </label>
+                    <input placeholder={"Phone number"} value={fields["telefon"]} onChange={e=>handleChange("telefon",e.target.value)} />
+                    <div className={"error-text"} >{errors["telefon"]}</div>
             </div>
             <div className={"mb-3"}>
-                <label className={"label-text"}>
-                    Phone Number
-                    <input  placeholder={"Phone number"} value={fields["telefon"]} onChange={e=>handleChange("telefon",e.target.value)} />
-                    <div className={"text-red-500"} >{errors["telefon"]}</div>
-                </label>
-            </div>
-            <div className={"mb-3"}>
-                <label className={"label-text"}>
+                <label className={"label-text mr-3"}>
                     Univeristy
                 </label>
-                <select className={"bg-white text-base border-solid border-main-pink rounded-lg pl-2"} name="facultate" value={selectedFacultate} onChange={handleSelectChange}>
+                <select className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink"} name="facultate" value={selectedFacultate} onChange={handleSelectChange}>
                     <option className={"bg-white"} value="cibe">Cibernetica</option>
                     <option className={"bg-white"} value="info">Informatica economica</option>
                     <option className={"bg-white"} value="stat">Statistica</option>
                 </select>
             </div>
+            <div className={"flex justify-center mt-8"}>
+                <button className={"form-button button-text"} onClick={handleSubmit}>Submit</button>
+            </div>
 
-           <button onClick={handleSubmit}>Submit</button>
         </form>
         </div>
     )
 }
 
 export default SignUp;
+
+
