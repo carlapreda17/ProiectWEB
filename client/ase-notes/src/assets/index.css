@@ -34,9 +34,7 @@
   p {
     @apply text-justify whitespace-break-spaces;
   }
-  ul {
-    @apply pl-6 space-y-1.5;
-  }
+
 
   input{
     @apply bg-white text-base border-solid rounded-2xl pl-2 py-1.5

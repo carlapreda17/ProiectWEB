@@ -1,8 +1,12 @@
 import React from "react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 function MainPage(props){
     return(
-        <Navbar isMainPage={true}></Navbar>
+       <div>
+           <Navbar isMainPage={true}></Navbar>
+           <Footer></Footer>
+       </div>
     )
 }
 
