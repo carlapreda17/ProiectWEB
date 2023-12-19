@@ -63,10 +63,10 @@ function Login(props){
         try {
             const response = await axios.post('http://localhost:3001/auth/login', loginData);
 
-            console.log(response);
-
             if(response.status === 200){
                 navigate("/main-page");
+                const {data: {data: {nume, prenume}}} = response;
+                console.log(nume, prenume);
             }
             else {
                 alert('Errors');
