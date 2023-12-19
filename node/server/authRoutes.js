@@ -16,6 +16,8 @@ router.post('/login', async(req, res) => {
             }
         });
 
+        const {prenume} = user;
+
         if(!user) {
             return res.status(404).json({success: false, message: "User not found", data: {}});
         }
@@ -28,7 +30,7 @@ router.post('/login', async(req, res) => {
         const token = jwt.sign({id: user.dataValues.id_utilizator}, process.env.TOKEN_SECRET, {
             expiresIn: '1h'
         });
-        return res.status(200).json({success: true, message: "User logged in", data: token});
+        return res.status(200).json({success: true, message: "User logged in", data: {'prenume': prenume}});
     } catch(error) {
         console.error('Error:', error);
         res.status(500).json({success: false, message: 'An error occurred'});

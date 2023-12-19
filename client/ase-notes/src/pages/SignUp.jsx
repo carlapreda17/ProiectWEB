@@ -192,7 +192,7 @@ function SignUp(props){
                 </select>
             </div>
             <div className={"flex justify-center mt-8"}>
-                <button className={"form-button button-text"} onClick={handleSubmit}>Submit</button>
+                <button className={"form-button button button-text"} onClick={handleSubmit}>Submit</button>
             </div>
 
         </form>

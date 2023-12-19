@@ -1,10 +1,15 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-function MainPage(props){
+import Login from "../components/Login";
+import {useState} from "react";
+
+function MainPage(){
+    const prenume=localStorage.getItem('prenume')
+
     return(
        <div>
-           <Navbar isMainPage={true}></Navbar>
+           <Navbar prenume={prenume} isMainPage={true}></Navbar>
            <Footer></Footer>
        </div>
     )

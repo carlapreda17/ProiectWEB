@@ -1,15 +1,11 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
 import {useState} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-function Navbar({ isHomepage, isMainPage }) {
+
+function Navbar({ isHomepage, isMainPage, prenume, handlePopUp }) {
     const navigate = useNavigate();
     const [dropdownVisible, setDropdownVisible] = useState(false);
-
-    const navigateToLogIn = () => {
-        navigate('/login');
-    };
 
     const toggleDropdown = () => {
         setDropdownVisible(!dropdownVisible);
@@ -23,7 +19,7 @@ function Navbar({ isHomepage, isMainPage }) {
                     {isMainPage ? (
                         <div className="relative">
                             <button className={"flex items-center pr-7"} onClick={toggleDropdown}>
-                                <div className={"pr-3"}>Nume</div>
+                                <div className={"pr-3"}>{prenume}</div>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
                                     <path d="M201.4 342.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 274.7 86.6 137.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/>
                                 </svg>
@@ -70,7 +66,7 @@ function Navbar({ isHomepage, isMainPage }) {
                         </a>
                     )}
                     {isHomepage && (
-                        <button onClick={navigateToLogIn} className={"nav-button"}>
+                        <button onClick={handlePopUp} className={"button nav-button"}>
                             Log in
                         </button>
                     )}

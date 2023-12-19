@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer(){
     return(
-        <div className={"bg-baby-pink bottom-0 fixed w-full"}>
+        <div className={"bg-baby-pink bottom-0 fixed w-full z-0"}>
             <h1 className={"text-center pt-[3.125rem] pb-[3.125rem]"}>Contact us</h1>
                 <ul className={"flex w-full justify-center pb-[3.125rem]"}>
                     <li className={"pr-[1.875rem] pl-[2.5rem]"}>
