@@ -4,6 +4,7 @@ import axios from 'axios';
 import { passwordRegex, phoneRegex, nameRegex, mailRegex} from "../utils/constants";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CloseSVG from "../components/SVG/CloseSVG";
 
 
 
@@ -126,13 +127,12 @@ function SignUp(props){
         try {
             const response = await axios.post('http://localhost:3001/users/signUp', userData);
 
-            console.log(response);
 
             if(response.status === 201){
-                alert('Form submitted');
+                document.querySelector("#success-form").style.display = "block";
             }
             else {
-                alert('Errors');
+                document.querySelector("#error-form").style.display = "block";
             }
         } catch (error) {
             if (error.response) {
@@ -216,6 +216,31 @@ function SignUp(props){
             </div>
 
             <Footer/>
+
+            <div id={'success-form'} className={'absolute bg-baby-blue text-center w-[20%] p-1 pb-5 bottom-[16%] right-[40%] rounded-lg laptop:bottom-[5%] m-tablet:w-[30%] m-tablet:right-[35%] mobile:w-[40%] mobile:right-[30%]'} style={{'display': 'none'}}>
+                <div className={'relative'}>
+                    <div className={'h-6 flex justify-end'}>
+                        <button type="button" className={'w-6'} onClick={() => {
+                            document.querySelector("#success-form").style.display = "none";
+                        }}>
+                            <CloseSVG />
+                        </button>
+                    </div>
+                    <span className={'text-base'}>The account was created successfully!</span>
+                </div>
+            </div>
+            <div id={'error-form'} className={'absolute bg-baby-purple text-center w-[20%] p-1 pb-5 bottom-[16%] right-[40%] rounded-lg laptop:bottom-[5%] m-tablet:w-[30%] m-tablet:right-[35%] mobile:w-[40%] mobile:right-[30%]'} style={{'display': 'none'}}>
+                <div className={'relative'}>
+                    <div className={'h-6 flex justify-end'}>
+                        <button type="button" className={'w-6'} onClick={() => {
+                            document.querySelector("#error-form").style.display = "none";
+                        }}>
+                            <CloseSVG />
+                        </button>
+                    </div>
+                    <span className={'text-base'}>There was an error creating the account!</span>
+                </div>
+            </div>
         </div>
     )
 }
