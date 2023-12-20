@@ -5,22 +5,29 @@ import StudyGirlSVG from "./SVG/StudyGirlSVG";
 function Footer(){
     return(
         <div className={"page-container bg-main-pink shadow-footer"}>
-            <div className={'content-container py-14 flex justify-between'}>
+            <div className={'content-container py-14 flex justify-between m-tablet:py-10 m-tablet:px-8 tablet:px-6 mobile:flex-wrap mobile:gap-y-4'}>
                 <div>
-                    <h3 className={'text-dark-purple'}>Contact Us</h3>
+                    <h3 className={'text-dark-purple tablet:text-2xl'}>Contact Us</h3>
                     <div className={'flex gap-1 items-center mb-2'}>
-                        <LinkedinSVG colorClass={'text-main-text'} link={'https://www.linkedin.com/in/carla-preda-63668b246/'}/>
-                        <span className={'text-lg'}>Preda Carla Maria</span>
+                        <LinkedinSVG colorClass={'text-main-text'}
+                                     link={'https://www.linkedin.com/in/carla-preda-63668b246/'}/>
+                        <span className={'text-lg tablet:text-base'}>Preda Carla Maria</span>
                     </div>
                     <div className={'flex gap-1 items-center'}>
-                        <LinkedinSVG colorClass={'text-main-text'} link={'https://www.linkedin.com/in/m%C4%83riuca-pricop-737997237/'}/>
-                        <span className={'text-lg'}>Pricop Măriuca</span>
+                        <LinkedinSVG colorClass={'text-main-text'}
+                                     link={'https://www.linkedin.com/in/m%C4%83riuca-pricop-737997237/'}/>
+                        <span className={'text-lg tablet:text-base'}>Pricop Măriuca</span>
                     </div>
                 </div>
-                <div className={'w-2/12 text-center'}>
+                <div className={'w-3/12 text-center tablet:w-4/12 mobile:flex mobile:items-end'}>
                     <div className={'flex justify-center'}>
-                        <StudyGirlSVG />
+                        <StudyGirlSVG/>
                     </div>
+                    <span className={'text-base mobile:hidden'}>
+                        Knowledge is beautiful, and so is the mind that holds it.
+                    </span>
+                </div>
+                <div className={'hidden text-center mobile:block'}>
                     <span className={'text-base'}>
                         Knowledge is beautiful, and so is the mind that holds it.
                     </span>
