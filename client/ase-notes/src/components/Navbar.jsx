@@ -5,9 +5,8 @@ import LogoSVG from './SVG/LogoSVG';
 import {NAVBAR_TEXT} from '../utils/content';
 
 function Navbar(props) {
-        const { isHomepage, isMainPage, classes, prenume, handlePopUp } = props;
+    const { isHomepage, isMainPage, classes, prenume, handlePopUp } = props;
 
-    const navigate = useNavigate();
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
     const toggleDropdown = () => {
@@ -85,7 +84,7 @@ function Navbar(props) {
                             </a>
                         )}
                         {isHomepage && (
-                            <button onClick={handlePopUp} className={'nav-button'}>
+                            <button onClick={handlePopUp} className={'nav-button button'}>
                                 Log In
                             </button>
                         )}

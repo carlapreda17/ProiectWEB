@@ -25,7 +25,7 @@ function Homepage(props){
 
     return(
         <div className={'page-container'}>
-            <Navbar isHomepage={true} classes={'content-container'}></Navbar>
+            <Navbar isHomepage={true} handlePopUp={handlePopUp} classes={'content-container'}></Navbar>
 
             <div className={'bg-baby-blue'}>
                 <div className={'relative h-0 pb-[41%] max-w-[90rem] mr-auto ml-auto tablet:pb-[110%]'}>
@@ -85,10 +85,7 @@ function Homepage(props){
 
             <Footer/>
             <div>
-            <Navbar isHomepage={true} handlePopUp={handlePopUp}></Navbar>
-            <button onClick={navigateToSignUp}>Sign up</button>
             {popUpVisible && <Login />}
-            <Footer></Footer>
         </div>
         </div>
     )
