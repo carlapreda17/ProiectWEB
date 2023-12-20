@@ -61,14 +61,15 @@
     @apply absolute -z-10 w-full h-full;
   }
   .form-button {
-    @apply bg-baby-blue border-solid rounded-3xl py-2.5 px-32
+    @apply  py-2.5 px-32
   }
   .nav-button{
-    @apply bg-baby-blue border-solid py-1 px-3 rounded-xl text-white
+    @apply  px-5 py-1.5
   }
-  .form-button:hover, .nav-button:hover{
-    @apply bg-white text-main-pink
+  .button{
+    @apply text-dark-purple bg-gradient-to-r from-baby-blue to-baby-purple hover:bg-gradient-to-l focus:outline-none font-medium rounded-3xl text-sm text-center
   }
+
   .main-button {
     @apply bg-primary text-light-shade font-bold py-2.5 px-4 rounded shadow-xl;
   }
@@ -102,7 +103,7 @@
   @apply text-[1.125rem] leading-4 text-baby-pink font-bold
 }
 .button-text{
-  @apply text-[1.125rem] text-white
+  @apply text-[1.125rem]
 }
 .error-text{
   @apply  text-base text-dark-purple

@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Login from "../components/Login";
 
 function Homepage(props){
+    const [popUpVisible, setPopUpVisible] = useState(false);
     const navigate=useNavigate();
     const navigateToSignUp = () => {
         navigate('/sign-up')
@@ -15,6 +17,11 @@ function Homepage(props){
     } else {
         imgURL = 'banner.png'
     }
+
+    const handlePopUp = () => {
+        setPopUpVisible(!popUpVisible);
+        console.log(popUpVisible)
+    };
 
     return(
         <div className={'page-container'}>
@@ -77,6 +84,12 @@ function Homepage(props){
             </div>
 
             <Footer/>
+            <div>
+            <Navbar isHomepage={true} handlePopUp={handlePopUp}></Navbar>
+            <button onClick={navigateToSignUp}>Sign up</button>
+            {popUpVisible && <Login />}
+            <Footer></Footer>
+        </div>
         </div>
     )
 }

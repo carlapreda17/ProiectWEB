@@ -65,8 +65,10 @@ function Login(props){
 
             if(response.status === 200){
                 navigate("/main-page");
-                const {data: {data: {nume, prenume}}} = response;
-                console.log(nume, prenume);
+                const {data: {data:{prenume}}} =response;
+                localStorage.setItem('prenume',prenume);
+                props.handlePopUp();
+
             }
             else {
                 alert('Errors');
@@ -83,7 +85,7 @@ function Login(props){
     }
 
     return(
-        <div className={"flex justify-center items-center h-screen"}>
+        <div className={"flex justify-center items-center h-screen z-50"}>
             <form className={"bg-main-pink py-20 px-20 rounded-xl shadow-box"}>
 
                 <div className={"mb-3"}>
@@ -102,7 +104,7 @@ function Login(props){
                     <div className={"error-text"} >{errors["parola"]}</div>
                 </div>
                 <div className={"flex justify-center mt-8"}>
-                    <button className={"form-button button-text"} onClick={handleSumbit}>Submit</button>
+                    <button className={"form-button button button-text"} onClick={handleSumbit}>Submit</button>
                 </div>
 
             </form>

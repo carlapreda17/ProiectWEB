@@ -5,13 +5,10 @@ import LogoSVG from './SVG/LogoSVG';
 import {NAVBAR_TEXT} from '../utils/content';
 
 function Navbar(props) {
-    const {isHomepage, isMainPage, classes} = props
+        const { isHomepage, isMainPage, classes, prenume, handlePopUp } = props;
+
     const navigate = useNavigate();
     const [dropdownVisible, setDropdownVisible] = useState(false);
-
-    const navigateToLogIn = () => {
-        navigate('/login');
-    };
 
     const toggleDropdown = () => {
         setDropdownVisible(!dropdownVisible);
@@ -28,7 +25,7 @@ function Navbar(props) {
                         {isMainPage ? (
                             <div className='relative'>
                                 <button className={'flex items-center pr-7'} onClick={toggleDropdown}>
-                                    <div className={'pr-3'}>Nume</div>
+                                    <div className={'pr-3'}>{prenume}</div>
                                     <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
                                          viewBox="0 0 448 512">
                                         <path
@@ -88,7 +85,7 @@ function Navbar(props) {
                             </a>
                         )}
                         {isHomepage && (
-                            <button onClick={navigateToLogIn} className={'nav-button'}>
+                            <button onClick={handlePopUp} className={'nav-button'}>
                                 Log In
                             </button>
                         )}
