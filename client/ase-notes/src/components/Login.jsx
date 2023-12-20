@@ -64,11 +64,16 @@ function Login(props){
             const response = await axios.post('http://localhost:3001/auth/login', loginData);
 
             if(response.status === 200){
-                navigate("/main-page");
-                const {data: {data:{prenume}}} =response;
+                const {data: {data:{token, prenume}}} =response;
+                localStorage.setItem('token',token);
                 localStorage.setItem('prenume',prenume);
-                props.handlePopUp();
 
+                localStorage.getItem('token');
+
+                // localStorage.removeItem('token');
+
+                navigate("/main-page");
+                props.handlePopUp();
             }
             else {
                 alert('Errors');
