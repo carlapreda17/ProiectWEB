@@ -17,7 +17,7 @@ module.exports = {
         'main-pink': '#F875AA',
         'baby-pink': '#FFDFDF',
         'baby-blue': '#AEDEFC',
-        'baby-purple': '#D8B4F8',
+        'baby-purple':'#D8B4F8',
         'background': '#FFF6F6',
         'dark-purple': '#49108B',
         'main-text':'#000000',
