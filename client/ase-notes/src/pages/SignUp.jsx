@@ -2,6 +2,8 @@ import React from "react";
 import {useState} from "react";
 import axios from 'axios';
 import { passwordRegex, phoneRegex, nameRegex, mailRegex} from "../utils/constants";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 
 
@@ -46,13 +48,14 @@ function SignUp(props){
             if(!nameRegex.test(formFields["nume"])){
                 formIsValid = false;
                 formErrors["nume"] = "Only letters";
-
+                document.querySelector("#nume-error").classList.remove("hidden");
             }
         }
         if(typeof formFields["prenume"] !== "undefined"){
             if(!nameRegex.test(formFields["prenume"])){
                 formIsValid = false
                 formErrors["prenume"] = "Only letters";
+                document.querySelector("#prenume-error").classList.remove("hidden");
             }
         }
 
@@ -61,7 +64,8 @@ function SignUp(props){
             if(!mailRegex.test(formFields["email"]))
             {
                 formIsValid = false;
-                formErrors["email"] = "Invalid mail";
+                formErrors["email"] = "Invalid email";
+                document.querySelector("#email-error").classList.remove("hidden");
             }
         }
 
@@ -72,6 +76,7 @@ function SignUp(props){
             {
                 formIsValid = false;
                 formErrors["parola"] = "Invalid password";
+                document.querySelector("#parola-error").classList.remove("hidden");
             }
         }
 
@@ -82,6 +87,7 @@ function SignUp(props){
             {
                 formIsValid = false;
                 formErrors["telefon"] = "Invalid number";
+                document.querySelector("#telefon-error").classList.remove("hidden");
             }
         }
 
@@ -140,62 +146,76 @@ function SignUp(props){
     }
 
     return(
-        <div className={"flex justify-center items-center h-screen"}>
-        <form className={"bg-main-pink py-20 px-20 rounded-xl shadow-box"}>
-            <div className={"mb-3"}>
-                <label className={"label-text mr-3"}>
-                    First Name
-                </label>
-                <input type="text"  placeholder={"First name"} value={fields["prenume"]} onChange={e=>handleChange("prenume",e.target.value)} />
-                <div className={"error-text"}>{errors["prenume"]}</div>
+        <div className={'page-container'}>
+            <Navbar isHomepage={false} isSignUp={true} classes={'content-container'}></Navbar>
+            <div className={"flex justify-center py-16 "}>
+                <form className={"bg-main-pink p-16 rounded-xl shadow-box w-3/6 tablet:w-9/12 mobile:w-11/12"}>
+                    <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                        <label className={"label-text mr-3 w-28 laptop:w-24"}>
+                            First Name
+                        </label>
+                        <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"First name"} value={fields["prenume"]} onChange={e=>handleChange("prenume",e.target.value)} />
+                    </div>
+                    <div id={'prenume-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["prenume"]}</div>
+
+                    <div className={'mb-8'}>
+                        <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                            <label className={"label-text mr-3 w-28 laptop:w-24"}>
+                                Last Name
+                            </label>
+                            <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Last Name"} value={fields["nume"]} onChange={e=>handleChange("nume",e.target.value)}/>
+                        </div>
+                        <div id={'nume-error'} className={"error-text pt-4 pl-40 hidden"} >{errors["nume"]}</div>
+                    </div>
+
+                    <div className={'mb-8'}>
+                        <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                            <label className={"label-text mr-3 w-28 laptop:w-24"}>
+                                Email
+                            </label>
+                            <input type="email" className={'pr-16 laptop:pr-12'} placeholder={"Email"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
+                        </div>
+                        <div id={'email-error'} className={"error-text pt-4 pl-40 hidden"} >{errors["email"]}</div>
+                    </div>
+
+                    <div className={'mb-8'}>
+                        <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                            <label className={"label-text mr-3 w-28 laptop:w-24"}>
+                                Password
+                            </label>
+                            <input type="password" className={'pr-16 laptop:pr-12'} placeholder={"Password"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
+                        </div>
+                        <div id={'parola-error'} className={"error-text pt-4 pl-40 hidden"} >{errors["parola"]}</div>
+                    </div>
+
+                    <div className={'mb-8'}>
+                        <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                            <label className={"label-text mr-3 w-28 laptop:w-24"}>
+                                Phone
+                            </label>
+                            <input className={'pr-16 laptop:pr-12'} placeholder={"Phone number"} value={fields["telefon"]} onChange={e=>handleChange("telefon",e.target.value)} />
+                        </div>
+                        <div id={'telefon-error'} className={"error-text pt-4 pl-40 hidden"} >{errors["telefon"]}</div>
+                    </div>
+
+                    <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                        <label className={"label-text mr-3 w-28 laptop:w-24"}>
+                            University
+                        </label>
+                        <select className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"} name="facultate" value={selectedFacultate} onChange={handleSelectChange}>
+                            <option className={"bg-white"} value="cibe">Cibernetica</option>
+                            <option className={"bg-white"} value="info">Informatica economica</option>
+                            <option className={"bg-white"} value="stat">Statistica</option>
+                        </select>
+                    </div>
+                    <div className={"flex justify-center mt-20"}>
+                        <button className={"!text-xl form-button button button-text m-tablet:px-20"} onClick={handleSubmit}>Submit</button>
+                    </div>
+
+                </form>
             </div>
 
-            <div className={"mb-3"}>
-                <label className={"label-text mr-3"}>
-                    Last Name
-                </label>
-                    <input type="text" placeholder={"Last Name"} value={fields["nume"]} onChange={e=>handleChange("nume",e.target.value)}/>
-                    <div className={"error-text"} >{errors["nume"]}</div>
-            </div>
-
-            <div className={"mb-3"}>
-                <label className={"label-text mr-3"}>
-                    Email
-                </label>
-                    <input type="email"  placeholder={"Email"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
-                    <div className={"error-text"} >{errors["email"]}</div>
-            </div>
-
-            <div className={"mb-3"}>
-                <label className={"label-text mr-3"}>
-                    Password
-                </label>
-                    <input type="password"  placeholder={"Password"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
-                    <div className={"error-text"} >{errors["parola"]}</div>
-            </div>
-
-            <div className={"mb-3"}>
-                <label className={"label-text mr-3"}>
-                    Phone
-                </label>
-                    <input placeholder={"Phone number"} value={fields["telefon"]} onChange={e=>handleChange("telefon",e.target.value)} />
-                    <div className={"error-text"} >{errors["telefon"]}</div>
-            </div>
-            <div className={"mb-3"}>
-                <label className={"label-text mr-3"}>
-                    Univeristy
-                </label>
-                <select className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink"} name="facultate" value={selectedFacultate} onChange={handleSelectChange}>
-                    <option className={"bg-white"} value="cibe">Cibernetica</option>
-                    <option className={"bg-white"} value="info">Informatica economica</option>
-                    <option className={"bg-white"} value="stat">Statistica</option>
-                </select>
-            </div>
-            <div className={"flex justify-center mt-8"}>
-                <button className={"form-button button button-text"} onClick={handleSubmit}>Submit</button>
-            </div>
-
-        </form>
+            <Footer/>
         </div>
     )
 }

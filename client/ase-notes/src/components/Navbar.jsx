@@ -5,7 +5,7 @@ import LogoSVG from './SVG/LogoSVG';
 import {NAVBAR_TEXT} from '../utils/content';
 
 function Navbar(props) {
-    const { isHomepage, isMainPage, classes, prenume, handlePopUp } = props;
+    const { isHomepage, isSignUp, isMainPage, classes, prenume, handlePopUp } = props;
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -79,6 +79,7 @@ function Navbar(props) {
                                 )}
                             </div>
                         ) : (
+                            !isSignUp &&
                             <a className={'mr-3 text-white'} href="#">
                                 About
                             </a>
