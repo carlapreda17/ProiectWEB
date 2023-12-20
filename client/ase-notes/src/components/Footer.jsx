@@ -9,12 +9,12 @@ function Footer(){
                 <div>
                     <h3 className={'text-dark-purple tablet:text-2xl'}>Contact Us</h3>
                     <div className={'mb-2'}>
-                        <LinkedinSVG colorClass={'text-main-text'}
+                        <LinkedinSVG colorClass={'text-background'}
                                      link={'https://www.linkedin.com/in/carla-preda-63668b246/'}
                                      name={'Preda Carla Maria'}/>
                     </div>
                     <div>
-                        <LinkedinSVG colorClass={'text-main-text'}
+                        <LinkedinSVG colorClass={'text-background'}
                                      link={'https://www.linkedin.com/in/m%C4%83riuca-pricop-737997237/'}
                                      name={'Pricop Măriuca'}/>
                     </div>
@@ -23,12 +23,12 @@ function Footer(){
                     <div className={'flex justify-center'}>
                         <StudyGirlSVG/>
                     </div>
-                    <span className={'text-base mobile:hidden'}>
+                    <span className={'text-base text-background mobile:hidden'}>
                         Knowledge is beautiful, and so is the mind that holds it.
                     </span>
                 </div>
                 <div className={'hidden text-center mobile:block'}>
-                    <span className={'text-base'}>
+                    <span className={'text-base text-background'}>
                         Knowledge is beautiful, and so is the mind that holds it.
                     </span>
                 </div>

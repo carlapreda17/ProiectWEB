@@ -85,7 +85,13 @@ function Homepage(props){
 
             <Footer/>
             <div>
-            {popUpVisible && <Login />}
+            {popUpVisible &&
+                <div className={'modal-container'}>
+                    <div>
+                        <Login />
+                    </div>
+                </div>
+            }
         </div>
         </div>
     )

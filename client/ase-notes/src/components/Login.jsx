@@ -8,6 +8,7 @@ function Login(props){
     const [errors, setErrors]=useState({});
     const navigate=useNavigate();
 
+
     const handleValidation= ()=>
     {
         const formFields = {...fields};
@@ -62,6 +63,8 @@ function Login(props){
 
         try {
             const response = await axios.post('http://localhost:3001/auth/login', loginData);
+
+            console.log(response)
 
             if(response.status === 200){
                 const {data: {data:{token, prenume}}} =response;
