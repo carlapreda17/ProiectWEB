@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Login from "../components/Login";
-function Homepage(params){
 
 function Homepage(props){
     const [popUpVisible, setPopUpVisible] = useState(false);
@@ -85,11 +84,12 @@ function Homepage(props){
             </div>
 
             <Footer/>
-        <div>
+            <div>
             <Navbar isHomepage={true} handlePopUp={handlePopUp}></Navbar>
             <button onClick={navigateToSignUp}>Sign up</button>
             {popUpVisible && <Login />}
             <Footer></Footer>
+        </div>
         </div>
     )
 }
