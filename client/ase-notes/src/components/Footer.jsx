@@ -8,15 +8,15 @@ function Footer(){
             <div className={'content-container py-14 flex justify-between m-tablet:py-10 m-tablet:px-8 tablet:px-6 mobile:flex-wrap mobile:gap-y-4'}>
                 <div>
                     <h3 className={'text-dark-purple tablet:text-2xl'}>Contact Us</h3>
-                    <div className={'flex gap-1 items-center mb-2'}>
+                    <div className={'mb-2'}>
                         <LinkedinSVG colorClass={'text-main-text'}
-                                     link={'https://www.linkedin.com/in/carla-preda-63668b246/'}/>
-                        <span className={'text-lg tablet:text-base'}>Preda Carla Maria</span>
+                                     link={'https://www.linkedin.com/in/carla-preda-63668b246/'}
+                                     name={'Preda Carla Maria'}/>
                     </div>
-                    <div className={'flex gap-1 items-center'}>
+                    <div>
                         <LinkedinSVG colorClass={'text-main-text'}
-                                     link={'https://www.linkedin.com/in/m%C4%83riuca-pricop-737997237/'}/>
-                        <span className={'text-lg tablet:text-base'}>Pricop Măriuca</span>
+                                     link={'https://www.linkedin.com/in/m%C4%83riuca-pricop-737997237/'}
+                                     name={'Pricop Măriuca'}/>
                     </div>
                 </div>
                 <div className={'w-3/12 text-center tablet:w-4/12 mobile:flex mobile:items-end'}>

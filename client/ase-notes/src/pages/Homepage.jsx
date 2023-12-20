@@ -2,20 +2,28 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-function Homepage(params){
 
+function Homepage(props){
     const navigate=useNavigate();
     const navigateToSignUp = () => {
         navigate('/sign-up')
+    }
+
+    let imgURL;
+    if(window.innerWidth<750) {
+        imgURL = 'banner_mobile.png'
+    } else {
+        imgURL = 'banner.png'
     }
 
     return(
         <div className={'page-container'}>
             <Navbar isHomepage={true} classes={'content-container'}></Navbar>
 
-            <div className={'bg-main-pink'}>
-                <div className={'relative h-[27rem] max-w-[90rem] mr-auto ml-auto'}>
-                    <img className={'absolute w-full h-full top-0 right-0 bg-cover'} src={'banner.jpg'}
+            <div className={'bg-baby-blue'}>
+                <div className={'relative h-0 pb-[41%] max-w-[90rem] mr-auto ml-auto tablet:pb-[110%]'}>
+                    <img className={'absolute w-full h-full top-0 right-0 object-cover'}
+                         src={imgURL}
                          alt={'Banner image'}></img>
                 </div>
             </div>
