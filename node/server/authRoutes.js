@@ -17,7 +17,7 @@ router.post('/login', async(req, res) => {
         });
         console.log(user);
 
-        const {prenume} = user;
+        const {nume, prenume, facultate} = user;
 
         if(!user) {
             return res.status(404).json({success: false, message: "User not found", data: {}});
@@ -32,7 +32,7 @@ router.post('/login', async(req, res) => {
             expiresIn: '1h'
         });
         console.log(token);
-        return res.status(200).json({success: true, message: "User logged in", data: {'token': token, 'prenume': prenume}});
+        return res.status(200).json({success: true, message: "User logged in", data: {'token': token, 'prenume': prenume, 'nume':nume,'facultate':facultate}});
     } catch(error) {
         console.error('Error:', error);
         res.status(500).json({success: false, message: 'An error occurred'});

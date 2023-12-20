@@ -28,8 +28,8 @@ function Navbar(props) {
                         {isMainPage ? (
                             <div className='relative'>
                                 <button className={'flex items-center pr-7'} onClick={toggleDropdown}>
-                                    <div className={'pr-3'}>{prenume}</div>
-                                    <ArrowDownSVG></ArrowDownSVG>
+                                    <div className={'pr-3 text-background text-xl'}>{prenume}</div>
+                                    <ArrowDownSVG colorClass={'text-background'}></ArrowDownSVG>
                                 </button>
                                 {dropdownVisible && (
                                     <div className='absolute right-0 bg-white rounded-md shadow-md mt-[0.625rem]'>
