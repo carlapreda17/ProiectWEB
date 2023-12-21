@@ -9,6 +9,15 @@ router.post('/signUp', async (req, res) => {
     try {
         const {nume, prenume, parola, email, telefon, facultate} = req.body;
 
+        const existaUser = await Utilizator.findOne({
+            where: {
+                'email': email
+            }
+        });
+        if (existaUser) {
+            return res.status(409).json({ success: false, message: "Email already in use." });
+        }
+
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(parola, salt);
 

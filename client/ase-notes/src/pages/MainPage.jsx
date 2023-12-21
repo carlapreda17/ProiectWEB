@@ -9,7 +9,7 @@ function MainPage(){
 
     return(
        <div>
-           <Navbar prenume={prenume} isMainPage={true}></Navbar>
+           <Navbar prenume={prenume} isMainPage={true} classes={'content-container'}></Navbar>
            <Footer></Footer>
        </div>
     )

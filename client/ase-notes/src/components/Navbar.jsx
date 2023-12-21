@@ -27,38 +27,39 @@ function Navbar(props) {
                     <div className='flex items-center'>
                         {isMainPage ? (
                             <div className='relative'>
-                                <button className={'flex items-center pr-7'} onClick={toggleDropdown}>
-                                    <div className={'pr-3'}>{prenume}</div>
+                                <button className={'flex items-center'} onClick={toggleDropdown}>
+                                    <div className={'pr-3 text-lg text-white'}>{prenume}</div>
                                     <ArrowDownSVG></ArrowDownSVG>
                                 </button>
                                 {dropdownVisible && (
-                                    <div className='absolute right-0 bg-white rounded-md shadow-md mt-[0.625rem]'>
+                                    <div className='absolute right-1 bg-white rounded-md shadow-md mt-[0.625rem] p-3'>
                                         <ul>
-                                            <li className={'flex'}>
+                                            <li className={'flex w-[9.375rem]'}>
                                                 <a href={"#"}
                                                    className={'flex gap-[1rem] w-full items-center px-5 py-4'}>
                                                     <p className={'text-[1.125rem] grow'}>Home</p>
                                                     <div>
-                                                        <HouseSVG></HouseSVG>
+                                                        <HouseSVG />
                                                     </div>
                                                 </a>
                                             </li>
-                                            <li className={'flex'}>
+                                            <li className={'flex w-[9.375rem]'}>
                                                 <a href={'#'}
-                                                   className={'flex gap-[1rem] px-5 py-4 w-full items-center'}>
+                                                   className={'flex gap-[1rem] px-5 py-4 w-full items-center pt-0'}>
                                                     <p className={'text-[1.125rem] grow'}>Settings</p>
                                                     <div>
-                                                        <SettingsSVG></SettingsSVG>
+                                                        <SettingsSVG />
                                                     </div>
 
                                                 </a>
                                             </li>
-                                            <li className={'flex border-t-[1px] border-t-solid border-t-stone-300'}>
-                                                <a href={'#'}
-                                                   className={'flex gap-[1rem] px-5 py-4 w-full items-center'}>
+                                            <li className={'flex border-t-[1px] border-t-solid border-t-stone-300 w-[9.375rem]'}>
+                                                <a href={'/'} id={'signOut'}
+                                                   className={'flex gap-[1rem] px-5 py-4 w-full items-center'}
+                                                    onClick={() => localStorage.removeItem('token')}>
                                                     <p className={'text-[1.125rem] grow'}>Sign out</p>
                                                     <div>
-                                                        <SignOutSVG></SignOutSVG>
+                                                        <SignOutSVG  />
                                                     </div>
                                                 </a>
                                             </li>
@@ -68,12 +69,12 @@ function Navbar(props) {
                             </div>
                         ) : (
                             !isSignUp &&
-                            <a className={'mr-3 text-white'} href="#">
+                            <a className={'mr-3 text-white text-lg'} href="#">
                                 About
                             </a>
                         )}
                         {isHomepage && (
-                            <button onClick={handlePopUp} className={'nav-button button'}>
+                            <button onClick={handlePopUp} className={'nav-button button !text-lg'}>
                                 Log In
                             </button>
                         )}

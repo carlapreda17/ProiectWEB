@@ -112,7 +112,7 @@ function Login(props){
                     <div className={"error-text"} >{errors["parola"]}</div>
                 </div>
                 <div className={"flex justify-center mt-8"}>
-                    <button className={"form-button button button-text"} onClick={handleSumbit}>Submit</button>
+                    <button className={"form-button button button-text !text-lg"} onClick={handleSumbit}>Submit</button>
                 </div>
 
             </form>
