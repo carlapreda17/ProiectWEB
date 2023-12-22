@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp";
 import Homepage from "./pages/Homepage";
 import Login from "./components/Login";
 import MainPage from "./pages/MainPage";
+import TextNote from "./pages/TextNote";
 function App() {
   return (
     <Router>
@@ -13,6 +14,7 @@ function App() {
             <Route path={"/sign-up"} element={<SignUp/>}></Route>
             <Route path={"/login"} element={<Login/>}></Route>
             <Route path={'/main-page'} element={<MainPage/>}></Route>
+            <Route path={'/text-note'} element={<TextNote/>}></Route>
         </Routes>
     </Router>
   );
