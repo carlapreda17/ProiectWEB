@@ -12,6 +12,7 @@ function SignUp(props){
     const [fields, setFields] = useState({});
     const [errors, setErrors] = useState({});
     const [selectedFacultate, setSelectedFacultate] = useState("");
+    const [showErrorEmail, setShowErrorEmail] = useState(false);
 
     const handleValidation = () => {
         const formFields = {...fields};
@@ -125,11 +126,11 @@ function SignUp(props){
                 document.querySelector("#error-form").style.display = "block";
             }
         } catch (error) {
-            if(error.response.status === 409) {
-                setErrors(prevErrors => ({ ...prevErrors, 'email': 'This email is already in use.' }));
-                // document.querySelector("#email-error").classList.remove("hidden");
-            }
             if (error.response) {
+                if(error.response.status === 409) {
+                    setErrors(prevErrors => ({ ...prevErrors, email: 'This email is already in use.' }));
+                    setShowErrorEmail(true);
+                }
                 console.error("Eroare de la server:", error.response.data);
             } else if (error.request) {
                 console.error("Cererea a fost trimisă, dar nu s-a primit niciun răspuns");
@@ -248,20 +249,18 @@ function SignUp(props){
                     <span className={'text-base'}>There was an error creating the account!</span>
                 </div>
             </div>
-            <div id={'error-email'}
-                 className={'absolute bg-baby-purple text-center w-[20%] p-1 pb-5 bottom-[16%] right-[40%] rounded-lg laptop:bottom-[5%] m-tablet:w-[30%] m-tablet:right-[35%] mobile:w-[40%] mobile:right-[30%]'}
-                 style={{'display': 'none'}}>
-                <div className={'relative'}>
-                    <div className={'h-6 flex justify-end'}>
-                        <button type="button" className={'w-6'} onClick={() => {
-                            document.querySelector("#error-email").style.display = "none";
-                        }}>
-                            <CloseSVG/>
-                        </button>
+            {showErrorEmail && (
+                <div className={'absolute bg-baby-purple text-center w-[20%] p-1 pb-5 bottom-[16%] right-[40%] rounded-lg laptop:bottom-[5%] m-tablet:w-[30%] m-tablet:right-[35%] mobile:w-[40%] mobile:right-[30%]'}>
+                    <div className={'relative'}>
+                        <div className={'h-6 flex justify-end'}>
+                            <button type="button" className={'w-6'} onClick={() => setShowErrorEmail(false)}>
+                                <CloseSVG/>
+                            </button>
+                        </div>
+                        <span className={'text-base'}>{errors.email}</span>
                     </div>
-                    <span className={'text-base'}>This email is already in use!</span>
                 </div>
-            </div>
+            )}
         </div>
     )
 }

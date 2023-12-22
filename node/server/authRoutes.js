@@ -15,17 +15,16 @@ router.post('/login', async(req, res) => {
                 email: email
             }
         });
-        console.log(user);
-
-        const {nume, prenume, facultate} = user;
 
         if(!user) {
             return res.status(404).json({success: false, message: "User not found", data: {}});
         }
 
+        const {nume, prenume, facultate} = user;
+
         const parolaValida = bcrypt.compareSync(parola, user.dataValues.parola);
         if (!parolaValida) {
-            return res.status(404).json({success: false, message: "Not the same password", data: {}});
+            return res.status(403).json({success: false, message: "Not the same password", data: {}});
         }
 
         const token = jwt.sign({id: user.dataValues.id_utilizator}, process.env.TOKEN_SECRET, {

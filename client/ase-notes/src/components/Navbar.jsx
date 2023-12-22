@@ -29,7 +29,9 @@ function Navbar(props) {
                             <div className='relative'>
                                 <button className={'flex items-center'} onClick={toggleDropdown}>
                                     <div className={'pr-3 text-lg text-white'}>{prenume}</div>
-                                    <ArrowDownSVG></ArrowDownSVG>
+                                    <div className={'pt-[5px]'}>
+                                        <ArrowDownSVG colorClass={'text-white'} />
+                                    </div>
                                 </button>
                                 {dropdownVisible && (
                                     <div className='absolute right-1 bg-white rounded-md shadow-md mt-[0.625rem] p-3'>
