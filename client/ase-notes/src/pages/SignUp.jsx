@@ -204,9 +204,9 @@ function SignUp(props){
                         <select
                             className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
                             name="facultate" value={selectedFacultate} onChange={handleSelectChange}>
-                            <option className={"bg-white"} value="cibe">Cibernetica</option>
-                            <option className={"bg-white"} value="info">Informatica economica</option>
-                            <option className={"bg-white"} value="stat">Statistica</option>
+                            <option className={"bg-white"} value="Cibernetica">Cibernetica</option>
+                            <option className={"bg-white"} value="Informatica Economica">Informatica Economica</option>
+                            <option className={"bg-white"} value="Statistica">Statistica</option>
                         </select>
                     </div>
                     <div className={"flex justify-center mt-20"}>

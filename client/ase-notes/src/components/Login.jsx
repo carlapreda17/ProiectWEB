@@ -67,10 +67,11 @@ function Login(props){
             console.log(response)
 
             if(response.status === 200){
-                const {data: {data:{token, prenume}}} =response;
+                const {data: {data:{token, prenume,nume,facultate}}} =response;
                 localStorage.setItem('token',token);
                 localStorage.setItem('prenume',prenume);
-
+                localStorage.setItem('nume',nume);
+                localStorage.setItem('facultate', facultate)
                 localStorage.getItem('token');
 
                 // localStorage.removeItem('token');
