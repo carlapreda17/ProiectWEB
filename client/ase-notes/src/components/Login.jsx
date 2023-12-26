@@ -2,12 +2,18 @@ import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import {mailRegex} from "../utils/constants";
+import CloseSVG from "./SVG/CloseSVG";
 
-function Login(props){
+function Login({handlePopUp}){
     const [fields, setFields] = useState({});
     const [errors, setErrors]=useState({});
     const navigate=useNavigate();
 
+
+    const handleButtonClose = (event) => {
+        event.stopPropagation();
+        handlePopUp();
+    };
 
     const handleValidation= ()=>
     {
@@ -77,7 +83,7 @@ function Login(props){
                 // localStorage.removeItem('token');
 
                 navigate("/main-page");
-                props.handlePopUp();
+                // props.handlePopUp();
             }
             else {
                 alert('Errors');
@@ -95,13 +101,16 @@ function Login(props){
 
     return(
         <div className={"flex justify-center items-center h-screen z-50"}>
-            <form className={"bg-main-pink py-20 px-20 rounded-xl shadow-box"}>
-
+            <form className={"bg-main-pink py-20 px-20 rounded-xl tablet:w-9/12 shadow-box relative"}>
+                <button onClick={handleButtonClose} className={"absolute top-[1.688rem] right-[1.938rem]"}>
+                    <CloseSVG colorClass={"text-background"}></CloseSVG>
+                </button>
+                <div className={"flex items-center flex-col"}>
                 <div className={"mb-3"}>
                     <label className={"label-text mr-11"}>
                         Email
                     </label>
-                    <input type="email"  placeholder={"Email"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
+                    <input className={"tablet:mt-[0.6rem]"} type="email"  placeholder={"Email"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
                     <div className={"error-text"} >{errors["email"]}</div>
                 </div>
 
@@ -109,14 +118,16 @@ function Login(props){
                     <label className={"label-text mr-3"}>
                         Password
                     </label>
-                    <input type="password"  placeholder={"Password"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
+                    <input className={"tablet:mt-[0.6rem]"} type="password"  placeholder={"Password"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
                     <div className={"error-text"} >{errors["parola"]}</div>
                 </div>
-                <div className={"flex justify-center mt-8"}>
-                    <button className={"form-button button button-text"} onClick={handleSumbit}>Submit</button>
+                    <div className={"mt-8"}>
+                    <button className={"form-button button button-text tablet:px-20"} onClick={handleSumbit}>Submit</button>
+                    </div>
                 </div>
 
             </form>
+
         </div>
     )
 }

@@ -20,7 +20,6 @@ function Homepage(props){
 
     const handlePopUp = () => {
         setPopUpVisible(!popUpVisible);
-        console.log(popUpVisible)
     };
 
     return(
@@ -88,7 +87,7 @@ function Homepage(props){
             {popUpVisible &&
                 <div className={'modal-container'}>
                     <div>
-                        <Login />
+                        <Login handlePopUp={handlePopUp}/>
                     </div>
                 </div>
             }

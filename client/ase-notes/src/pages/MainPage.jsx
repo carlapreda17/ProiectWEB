@@ -18,8 +18,8 @@ function MainPage(){
 
 
     return(
-       <div>
-           <Navbar prenume={prenume} isMainPage={true}></Navbar>
+       <div className={"page-container"}>
+           <Navbar prenume={prenume} isMainPage={true} classes={'content-container'}></Navbar>
            <div className={"sidebar-container"}>
                <div className={"info-section"}>
                     <UserSVG></UserSVG>
