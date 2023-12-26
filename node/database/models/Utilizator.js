@@ -12,7 +12,15 @@ const Utilizator = sequelize.define('Utilizatori', {
     parola: Sequelize.STRING,
     email: Sequelize.STRING,
     telefon:Sequelize.STRING,
-    facultate: Sequelize.STRING,
+    an:Sequelize.INTEGER,
+    facultate:Sequelize.INTEGER,
+    id_facultate: {
+        type:Sequelize.INTEGER,
+        references: {
+            model: 'Facultati',
+            key:'id_facultate'
+        }
+    },
     id_grup: {
         type: Sequelize.INTEGER,
         references: {

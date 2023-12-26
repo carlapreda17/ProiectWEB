@@ -7,7 +7,7 @@ const Utilizator = require('../database/models/Utilizator');
 
 router.post('/signUp', async (req, res) => {
     try {
-        const {nume, prenume, parola, email, telefon, facultate} = req.body;
+        const {nume, prenume, parola, email, telefon,facultate, an} = req.body;
 
         const existaUser = await Utilizator.findOne({
             where: {
@@ -59,6 +59,7 @@ router.post('/signUp', async (req, res) => {
                 email,
                 telefon,
                 facultate,
+                an
         });
 
         return res.status(201).json({success: true, message: 'User added'});

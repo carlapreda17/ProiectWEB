@@ -11,6 +11,8 @@ function MainPage(){
     const prenume=localStorage.getItem('prenume')
     const nume=localStorage.getItem('nume')
     const facultate=localStorage.getItem('facultate')
+    const an=localStorage.getItem('an')
+
     const navigate=useNavigate();
     const AdaugaNotita= ()=>{
         navigate('/text-note')
@@ -27,7 +29,7 @@ function MainPage(){
                     </div>
                     <div className={"user-data"}>
                         <p>{nume} {prenume}</p>
-                        <a href={"#"}>{facultate}</a>
+                        <a href={"#"}>{facultate} {an}</a>
                     </div>
                </div>
                <div className={"addNote-section"}>
