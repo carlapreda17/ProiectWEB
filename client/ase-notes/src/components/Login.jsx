@@ -9,6 +9,8 @@ function Login({handlePopUp}){
     const [errors, setErrors]=useState({});
     const navigate=useNavigate();
 
+    const [notFound, setNotFound] = useState(false);
+    const [wrongPassword, setWrongPassword] = useState(false)
 
     const handleButtonClose = (event) => {
         event.stopPropagation();
@@ -24,19 +26,19 @@ function Login({handlePopUp}){
         if(!formFields["email"] && !formFields["parola"])
         {
             formIsValid=false;
-            formErrors["email"] = "Cannot be empty";
+            formErrors["email"] = "Cannot be empty!";
         }
         if(!formFields["parola"])
         {
             formIsValid=false;
-            formErrors["parola"] = "Cannot be empty";
+            formErrors["parola"] = "Cannot be empty!";
         }
 
-        if(typeof formFields["email"] !=="undefined")
+        if(typeof formFields["email"] !== "undefined")
         {
             if(!mailRegex.test(formFields["email"])){
                 formIsValid=false;
-                formErrors["email"] = "Invalid mail";
+                formErrors["email"] = "Invalid email!";
             }
         }
 
@@ -57,44 +59,42 @@ function Login({handlePopUp}){
         event.preventDefault();
 
         const isValidForm = handleValidation();
-        if (!isValidForm) {
-            alert("Errors in form");
-            return;
-        }
 
-        const loginData = {
-            email: fields['email'],
-            parola: fields['parola'],
-        };
+        if(isValidForm) {
+            const loginData = {
+                email: fields['email'],
+                parola: fields['parola'],
+            };
 
-        try {
-            const response = await axios.post('http://localhost:3001/auth/login', loginData);
+            try {
+                const response = await axios.post('http://localhost:3001/auth/login', loginData);
 
-            console.log(response)
+                if(response.status === 200){
+                    const {data: {data:{token, prenume,nume,facultate}}} =response;
+                    localStorage.setItem('token',token);
+                    localStorage.setItem('prenume',prenume);
+                    localStorage.setItem('nume',nume);
+                    localStorage.setItem('facultate', facultate)
+                    localStorage.getItem('token');
 
-            if(response.status === 200){
-                const {data: {data:{token, prenume,nume,facultate}}} =response;
-                localStorage.setItem('token',token);
-                localStorage.setItem('prenume',prenume);
-                localStorage.setItem('nume',nume);
-                localStorage.setItem('facultate', facultate)
-                localStorage.getItem('token');
-
-                // localStorage.removeItem('token');
-
-                navigate("/main-page");
-                // props.handlePopUp();
-            }
-            else {
-                alert('Errors');
-            }
-        } catch (error) {
-            if (error.response) {
-                console.error("Eroare de la server:", error.response.data);
-            } else if (error.request) {
-                console.error("Cererea a fost trimisă, dar nu s-a primit niciun răspuns");
-            } else {
-                console.error("Eroare la crearea cererii:", error.message);
+                    navigate("/main-page");
+                    props.handlePopUp();
+                }
+            } catch (error) {
+                if (error.response) {
+                    if(error.response.status === 404) {
+                        setNotFound(true);
+                        setWrongPassword(false);
+                    } else if(error.response.status === 403) {
+                        setWrongPassword(true);
+                        setNotFound(false);
+                    }
+                    console.error("Eroare de la server:", error.response.data);
+                } else if (error.request) {
+                    console.error("Cererea a fost trimisă, dar nu s-a primit niciun răspuns");
+                } else {
+                    console.error("Eroare la crearea cererii:", error.message);
+                }
             }
         }
     }
@@ -110,20 +110,34 @@ function Login({handlePopUp}){
                     <label className={"label-text mr-11"}>
                         Email
                     </label>
-                    <input className={"tablet:mt-[0.6rem]"} type="email"  placeholder={"Email"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
-                    <div className={"error-text"} >{errors["email"]}</div>
+                    <input className={"tablet:mt-[0.6rem]"} type="email" placeholder={"Email"} value={fields["email"]}
+                           onChange={e => handleChange("email", e.target.value)}/>
+                    <div className={"error-text pt-1"}>{errors["email"]}</div>
                 </div>
 
                 <div className={"mb-3"}>
                     <label className={"label-text mr-3"}>
                         Password
                     </label>
-                    <input className={"tablet:mt-[0.6rem]"} type="password"  placeholder={"Password"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
-                    <div className={"error-text"} >{errors["parola"]}</div>
+                    <input className={"tablet:mt-[0.6rem]"} type="password" placeholder={"Password"} value={fields["parola"]}
+                           onChange={e => handleChange("parola", e.target.value)}/>
+                    <div className={"error-text pt-1"}>{errors["parola"]}</div>
                 </div>
                     <div className={"mt-8"}>
                     <button className={"form-button button button-text tablet:px-20"} onClick={handleSumbit}>Submit</button>
                     </div>
+
+                {notFound && (
+                    <div className={'error-text pt-1 text-center'}>
+                        <span>User not found!</span>
+                    </div>
+                )}
+                {wrongPassword && (
+                    <div className={'error-text pt-1 text-center'}>
+                        <span>Incorrect password or email!</span>
+                    </div>
+                )}
+
                 </div>
 
             </form>

@@ -22,14 +22,16 @@ function MainPage(){
            <Navbar prenume={prenume} isMainPage={true} classes={'content-container'}></Navbar>
            <div className={"sidebar-container"}>
                <div className={"info-section"}>
-                    <UserSVG></UserSVG>
+                    <div className={'border-2 border-main-text border-solid p-1 bg-baby-pink'}>
+                        <UserSVG />
+                    </div>
                     <div className={"user-data"}>
                         <p>{nume} {prenume}</p>
                         <a href={"#"}>{facultate}</a>
                     </div>
                </div>
                <div className={"addNote-section"}>
-                   <button onClick={AdaugaNotita} className={"button button-text py-[0.313rem] px-[3.125rem]"}>Aduga notita</button>
+                   <button onClick={AdaugaNotita} className={"button button-text py-[0.313rem] px-[3.125rem]"}>Adauga notita</button>
                </div>
                <div className={"notes-section"}>
                    <div className={"courses"}>
