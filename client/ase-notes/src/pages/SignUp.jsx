@@ -4,6 +4,7 @@ import axios from 'axios';
 import { passwordRegex, phoneRegex, nameRegex, mailRegex} from "../utils/constants";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import CloseSVG from "../components/SVG/CloseSVG";
 
 
 
@@ -11,13 +12,13 @@ function SignUp(props){
     const [fields, setFields] = useState({});
     const [errors, setErrors] = useState({});
     const [selectedFacultate, setSelectedFacultate] = useState("");
+    const [showErrorEmail, setShowErrorEmail] = useState(false);
 
     const handleValidation = () => {
         const formFields = {...fields};
         const formErrors = {};
         let formIsValid = true;
 
-        //verificam daca fiecare field e completat
         if (!formFields["nume"]) {
             formIsValid = false;
             formErrors["nume"] = "Cannot be empty";
@@ -43,7 +44,6 @@ function SignUp(props){
             formErrors["telefon"] = "Cannot be empty";
         }
 
-        //fara numere in nume/prenume
         if(typeof formFields["nume"] !== "undefined"){
             if(!nameRegex.test(formFields["nume"])){
                 formIsValid = false;
@@ -69,7 +69,6 @@ function SignUp(props){
             }
         }
 
-        //parola
         if(typeof formFields["parola"] !=="undefined")
         {
             if(!passwordRegex.test(formFields["parola"]))
@@ -80,7 +79,6 @@ function SignUp(props){
             }
         }
 
-        //nr telefon
         if(typeof formFields["telefon"] !=="undefined")
         {
             if(!phoneRegex.test(formFields["telefon"]))
@@ -109,11 +107,6 @@ function SignUp(props){
 
         const isValidForm = handleValidation();
 
-        if (!isValidForm) {
-            alert("Errors in form");
-            return;
-        }
-
         const userData = {
             nume: fields["nume"],
             prenume: fields["prenume"],
@@ -126,16 +119,18 @@ function SignUp(props){
         try {
             const response = await axios.post('http://localhost:3001/users/signUp', userData);
 
-            console.log(response);
-
             if(response.status === 201){
-                alert('Form submitted');
+                document.querySelector("#success-form").style.display = "block";
             }
             else {
-                alert('Errors');
+                document.querySelector("#error-form").style.display = "block";
             }
         } catch (error) {
             if (error.response) {
+                if(error.response.status === 409) {
+                    setErrors(prevErrors => ({ ...prevErrors, email: 'This email is already in use.' }));
+                    setShowErrorEmail(true);
+                }
                 console.error("Eroare de la server:", error.response.data);
             } else if (error.request) {
                 console.error("Cererea a fost trimisă, dar nu s-a primit niciun răspuns");
@@ -154,7 +149,8 @@ function SignUp(props){
                         <label className={"label-text mr-3 w-28 laptop:w-24"}>
                             First Name
                         </label>
-                        <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"First name"} value={fields["prenume"]} onChange={e=>handleChange("prenume",e.target.value)} />
+                        <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"First name"}
+                               value={fields["prenume"]} onChange={e => handleChange("prenume", e.target.value)}/>
                     </div>
                     <div id={'prenume-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["prenume"]}</div>
 
@@ -163,9 +159,10 @@ function SignUp(props){
                             <label className={"label-text mr-3 w-28 laptop:w-24"}>
                                 Last Name
                             </label>
-                            <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Last Name"} value={fields["nume"]} onChange={e=>handleChange("nume",e.target.value)}/>
+                            <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Last Name"}
+                                   value={fields["nume"]} onChange={e => handleChange("nume", e.target.value)}/>
                         </div>
-                        <div id={'nume-error'} className={"error-text pt-4 pl-40 hidden"} >{errors["nume"]}</div>
+                        <div id={'nume-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["nume"]}</div>
                     </div>
 
                     <div className={'mb-8'}>
@@ -173,9 +170,10 @@ function SignUp(props){
                             <label className={"label-text mr-3 w-28 laptop:w-24"}>
                                 Email
                             </label>
-                            <input type="email" className={'pr-16 laptop:pr-12'} placeholder={"Email"} value={fields["email"]} onChange={e=>handleChange("email",e.target.value)} />
+                            <input type="email" className={'pr-16 laptop:pr-12'} placeholder={"Email"}
+                                   value={fields["email"]} onChange={e => handleChange("email", e.target.value)}/>
                         </div>
-                        <div id={'email-error'} className={"error-text pt-4 pl-40 hidden"} >{errors["email"]}</div>
+                        <div id={'email-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["email"]}</div>
                     </div>
 
                     <div className={'mb-8'}>
@@ -183,9 +181,10 @@ function SignUp(props){
                             <label className={"label-text mr-3 w-28 laptop:w-24"}>
                                 Password
                             </label>
-                            <input type="password" className={'pr-16 laptop:pr-12'} placeholder={"Password"} value={fields["parola"]} onChange={e=>handleChange("parola",e.target.value)} />
+                            <input type="password" className={'pr-16 laptop:pr-12'} placeholder={"Password"}
+                                   value={fields["parola"]} onChange={e => handleChange("parola", e.target.value)}/>
                         </div>
-                        <div id={'parola-error'} className={"error-text pt-4 pl-40 hidden"} >{errors["parola"]}</div>
+                        <div id={'parola-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["parola"]}</div>
                     </div>
 
                     <div className={'mb-8'}>
@@ -193,29 +192,75 @@ function SignUp(props){
                             <label className={"label-text mr-3 w-28 laptop:w-24"}>
                                 Phone
                             </label>
-                            <input className={'pr-16 laptop:pr-12'} placeholder={"Phone number"} value={fields["telefon"]} onChange={e=>handleChange("telefon",e.target.value)} />
+                            <input className={'pr-16 laptop:pr-12'} placeholder={"Phone number"}
+                                   value={fields["telefon"]} onChange={e => handleChange("telefon", e.target.value)}/>
                         </div>
-                        <div id={'telefon-error'} className={"error-text pt-4 pl-40 hidden"} >{errors["telefon"]}</div>
+                        <div id={'telefon-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["telefon"]}</div>
                     </div>
 
                     <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
                         <label className={"label-text mr-3 w-28 laptop:w-24"}>
                             University
                         </label>
-                        <select className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"} name="facultate" value={selectedFacultate} onChange={handleSelectChange}>
+                        <select
+                            className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
+                            name="facultate" value={selectedFacultate} onChange={handleSelectChange}>
                             <option className={"bg-white"} value="Cibernetica">Cibernetica</option>
-                            <option className={"bg-white"} value="Informatica economica">Informatica economica</option>
+                            <option className={"bg-white"} value="Informatica Economica">Informatica Economica</option>
                             <option className={"bg-white"} value="Statistica">Statistica</option>
                         </select>
                     </div>
                     <div className={"flex justify-center mt-20"}>
-                        <button className={"!text-xl form-button button button-text m-tablet:px-20"} onClick={handleSubmit}>Submit</button>
+                        <button className={"!text-xl form-button button button-text m-tablet:px-20"}
+                                onClick={handleSubmit}>Submit
+                        </button>
                     </div>
 
                 </form>
             </div>
 
             <Footer/>
+
+            <div id={'success-form'}
+                 className={'absolute bg-baby-blue text-center w-[20%] p-1 pb-5 bottom-[16%] right-[40%] rounded-lg laptop:bottom-[5%] m-tablet:w-[30%] m-tablet:right-[35%] mobile:w-[40%] mobile:right-[30%]'}
+                 style={{'display': 'none'}}>
+                <div className={'relative'}>
+                    <div className={'h-6 flex justify-end'}>
+                        <button type="button" className={'w-6'} onClick={() => {
+                            document.querySelector("#success-form").style.display = "none";
+                        }}>
+                            <CloseSVG/>
+                        </button>
+                    </div>
+                    <span className={'text-base'}>The account was created successfully!</span>
+                </div>
+            </div>
+            <div id={'error-form'}
+                 className={'absolute bg-baby-purple text-center w-[20%] p-1 pb-5 bottom-[16%] right-[40%] rounded-lg laptop:bottom-[5%] m-tablet:w-[30%] m-tablet:right-[35%] mobile:w-[40%] mobile:right-[30%]'}
+                 style={{'display': 'none'}}>
+                <div className={'relative'}>
+                    <div className={'h-6 flex justify-end'}>
+                        <button type="button" className={'w-6'} onClick={() => {
+                            document.querySelector("#error-form").style.display = "none";
+                        }}>
+                            <CloseSVG/>
+                        </button>
+                    </div>
+                    <span className={'text-base'}>There was an error creating the account!</span>
+                </div>
+            </div>
+            {showErrorEmail && (
+                <div className={'absolute bg-baby-purple text-center w-[20%] p-1 pb-5 bottom-[16%] right-[40%] rounded-lg laptop:bottom-[5%] m-tablet:w-[30%] m-tablet:right-[35%] mobile:w-[40%] mobile:right-[30%]'}>
+                    <div className={'relative'}>
+                        <div className={'h-6 flex justify-end'}>
+                            <button type="button" className={'w-6'} onClick={() => setShowErrorEmail(false)}>
+                                <CloseSVG/>
+                            </button>
+                        </div>
+                        <span className={'text-base'}>{errors.email}</span>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
