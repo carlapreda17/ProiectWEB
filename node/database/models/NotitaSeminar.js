@@ -14,15 +14,9 @@ const NotitaSeminar = sequelize.define('NotitaSeminar', {
             key: 'id_utilizator',
         }
     },
-    id_seminar:{
-        type:Sequelize.INTEGER,
-        references: {
-            model: 'Seminare',
-            key: 'id_seminar',
-        }
-    },
     nume_materie: Sequelize.STRING,
     titlu:Sequelize.STRING,
+    content: Sequelize.TEXT('long'),
     data:Sequelize.DATE
 }, {
     tableName: 'NotiteSeminar',

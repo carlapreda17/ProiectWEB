@@ -70,10 +70,11 @@ function Login({handlePopUp}){
                 const response = await axios.post('http://localhost:3001/auth/login', loginData);
 
                 if(response.status === 200){
-                    const {data: {data:{token, prenume,nume,facultate,an}}} =response;
+                    const {data: {data:{token, prenume, nume, email, facultate, an}}} =response;
                     localStorage.setItem('token',token);
                     localStorage.setItem('prenume',prenume);
                     localStorage.setItem('nume',nume);
+                    localStorage.setItem('email', email);
                     localStorage.setItem('facultate', facultate)
                     localStorage.setItem('an',an);
                     localStorage.getItem('token');
