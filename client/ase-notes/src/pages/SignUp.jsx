@@ -12,6 +12,7 @@ function SignUp(props){
     const [fields, setFields] = useState({});
     const [errors, setErrors] = useState({});
     const [selectedFacultate, setSelectedFacultate] = useState("");
+    const [selectedAn, setSelectedAn] = useState("");
     const [showErrorEmail, setShowErrorEmail] = useState(false);
 
     const handleValidation = () => {
@@ -99,9 +100,14 @@ function SignUp(props){
         })
     }
 
-    const handleSelectChange = (event) => {
+    const handleSelectFacultate = (event) => {
         setSelectedFacultate(event.target.value);
+
     };
+    const handleSelectAn = (event) => {
+        setSelectedAn(event.target.value);
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
 
@@ -113,7 +119,8 @@ function SignUp(props){
             email: fields["email"],
             parola: fields["parola"],
             telefon: fields["telefon"],
-            facultate: selectedFacultate
+            facultate: selectedFacultate,
+            an:selectedAn
         };
 
         try {
@@ -204,10 +211,22 @@ function SignUp(props){
                         </label>
                         <select
                             className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
-                            name="facultate" value={selectedFacultate} onChange={handleSelectChange}>
+                            name="facultate" value={selectedFacultate} onChange={handleSelectFacultate}>
                             <option className={"bg-white"} value="Cibernetica">Cibernetica</option>
                             <option className={"bg-white"} value="Informatica Economica">Informatica Economica</option>
                             <option className={"bg-white"} value="Statistica">Statistica</option>
+                        </select>
+                    </div>
+                    <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                        <label className={"label-text mr-3 w-28 laptop:w-24"}>
+                            Year
+                        </label>
+                        <select
+                            className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
+                            name="facultate" value={selectedAn} onChange={handleSelectAn}>
+                            <option className={"bg-white"} value="1">1</option>
+                            <option className={"bg-white"} value="2">2</option>
+                            <option className={"bg-white"} value="3">3</option>
                         </select>
                     </div>
                     <div className={"flex justify-center mt-20"}>

@@ -20,7 +20,7 @@ router.post('/login', async(req, res) => {
             return res.status(404).json({success: false, message: "User not found", data: {}});
         }
 
-        const {nume, prenume, facultate} = user;
+        const {nume, prenume, facultate, an} = user;
 
         const parolaValida = bcrypt.compareSync(parola, user.dataValues.parola);
         if (!parolaValida) {
@@ -31,7 +31,7 @@ router.post('/login', async(req, res) => {
             expiresIn: '1h'
         });
         console.log(token);
-        return res.status(200).json({success: true, message: "User logged in", data: {'token': token, 'prenume': prenume, 'nume':nume,'facultate':facultate}});
+        return res.status(200).json({success: true, message: "User logged in", data: {'token': token, 'prenume': prenume, 'nume':nume,'facultate':facultate, 'an':an}});
     } catch(error) {
         console.error('Error:', error);
         res.status(500).json({success: false, message: 'An error occurred'});

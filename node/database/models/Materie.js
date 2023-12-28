@@ -8,6 +8,22 @@ const Materie = sequelize.define('Materie', {
         autoIncrement: true,
     },
     nume: Sequelize.STRING,
+    id_facultate:{
+        type:Sequelize.INTEGER,
+        references:{
+            model:'Facultati',
+            key:'id_facultate'
+        }
+    },
+    an:{
+        type:Sequelize.INTEGER,
+        references: {
+            model:'Utilizatori',
+            key:'an'
+        },
+        allowNull: true
+
+    }
 }, {
     tableName: 'Materii',
     timestamps: false,
