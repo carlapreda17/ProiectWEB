@@ -12,10 +12,12 @@ const relations = require('./database/modelsRelations');
 const userRoutes = require('./server/userRoutes');
 const authRoutes = require('./server/authRoutes');
 const dataRoutes = require('./server/dataRoutes');
+const notesRoutes=require('./server/notesRoutes');
 
 app.use('/users', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/info', dataRoutes);
+app.use('/notes', notesRoutes);
 
 app.listen(3001, ()=> {
     console.log('Server listening on port 3001');

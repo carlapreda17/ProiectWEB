@@ -11,7 +11,7 @@ function Footer(){
                     <div className={'mb-2'}>
                         <LinkedinSVG colorClass={'text-background'}
                                      link={'https://www.linkedin.com/in/carla-preda-63668b246/'}
-                                     name={'Preda Carla Maria'}/>
+                                     name={'Preda Maria Carla'}/>
                     </div>
                     <div>
                         <LinkedinSVG colorClass={'text-background'}

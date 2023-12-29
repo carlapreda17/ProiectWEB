@@ -35,7 +35,6 @@
     @apply text-justify whitespace-break-spaces;
   }
 
-
   input{
     @apply bg-white text-base border-solid rounded-2xl pl-2 py-1.5
   }
@@ -235,4 +234,36 @@ select:focus-visible {
   padding-inline: 1.25rem;
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+  z-index: 1;
+  left:50%;
+  top:60%;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.input-container{
+  margin-top:3.125rem;
+  margin-bottom: 3.125rem;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  border:dotted 0.9rem #F875AA;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
