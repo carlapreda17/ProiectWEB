@@ -1,8 +1,6 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import Login from "../components/Login";
-import {useState} from "react";
 import UserSVG from "../components/SVG/UserSVG";
 import ArrowDownSVG from "../components/SVG/ArrowDownSVG";
 import {useNavigate} from "react-router-dom";
@@ -17,7 +15,6 @@ function MainPage(){
     const AdaugaNotita= ()=>{
         navigate('/text-note')
     }
-
 
     return(
        <div className={"page-container"}>

@@ -13,7 +13,6 @@ const Utilizator = sequelize.define('Utilizatori', {
     email: Sequelize.STRING,
     telefon:Sequelize.STRING,
     an:Sequelize.INTEGER,
-    facultate:Sequelize.INTEGER,
     id_facultate: {
         type:Sequelize.INTEGER,
         references: {
