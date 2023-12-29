@@ -30,7 +30,7 @@ function Homepage(props){
                 <div className={'relative h-0 pb-[41%] max-w-[90rem] mr-auto ml-auto tablet:pb-[110%]'}>
                     <img className={'absolute w-full h-full top-0 right-0 object-cover'}
                          src={imgURL}
-                         alt={'Banner image'}></img>
+                         alt={'Banner'}></img>
                 </div>
             </div>
             <div className={'content-container m-tablet:px-8 tablet:px-6'}>

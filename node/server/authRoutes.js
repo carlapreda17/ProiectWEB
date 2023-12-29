@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 
 const Utilizator = require('../database/models/Utilizator');
+const Facultate = require('../database/models/Facultate');
 
 router.post('/login', async(req, res) => {
     try {
@@ -20,7 +21,14 @@ router.post('/login', async(req, res) => {
             return res.status(404).json({success: false, message: "User not found", data: {}});
         }
 
-        const {nume, prenume, facultate, an} = user;
+        const {nume, prenume, facultate, id_facultate, an} = user;
+
+        const {dataValues: {nume_facultate}} = await Facultate.findOne({
+            where: {
+                id_facultate: id_facultate
+            }
+        })
+
 
         const parolaValida = bcrypt.compareSync(parola, user.dataValues.parola);
         if (!parolaValida) {
@@ -30,8 +38,8 @@ router.post('/login', async(req, res) => {
         const token = jwt.sign({id: user.dataValues.id_utilizator}, process.env.TOKEN_SECRET, {
             expiresIn: '1h'
         });
-        console.log(token);
-        return res.status(200).json({success: true, message: "User logged in", data: {'token': token, 'prenume': prenume, 'nume':nume,'facultate':facultate, 'an':an}});
+
+        return res.status(200).json({success: true, message: "User logged in", data: {'token': token, 'prenume': prenume, 'email': email, 'nume':nume,'facultate':nume_facultate, 'an':an}});
     } catch(error) {
         console.error('Error:', error);
         res.status(500).json({success: false, message: 'An error occurred'});
@@ -49,7 +57,6 @@ router.get('/authenticated', async(req, res) => {
                 id_utilizator: decoded.id
             }
         });
-        console.log(user);
         const {prenume} = user;
         return res.status(200).json({success: true, message: "User authenticated", data: {'prenume': prenume}});
     } catch(error) {

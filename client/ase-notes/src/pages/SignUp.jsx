@@ -11,8 +11,8 @@ import CloseSVG from "../components/SVG/CloseSVG";
 function SignUp(props){
     const [fields, setFields] = useState({});
     const [errors, setErrors] = useState({});
-    const [selectedFacultate, setSelectedFacultate] = useState("");
-    const [selectedAn, setSelectedAn] = useState("");
+    const [selectedFacultate, setSelectedFacultate] = useState("Cibernetica");
+    const [selectedAn, setSelectedAn] = useState("1");
     const [showErrorEmail, setShowErrorEmail] = useState(false);
 
     const handleValidation = () => {
@@ -110,8 +110,6 @@ function SignUp(props){
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        const isValidForm = handleValidation();
 
         const userData = {
             nume: fields["nume"],
@@ -223,7 +221,7 @@ function SignUp(props){
                         </label>
                         <select
                             className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
-                            name="facultate" value={selectedAn} onChange={handleSelectAn}>
+                            name="an_facultate" value={selectedAn} onChange={handleSelectAn}>
                             <option className={"bg-white"} value="1">1</option>
                             <option className={"bg-white"} value="2">2</option>
                             <option className={"bg-white"} value="3">3</option>

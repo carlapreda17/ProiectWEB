@@ -22,14 +22,6 @@ const AtasamentSeminar = sequelize.define('AtasamentSeminar', {
         },
         allowNull: true
     },
-    id_seminar: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: 'Seminare',
-            key: 'id_seminar',
-        },
-        allowNull: true
-    },
     nume_materie: Sequelize.STRING,
     tip: {
         type: Sequelize.STRING,
