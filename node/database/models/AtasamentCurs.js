@@ -22,14 +22,6 @@ const AtasamentCurs = sequelize.define('AtasamentCurs', {
         },
         allowNull: true
     },
-    id_curs: {
-        type: Sequelize.INTEGER,
-        references: {
-            model: 'Cursuri',
-            key: 'id_curs',
-        },
-        allowNull: true
-    },
     nume_materie: Sequelize.STRING,
     tip: {
         type: Sequelize.STRING,
