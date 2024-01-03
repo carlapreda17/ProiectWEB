@@ -1,5 +1,6 @@
 const express = require('express');
-
+const multer = require('multer');
+const {extname} = require("path");
 const router = express.Router();
 
 const Utilizator = require('../database/models/Utilizator');
@@ -8,9 +9,17 @@ const Facultate = require("../database/models/Facultate");
 const NotitaSeminar = require('../database/models/NotitaSeminar');
 const NotitaCurs = require('../database/models/NotitaCurs');
 const AtasamentCurs=require('../database/models/AtasamentCurs');
-
 const AtasamentSeminar=require('../database/models/AtasamentSeminar');
 
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + extname(file.originalname));
+    }
+});
+const upload = multer({ storage: storage });
 
 router.get('/getMaterii', async (req, res) => {
     try {
@@ -85,11 +94,20 @@ router.post('/addNotita', async (req, res) => {
     }
 });
 
-router.post('/addAtasament', async (req, res)=>{
+router.post('/addAtasament', upload.single('fisier'), async (req, res) => {
     try{
-        const{ email,tip, descriere, cale_fisier, materie, note, date}=req.body
+        const { tipMaterie, email, tip, descriere, materie, note, url, date } = req.body;
+        let cale_fisier;
+        let numeFisier;
 
+        if(req.file) {
+            cale_fisier = req.file.path;
+            numeFisier = req.file.originalname;
+        }
 
+        if(!numeFisier) {
+            numeFisier = url;
+        }
 
         const {dataValues: {id_utilizator}}= await Utilizator.findOne({
             where:{
@@ -97,52 +115,59 @@ router.post('/addAtasament', async (req, res)=>{
             }
         })
 
-        const notaSeminar = await NotitaSeminar.findOne({
-            where: {
-                data:date
-            }
-        });
+        if(tipMaterie === 'Seminar') {
+            const notaSeminar = await NotitaSeminar.findOne({
+                    where: {
+                        data:date
+                    }
+                });
 
-        if (notaSeminar !== null) {
-            const {dataValues: {id_notita_seminar}}= await NotitaSeminar.findOne({
-                where:{
-                    data:date
-                }
-            })
-            console.log(id_notita_seminar)
-
-            await AtasamentSeminar.create({
-                id_utilizator,
-                id_notita_seminar:id_notita_seminar,
-                nume_materie: materie,
-                tip:tip,
-                descriere:descriere,
-                cale_fisier:cale_fisier
-            })
-        } else {
-
-            const notaCurs = await NotitaCurs.findOne({
-                where: {
-                    data:date
-                }
-            });
-
-            if (notaCurs !== null) {
-                const {dataValues: {id_notita_curs}}= await NotitaCurs.findOne({
+            if(notaSeminar) {
+                const {dataValues: {id_notita_seminar}}= await NotitaSeminar.findOne({
                     where:{
                         data:date
                     }
-                })
-                await AtasamentCurs.create({
+                });
+
+                await AtasamentSeminar.create({
                     id_utilizator,
-                    id_notita_curs:id_notita_curs,
+                    id_notita_seminar:id_notita_seminar,
                     nume_materie: materie,
                     tip:tip,
                     descriere:descriere,
-                    cale_fisier:cale_fisier
-                })
+                    nume_fisier: numeFisier,
+                    cale_fisier:cale_fisier,
+                    url
+                });
             }
+        } else
+            if(tipMaterie === 'Curs') {
+                const notaCurs = await NotitaCurs.findOne({
+                            where: {
+                                data:date
+                            }
+                        });
+
+                if(notaCurs) {
+                    const {dataValues: {id_notita_curs}}= await NotitaCurs.findOne({
+                        where:{
+                            data:date
+                        }
+                    });
+
+                    await AtasamentCurs.create({
+                        id_utilizator,
+                        id_notita_curs:id_notita_curs,
+                        nume_materie: materie,
+                        tip:tip,
+                        descriere:descriere,
+                        nume_fisier: numeFisier,
+                        cale_fisier:cale_fisier,
+                        url
+                    });
+                }
         }
+
         return res.status(201).json({success: true, message: 'Atasament added'});
     } catch(error) {
         console.error('Error:', error);

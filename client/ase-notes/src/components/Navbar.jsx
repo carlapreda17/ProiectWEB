@@ -35,7 +35,7 @@ function Navbar(props) {
                                     <div className='absolute right-1 bg-white rounded-md shadow-md mt-[0.625rem] p-3'>
                                         <ul>
                                             <li className={'flex w-[9.375rem]'}>
-                                                <a href={"#"}
+                                                <a href={"/main-page"}
                                                    className={'flex gap-[1rem] w-full items-center px-5 py-4'}>
                                                     <p className={'text-[1.125rem] grow'}>Home</p>
                                                     <div>
