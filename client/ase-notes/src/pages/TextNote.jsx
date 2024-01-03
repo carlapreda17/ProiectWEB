@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -13,13 +13,16 @@ function TextNote() {
     const [noteText, setNoteText] = useState('');
     const [materii,setMaterii]=useState([]);
     const [title, setTitle] = useState('');
+    const [descriere,setDescriere]=useState('')
+    const [selectedDocument,setselectedDocument]=useState('PDF')
+    const [fiser,setFisier]=useState('')
+    const [url,setUrl]=useState('')
 
     const [selectedTip, setSelectedTip] = useState('Curs');
     const [selectedMaterie, setSelectedMaterie] = useState('');
 
-    useEffect(() => {
-        console.log(prenume, an, facultate);
 
+    useEffect(() => {
         if(an && facultate) {
             let response;
             async function getMaterie() {
@@ -41,6 +44,19 @@ function TextNote() {
         }
     }, []);
 
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const fileName = file.name;
+            setFisier(fileName)
+        }
+    };
+    const handleSelectedDocument=(event) =>{
+        setselectedDocument(event.target.value)
+    }
+    const handleDescriere =(event) =>{
+        setDescriere(event.target.value)
+    }
 
     const handleInputChange = (event) => {
         setNoteText(event.target.value);
@@ -60,14 +76,23 @@ function TextNote() {
 
     const handleTitle = (event) => {
         setTitle(event.target.value);
+
+    }
+    const handleUrl= (event) => {
+        setUrl(event.target.value);
+
     }
 
     const salveazaText = async () => {
-        console.log(selectedTip)
-        console.log(selectedMaterie)
-        console.log(noteText)
-        console.log(email)
-        console.log(title)
+        if (!noteText.trim()) {
+            alert('Introduceți notita!');
+            return;
+        }
+
+        if (!title.trim()) {
+            alert('Introduceți un titlu valid!');
+            return;
+        }
 
         const data = {
             email: email,
@@ -79,13 +104,50 @@ function TextNote() {
 
         try {
             const response = await axios.post('http://localhost:3001/info/addNotita', data);
-            if(response.status===201) alert('trimis');
+            if(response.status===201) {
+                alert('Notita a fost adaugata cu succes!');
+                const responseData = response.data;
+                const date = responseData.data.date;
+                localStorage.setItem('date',date)
+            }
+
         } catch (error){
             console.error("Eroare la crearea cererii:", error.message);
         }
 
     }
 
+    const adaugaAtasament = async () =>{
+
+        const date=localStorage.getItem('date');
+        console.log(date)
+
+        const data={
+            email:email,
+            tip:selectedDocument,
+            descriere:descriere,
+            cale_fisier:fiser,
+            materie: selectedMaterie,
+            note:noteText,
+            date:date
+        }
+
+        try {
+            const response = await axios.post('http://localhost:3001/info/addAtasament', data);
+            console.log(response)
+            if(response.status===201) alert('Atasamentul a fost adaugat cu succes!');
+        } catch (error){
+            if (error.response && error.response.data) {
+                console.error("Eroare de la server:", error.response.data.message);
+
+            } else if (error.request) {
+                console.error("Cererea a fost trimisă, dar nu s-a primit niciun răspuns");
+            } else {
+                console.error("Eroare la crearea cererii:", error.message);
+            }
+        }
+
+    }
     return (
         <div className={"page-container"}>
             <Navbar prenume={prenume} isMainPage={true} classes={'content-container'}></Navbar>
@@ -99,7 +161,7 @@ function TextNote() {
                             <option className={"bg-white"} value="Seminar">Seminar</option>
                         </select>
                     </div>
-                    <div className={"mb-8 flex gap-8 items-center"}>
+                    <div className={"mb-8 flex items-center"}>
                         <label className={"text-main-pink mr-3"}>
                             Materii
                         </label>
@@ -134,6 +196,35 @@ function TextNote() {
                 <button className={"absolute mt-3 bottom-0 right-1/4 button button-text px-[1.25rem] py-[0.625rem]"} onClick={salveazaText}>Salveaza</button>
             </div>
             </div>
+            </div>
+            <div className="input-container">
+                <label className={"text-main-pink mb-12 text-2xl font-bold"} htmlFor="fileInput">
+                   Atasamente
+                </label>
+                <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                    <label className={"text-main-pink text-lg mr-3 laptop:w-24"}>
+                        Tip document
+                    </label>
+                    <select
+                        className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
+                        name="an_facultate" value={selectedDocument} onChange={handleSelectedDocument}>
+                        <option className={"bg-white"} value="PDF">PDF</option>
+                        <option className={"bg-white"} value="Document Word">Document Word</option>
+                        <option className={"bg-white"} value="Imagine">Imagine</option>
+                        <option className={"bg-white"} value="Excel">Excel</option>
+                    </select>
+                </div>
+                <div className={"mb-8 flex gap-8 items-center"}>
+                    <textarea className={"px-2 py-2"}  placeholder={"Descriere"} value={descriere} onChange={handleDescriere}  rows={5}
+                               cols={30} />
+                </div>
+                <div className={"mb-8 flex gap-8 items-center"}>
+                    <label className={"text-main-pink text-lg mr-3 laptop:w-24"}>Adauga Link</label>
+                    <input type={"text"}  placeholder={"URL"} value={url} onChange={handleUrl}/>
+                </div>
+                <input className={"mb-5"} type="file" id="fileInput" accept=".docx, .doc, .xlsx, .xls, .pdf, image/*"
+                       onChange={handleFileChange}/>
+                <button className={"button-text button mt-4 px-[1.25rem] py-[0.625rem]"} onClick={adaugaAtasament}>Adaugă document</button>
             </div>
             <Footer></Footer>
         </div>

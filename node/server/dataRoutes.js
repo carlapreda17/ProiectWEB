@@ -7,6 +7,10 @@ const Materie = require('../database/models/Materie');
 const Facultate = require("../database/models/Facultate");
 const NotitaSeminar = require('../database/models/NotitaSeminar');
 const NotitaCurs = require('../database/models/NotitaCurs');
+const AtasamentCurs=require('../database/models/AtasamentCurs');
+
+const AtasamentSeminar=require('../database/models/AtasamentSeminar');
+
 
 router.get('/getMaterii', async (req, res) => {
     try {
@@ -35,6 +39,20 @@ router.get('/getMaterii', async (req, res) => {
 router.post('/addNotita', async (req, res) => {
     try {
         const { email, title, tip, materie, note } = req.body;
+
+        let errors = [];
+        if(note===null)
+        {
+            errors.push('Notita inexistenta!')
+        }
+        if(title===null)
+        {
+            errors.push("Adauga titlu!")
+        }
+        if (errors.length > 0) {
+            return res.status(400).json({success: false, message: "The sent data is invalid.", errors: errors});
+        }
+
         const {dataValues: {id_utilizator}} = await Utilizator.findOne({
             where: {
                 email: email
@@ -60,11 +78,76 @@ router.post('/addNotita', async (req, res) => {
             });
         }
 
-        return res.status(201).json({success: true, message: 'Notita added'});
+        return res.status(201).json({success: true, message: 'Notita added', data:{'date':date}});
     } catch(error) {
         console.error('Error:', error);
         res.status(500).json({success: false, message: 'An error occurred'});
     }
 });
+
+router.post('/addAtasament', async (req, res)=>{
+    try{
+        const{ email,tip, descriere, cale_fisier, materie, note, date}=req.body
+
+
+
+        const {dataValues: {id_utilizator}}= await Utilizator.findOne({
+            where:{
+                email:email
+            }
+        })
+
+        const notaSeminar = await NotitaSeminar.findOne({
+            where: {
+                data:date
+            }
+        });
+
+        if (notaSeminar !== null) {
+            const {dataValues: {id_notita_seminar}}= await NotitaSeminar.findOne({
+                where:{
+                    data:date
+                }
+            })
+            console.log(id_notita_seminar)
+
+            await AtasamentSeminar.create({
+                id_utilizator,
+                id_notita_seminar:id_notita_seminar,
+                nume_materie: materie,
+                tip:tip,
+                descriere:descriere,
+                cale_fisier:cale_fisier
+            })
+        } else {
+
+            const notaCurs = await NotitaCurs.findOne({
+                where: {
+                    data:date
+                }
+            });
+
+            if (notaCurs !== null) {
+                const {dataValues: {id_notita_curs}}= await NotitaCurs.findOne({
+                    where:{
+                        data:date
+                    }
+                })
+                await AtasamentCurs.create({
+                    id_utilizator,
+                    id_notita_curs:id_notita_curs,
+                    nume_materie: materie,
+                    tip:tip,
+                    descriere:descriere,
+                    cale_fisier:cale_fisier
+                })
+            }
+        }
+        return res.status(201).json({success: true, message: 'Atasament added'});
+    } catch(error) {
+        console.error('Error:', error);
+        res.status(500).json({success: false, message: 'An error occurred'});
+    }
+})
 
 module.exports = router;
