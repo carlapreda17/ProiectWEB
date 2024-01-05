@@ -161,7 +161,6 @@ select:focus-visible {
   flex-direction: column;
   gap: 24px;
   justify-content: flex-start;
-  max-width: 250px;
   padding: 1.875rem 1.125rem;
   border-right: 2px solid #F875AA;
 }
@@ -305,3 +304,50 @@ textarea:focus-visible {
 .note-content {
   overflow-wrap: break-word;
 }
+
+/* Main Page Materii */
+.materii-container {
+  padding: 1.875rem 1.125rem;
+}
+
+@media screen and (min-width: 1400px) {
+  .materii-container {
+    width: 80%;
+  }
+
+  .sidebar-container {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 815px) {
+  .materii-container {
+    width: 65%;
+  }
+
+  .sidebar-container {
+    width: 35%;
+  }
+
+  #materie-anchor {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .materii-container {
+    width: 60%;
+  }
+
+  .sidebar-container {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .sidebar-container {
+    border-right: none;
+    border-bottom: 2px solid #F875AA;
+  }
+}
+/* Main Page Materii End */

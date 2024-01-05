@@ -6,8 +6,12 @@ import ArrowDownSVG from "../components/SVG/ArrowDownSVG";
 import {useNavigate} from "react-router-dom";
 import {useEffect,useState} from "react";
 import axios from "axios";
+import useAuth from "../components/useAuth";
+import Materie from "../components/Materie";
 
 function MainPage(){
+    const isAuthenticated = useAuth();
+
     const prenume=localStorage.getItem('prenume')
     const nume=localStorage.getItem('nume')
     const facultate=localStorage.getItem('facultate')
@@ -16,9 +20,32 @@ function MainPage(){
 
     const [notite, setNotite]=useState([]);
     const [atasamente, setAtasamente]=useState([]);
+    const [materii, setMaterii]=useState([]);
+
+    const navigate=useNavigate();
+
+    if(!isAuthenticated) {
+        navigate('/login');
+    }
 
     useEffect(()=>{
         let response;
+        async function getMaterie() {
+            try {
+                response = await axios.get('http://localhost:3001/info/getMaterii', {
+                    params: {
+                        nume_facultate: facultate,
+                        an: an
+                    }});
+
+            } catch (error) {
+                console.error("Eroare la crearea cererii:", error.message);
+            }
+        }
+        getMaterie().then(r => {
+            setMaterii(response.data.message.materii);
+        });
+
         async function getNotite(){
             try {
                 response = await axios.get('http://localhost:3001/notes/getNotite', {
@@ -34,13 +61,6 @@ function MainPage(){
         getNotite().then(r => {
             const notite = response.data.message.notite;
             if (notite && Array.isArray(notite)) {
-                // const titluriNotite = notite.map(notita => {
-                //     if (Array.isArray(notita)) {
-                //         return notita[0].titlu;
-                //     } else {
-                //         return notita.titlu;
-                //     }
-                // });
                 setNotite(notite);
             }
         })
@@ -60,20 +80,12 @@ function MainPage(){
         getAtasamente().then(() => {
             const atasamente = response.data.message.atasamente;
             if(atasamente && Array.isArray(atasamente)) {
-                // const titluriAtasamente = atasamente.map(atasament => {
-                //     if(Array.isArray(atasament)) {
-                //         return atasament[0].nume_fisier;
-                //     } else {
-                //         return atasament.nume_fisier;
-                //     }
-                // });
                 setAtasamente(atasamente);
                 console.log(atasamente)
             }
         })
     },[]);
 
-    const navigate=useNavigate();
     const AdaugaNotita= ()=>{
         navigate('/text-note')
     }
@@ -81,13 +93,13 @@ function MainPage(){
     return(
        <div className={"page-container"}>
            <Navbar prenume={prenume} isMainPage={true} classes={'content-container'}></Navbar>
-           <div>
-               <div className={"sidebar-container"}>
-                   <div className={"info-section"}>
+           <div className={'flex gap-4 tablet:flex-col'}>
+               <div className={"sidebar-container w-[25%] tablet:flex-col tablet:w-full tablet:gap-4"}>
+                   <div className={"info-section tablet:flex-row tablet:w-full"}>
                        <div className={'border-2 border-main-text border-solid p-1 bg-baby-pink'}>
                            <UserSVG/>
                        </div>
-                       <div className={"user-data"}>
+                       <div className={"user-data text-dark-purple"}>
                            <p>{nume} {prenume}</p>
                            <p className={"text-base"}>{facultate}</p>
                            <p className={"text-base"}>An: {an}</p>
@@ -101,20 +113,20 @@ function MainPage(){
                    <div className={"notes-section"}>
                        <div className={"courses dropdown"}>
                            <div className={"titles-container"}>
-                               <span className={"text-base"}>Notite</span>
-                               <ArrowDownSVG colorClass={"main-text"}/>
+                               <span className={"text-base text-dark-purple"}>Notite</span>
+                               <ArrowDownSVG colorClass={"text-dark-purple"}/>
                            </div>
 
                            <div className={"notes-container"}>
                                {notite.map((notita, index) => (
-                                   <div key={index} className={'note-content'} value={notita.titlu}>{notita.titlu}</div>
+                                   <div key={index} className={'note-content text-dark-purple'} value={notita.titlu}>{notita.titlu}</div>
                                ))}
                            </div>
                        </div>
                        <div className={"attach dropdown"}>
                            <div className={"titles-container"}>
-                               <a href={'#'}>Atasamente</a>
-                               <ArrowDownSVG colorClass={"main-text"}></ArrowDownSVG>
+                               <a href={'#'} className={'text-dark-purple'}>Atasamente</a>
+                               <ArrowDownSVG colorClass={"text-dark-purple"}></ArrowDownSVG>
                            </div>
 
                            <div className={"attach-container"}>
@@ -124,8 +136,8 @@ function MainPage(){
                                        {
                                            atasament.tip !== 'Link' ?
                                                <a href={`http://localhost:3001/${atasament.cale_fisier.replace('\\', '/')}`}
-                                                  download={atasament.nume_fisier}>{atasament.nume_fisier}</a>
-                                               : <a href={`${atasament.url}`} target="_blank" rel="noopener noreferrer">{atasament.nume_fisier}</a>
+                                                  className={'text-dark-purple'} download={atasament.nume_fisier}>{atasament.nume_fisier}</a>
+                                               : <a href={`${atasament.url}`} className={'text-dark-purple'} target="_blank" rel="noopener noreferrer">{atasament.nume_fisier}</a>
                                        }
 
                                    </div>
@@ -134,8 +146,16 @@ function MainPage(){
                        </div>
                    </div>
                </div>
+               <div className={"materii-container w-[75%] tablet:w-full"}>
+                   <p className={'text-4xl text-center text-dark-purple mb-8'}>Materii</p>
+                   <div className={'flex flex-wrap flex-row gap-6 justify-around tablet:justify-center'}>
+                       {materii.map(materie => {
+                           return <Materie materie={materie}/>
+                       })}
+                   </div>
+               </div>
            </div>
-           <Footer></Footer>
+           <Footer />
        </div>
     )
 }

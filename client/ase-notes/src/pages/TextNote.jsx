@@ -1,10 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import {useNavigate} from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import axios from "axios";
+import useAuth from "../components/useAuth";
 
 function TextNote() {
+    const isAuthenticated = useAuth();
+
     const prenume=localStorage.getItem('prenume')
     const an=localStorage.getItem('an')
     const facultate=localStorage.getItem('facultate')
@@ -21,6 +25,11 @@ function TextNote() {
     const [selectedTip, setSelectedTip] = useState('Curs');
     const [selectedMaterie, setSelectedMaterie] = useState('');
 
+    const navigate=useNavigate();
+
+    if(!isAuthenticated) {
+        navigate('/login');
+    }
 
     useEffect(() => {
         if(an && facultate) {
