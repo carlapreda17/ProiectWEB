@@ -45,6 +45,27 @@ router.get('/getMaterii', async (req, res) => {
     }
 });
 
+router.get('/getMaterie', async (req, res) => {
+    try {
+        const {id_materie} = req.query;
+
+        const materie = await  Materie.findOne({
+            where: {
+                id_materie: id_materie,
+            }
+        });
+
+        if (!materie) {
+            return res.status(404).json({success: false, message: 'Materia nu a fost găsită'});
+        }
+
+        return res.status(201).json({success: true, message: {'materie': materie}});
+    } catch(error) {
+        console.error('Error:', error);
+        res.status(500).json({success: false, message: 'An error occurred'});
+    }
+});
+
 router.post('/addNotita', async (req, res) => {
     try {
         const { email, title, tip, materie, note } = req.body;
