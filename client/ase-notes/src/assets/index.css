@@ -362,7 +362,6 @@ textarea:focus-visible {
   background-color: rgba(0, 0, 0, 0.7);
   opacity: 1;
   transition: opacity 0.3s;
-  z-index: 10;
 }
 
 .materie-name {

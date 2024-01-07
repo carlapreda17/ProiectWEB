@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
 import {getMaterie, getNotiteMaterie} from "../utils/functions";
 import Notita from "../components/Notita";
+import {useNavigate} from "react-router-dom";
 
 function PaginaMaterie() {
     const [materie, setMaterie] = useState(null);
@@ -18,6 +19,7 @@ function PaginaMaterie() {
     const { id_materie } = useParams();
     const prenume=localStorage.getItem('prenume');
     const email = localStorage.getItem('email');
+    const navigate=useNavigate();
 
     useEffect(() => {
         if(id_materie) {
@@ -63,6 +65,10 @@ function PaginaMaterie() {
 
         setNotite(notiteSortate);
     }, [sortType, sortOrder]);
+
+    const navigateToNotita = () => {
+        navigate('/editNotita')
+    }
 
     return (
         <div className={"page-container"}>
@@ -112,7 +118,7 @@ function PaginaMaterie() {
                         </div>
                     </div>
 
-                    <div className={'notes-container-materie'}>
+                    <div onClick={navigateToNotita} className={'notes-container-materie'}>
                         {notite?.map((notita, idx) => <Notita key={idx} notita={notita}/>)}
                     </div>
                 </div>
