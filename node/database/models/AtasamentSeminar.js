@@ -28,6 +28,7 @@ const AtasamentSeminar = sequelize.define('AtasamentSeminar', {
         allowNull: false
     },
     descriere: Sequelize.TEXT,
+    nume_fisier: Sequelize.STRING,
     cale_fisier: Sequelize.STRING,
     url: Sequelize.STRING
 }, {
