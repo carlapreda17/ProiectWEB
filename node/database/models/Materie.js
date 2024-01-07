@@ -23,7 +23,8 @@ const Materie = sequelize.define('Materie', {
         },
         allowNull: true
 
-    }
+    },
+    poza: Sequelize.STRING
 }, {
     tableName: 'Materii',
     timestamps: false,

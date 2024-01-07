@@ -112,7 +112,9 @@ function Login({handlePopUp}){
                         Email
                     </label>
                     <input className={"tablet:mt-[0.6rem]"} type="email" placeholder={"Email"} value={fields["email"]}
-                           onChange={e => handleChange("email", e.target.value)}/>
+                           onChange={e => handleChange("email", e.target.value)}
+                           onKeyDown={e => e.key === 'Enter' && handleSumbit(e)}
+                    />
                     <div className={"error-text pt-1"}>{errors["email"]}</div>
                 </div>
 
@@ -121,7 +123,9 @@ function Login({handlePopUp}){
                         Password
                     </label>
                     <input className={"tablet:mt-[0.6rem]"} type="password" placeholder={"Password"} value={fields["parola"]}
-                           onChange={e => handleChange("parola", e.target.value)}/>
+                           onChange={e => handleChange("parola", e.target.value)}
+                           onKeyDown={e => e.key === 'Enter' && handleSumbit(e)}
+                    />
                     <div className={"error-text pt-1"}>{errors["parola"]}</div>
                 </div>
                     <div className={"mt-8"}>

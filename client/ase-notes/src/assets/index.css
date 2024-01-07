@@ -161,13 +161,13 @@ select:focus-visible {
   flex-direction: column;
   gap: 24px;
   justify-content: flex-start;
-  max-width: 250px;
   padding: 1.875rem 1.125rem;
   border-right: 2px solid #F875AA;
 }
 
 .info-section {
   display: flex;
+  flex-direction: column;
   gap:1.25rem;
   align-items: center;
 }
@@ -182,35 +182,39 @@ select:focus-visible {
   justify-content: center;
 }
 
-.courses {
-  display: flex;
-  justify-content: space-between;
+.courses,
+.attach {
   padding: 1.25rem;
   cursor:pointer;
 }
 
-.courses:hover {
+.courses:hover,
+.attach:hover {
   background-color: #FFDFDF;
-  border-radius: 0.75rem;
   padding-top: 1rem;
   padding-right: 1rem;
+  border-radius: 0.75rem;
 }
 
 .text-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap:8.5rem;
-  margin-top: 1.875rem;
-  margin-bottom: 1.875rem;
-
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
 }
 
 .markdown-content {
+  overflow-wrap: break-word;
   max-width: 100%;
   max-height: 400px; /* Sau orice înălțime dorești să o oferi pentru containerul ReactMarkdown */
-  overflow-y: auto;
+  overflow-x: auto;
   padding: 10px;
   border: 1px solid black;
+
+  & > p {
+    font-size: 1rem;
+  }
 }
 
 .no-border{
@@ -219,9 +223,9 @@ select:focus-visible {
 
 .options-wrapper{
   display: flex;
-  gap:40px;
-  margin-left: 4.25rem;
-  margin-top: 1.875rem;
+  flex-wrap: wrap;
+  column-gap: 2.5rem;
+  margin: 1.875rem auto 0;
 }
 
 .note {
@@ -256,14 +260,151 @@ select:focus-visible {
 }
 
 .input-container{
-  margin-top:3.125rem;
-  margin-bottom: 3.125rem;
   flex-direction: column;
   align-items: center;
   display: flex;
   border:dotted 0.9rem #F875AA;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  margin: 3.125rem 0;
 }
+
+textarea:focus-visible {
+  outline: none;
+}
+
+.titles-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.notes-container,
+.attach-container {
+  display: none;
+}
+
+.courses:hover > .notes-container,
+.attach:hover > .attach-container {
+  display: block;
+}
+
+.notes-container > div,
+.attach-container > div {
+  background-color: #FFDFDF;
+  border-radius: 0;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.notes-container > div:last-child,
+.attach-container > div:last-child{
+  border-bottom-left-radius: 0.75rem;
+  border-bottom-right-radius: 0.75rem;
+}
+
+.note-content {
+  overflow-wrap: break-word;
+}
+
+/* Main Page Materii */
+.materii-container {
+  padding: 1.875rem 1.125rem;
+}
+
+@media screen and (min-width: 1400px) {
+  .materii-container {
+    width: 80%;
+  }
+
+  .sidebar-container {
+    width: 20%;
+  }
+}
+
+@media screen and (max-width: 815px) {
+  .materii-container {
+    width: 65%;
+  }
+
+  .sidebar-container {
+    width: 35%;
+  }
+
+  #materie-anchor {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .materii-container {
+    width: 60%;
+  }
+
+  .sidebar-container {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .sidebar-container {
+    border-right: none;
+    border-bottom: 2px solid #F875AA;
+  }
+}
+/* Main Page Materii End */
+
+/* Materie page */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 1;
+  transition: opacity 0.3s;
+  z-index: 10;
+}
+
+.materie-name {
+  position: absolute;
+  color: #AEDEFC;
+  font-size: 1.5rem;
+  bottom: 5%;
+  left: 5%;
+  z-index: 12;
+}
+
+.sorting-container {
+  padding: 1.875rem 1.125rem;
+}
+
+.notes-container-materie {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0 1.125rem 1.875rem;
+}
+
+.notita {
+  background-color: rgba(174, 222, 252, 60%);
+}
+
+@media screen and (min-width: 800px) {
+  .photo-container {
+    padding-bottom: 27%;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .photo-container {
+    padding-bottom: 20%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .notita {
+    width: 100%!important;
+  }
+}
+/* Materie page end */
