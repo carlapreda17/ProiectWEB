@@ -374,6 +374,22 @@ textarea:focus-visible {
   z-index: 12;
 }
 
+.sorting-container {
+  padding: 1.875rem 1.125rem;
+}
+
+.notes-container-materie {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 0 1.125rem 1.875rem;
+}
+
+.notita {
+  background-color: rgba(174, 222, 252, 60%);
+}
+
 @media screen and (min-width: 800px) {
   .photo-container {
     padding-bottom: 27%;
@@ -383,6 +399,12 @@ textarea:focus-visible {
 @media screen and (min-width: 1440px) {
   .photo-container {
     padding-bottom: 20%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .notita {
+    width: 100%!important;
   }
 }
 /* Materie page end */

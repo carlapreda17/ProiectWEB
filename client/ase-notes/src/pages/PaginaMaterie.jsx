@@ -1,16 +1,23 @@
 import {useParams} from "react-router-dom";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
-import {getMaterie} from "../utils/functions";
+import {getMaterie, getNotiteMaterie} from "../utils/functions";
+import Notita from "../components/Notita";
 
 function PaginaMaterie() {
     const [materie, setMaterie] = useState(null);
+    const [notite, setNotite] = useState([]);
+    const notiteInitialeRef = useRef([]);
+
+    const [sortType, setSortType] = useState('');
+    const [sortOrder, setSortOrder] = useState('');
 
     const { id_materie } = useParams();
     const prenume=localStorage.getItem('prenume');
+    const email = localStorage.getItem('email');
 
     useEffect(() => {
         if(id_materie) {
@@ -19,10 +26,43 @@ function PaginaMaterie() {
                     setMaterie(response.data.message.materie);
                 }
             });
+
+            getNotiteMaterie(id_materie, email).then(response => {
+                if(response) {
+                    setNotite(response.data.message.notite);
+                    notiteInitialeRef.current = response.data.message.notite;
+                }
+            })
         }
     }, []);
 
-    console.log(materie);
+    useEffect(() => {
+        if(!notiteInitialeRef.current.length) return;
+
+        let notiteSortate = [...notiteInitialeRef.current];
+
+        if(sortType === 'Course') {
+            notiteSortate = notiteSortate.filter(notita => notita.id_notita_curs);
+        } else if(sortType === 'Seminar') {
+            notiteSortate = notiteSortate.filter(notita => notita.id_notita_seminar);
+        } else if (sortType === 'All') {
+            notiteSortate = [...notiteInitialeRef.current];
+        }
+
+        if(sortOrder !== "") {
+            notiteSortate.sort((a, b) => {
+                if(sortOrder.includes('Date')) {
+                    const dateA = new Date(a.data);
+                    const dateB = new Date(b.data);
+                    return sortOrder.includes('Asc.') ? dateA - dateB : dateB - dateA;
+                } else if(sortOrder.includes('Name')) {
+                    return sortOrder.includes('Asc.') ? a.titlu?.localeCompare(b.titlu) : b.titlu?.localeCompare(a.titlu);
+                }
+            });
+        }
+
+        setNotite(notiteSortate);
+    }, [sortType, sortOrder]);
 
     return (
         <div className={"page-container"}>
@@ -37,6 +77,44 @@ function PaginaMaterie() {
                         <div className={'materie-name m-tablet:text-xl mobile:text-lg'}>{materie?.nume}</div>
                     </div>
 
+                    <div className={'sorting-container flex justify-between mobile:flex-col mobile:gap-2'}>
+                        <div>
+                            <label className={"text-base leading-4 text-dark-purple font-bold mr-3 w-28 laptop:w-24"}>
+                                Type
+                            </label>
+                            <select
+                                className={'bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-dark-purple pr-16 laptop:pr-12'}
+                                name={'sortType'}
+                                value={sortType}
+                                onChange={(e) => setSortType(e.target.value)}>
+                                <option className={"bg-white"} value="">Choose...</option>
+                                <option className={"bg-white"} value="Course">Course</option>
+                                <option className={"bg-white"} value="Seminar">Seminar</option>
+                                <option className={"bg-white"} value="All">All</option>
+                            </select>
+                        </div>
+
+                        <div>
+                        <label className={"text-base leading-4 text-dark-purple font-bold mr-3 w-28 laptop:w-24"}>
+                                Sort by
+                            </label>
+                            <select
+                                className={'bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-dark-purple pr-16 laptop:pr-12'}
+                                name={'sort'}
+                                value={sortOrder}
+                                onChange={(e) => setSortOrder(e.target.value)}>
+                                <option className={"bg-white"} value="">Choose...</option>
+                                <option className={"bg-white"} value="By Date Asc.">By Date Asc.</option>
+                                <option className={"bg-white"} value="By Date Desc.">By Date Desc.</option>
+                                <option className={"bg-white"} value="By Name Asc.">By Name Asc.</option>
+                                <option className={"bg-white"} value="By Name Desc.">By Name Desc.</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className={'notes-container-materie'}>
+                        {notite?.map((notita, idx) => <Notita key={idx} notita={notita}/>)}
+                    </div>
                 </div>
             </div>
             <Footer/>

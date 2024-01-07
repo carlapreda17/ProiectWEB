@@ -26,6 +26,19 @@ export async function getNotite(email) {
     }
 }
 
+export async function getNotiteMaterie(id_materie, email) {
+    try {
+        return await axios.get('http://localhost:3001/notes/getNotiteMaterie', {
+            params: {
+                id_materie: id_materie,
+                email: email
+            }
+        });
+    } catch (error) {
+        console.error("Eroare la crearea cererii:", error.message);
+    }
+}
+
 export async function getAtasamente(email) {
     try {
         return await axios.get('http://localhost:3001/notes/getAtasamente', {
