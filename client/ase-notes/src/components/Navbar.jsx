@@ -5,15 +5,22 @@ import ArrowDownSVG from "./SVG/ArrowDownSVG";
 import HouseSVG from "./SVG/HouseSVG";
 import SettingsSVG from "./SVG/SettingsSVG";
 import SignOutSVG from "./SVG/SignOutSVG";
+import {useNavigate} from "react-router-dom";
 
 function Navbar(props) {
     const { isHomepage, isSignUp, isMainPage, classes, prenume, handlePopUp } = props;
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
+    const navigate=useNavigate()
+
     const toggleDropdown = () => {
         setDropdownVisible(!dropdownVisible);
     };
+
+    const navigateToSettings = () =>{
+        navigate("/settings")
+    }
 
     return (
         <div className={'bg-main-pink shadow-nav z-10 sticky'}>
@@ -43,7 +50,7 @@ function Navbar(props) {
                                                     </div>
                                                 </a>
                                             </li>
-                                            <li className={'flex w-[9.375rem]'}>
+                                            <li onClick={navigateToSettings} className={'flex w-[9.375rem]'}>
                                                 <a href={'#'}
                                                    className={'flex gap-[1rem] px-5 py-4 w-full items-center pt-0'}>
                                                     <p className={'text-[1.125rem] grow'}>Settings</p>
