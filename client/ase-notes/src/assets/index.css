@@ -165,6 +165,11 @@ select:focus-visible {
   border-right: 2px solid #F875AA;
 }
 
+.notes-container > div:first-of-type,
+.attach-container > div:first-of-type {
+  padding-top: 1rem;
+}
+
 .info-section {
   display: flex;
   flex-direction: column;
@@ -184,6 +189,7 @@ select:focus-visible {
 
 .courses,
 .attach {
+  width: 14.375rem;
   padding: 1.25rem;
   cursor:pointer;
 }
@@ -307,7 +313,7 @@ textarea:focus-visible {
 
 /* Main Page Materii */
 .materii-container {
-  padding: 1.875rem 1.125rem;
+  padding: 2.125rem 1.125rem;
 }
 
 @media screen and (min-width: 1400px) {
@@ -332,6 +338,10 @@ textarea:focus-visible {
   #materie-anchor {
     width: 100%;
   }
+
+  #overlay-photo > button {
+    top: 6.5%;
+  }
 }
 
 @media screen and (max-width: 700px) {
@@ -349,11 +359,30 @@ textarea:focus-visible {
     border-right: none;
     border-bottom: 2px solid #F875AA;
   }
+
+  #overlay-photo > button {
+    top: 4%;
+  }
+
+  #attach-image-container {
+    top: 8%;
+  }
+}
+
+@media screen and (max-width: 505px) {
+  #overlay-photo > button {
+    top: 5%;
+  }
+
+  #attach-image-container {
+    right: 20%;
+  }
 }
 /* Main Page Materii End */
 
 /* Materie page */
-.overlay {
+.overlay,
+#overlay-photo {
   position: absolute;
   top: 0;
   left: 0;

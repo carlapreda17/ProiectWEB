@@ -38,6 +38,20 @@ function Sidebar(props) {
         navigate('/text-note')
     }
 
+    const openImage = (src) => {
+        const container = document.getElementById('attach-image-container');
+        if(container) {
+            container.style.display = 'block';
+            const img = container.children[0].children[0];
+            img.src = src;
+        }
+
+        const overlay = document.getElementById('overlay-photo');
+        if(overlay) {
+            overlay.style.display = 'block';
+        }
+    }
+
     return (
         <div className={"sidebar-container w-[25%] tablet:flex-col tablet:w-full tablet:gap-4"}>
             <div className={"info-section tablet:flex-row tablet:w-full"}>
@@ -63,7 +77,7 @@ function Sidebar(props) {
                     </div>
 
                     <div className={"notes-container"}>
-                        {notite.map((notita, index) => (
+                        {notite?.map((notita, index) => (
                             <div key={index} className={'note-content text-dark-purple'}
                                  value={notita.titlu}>{notita.titlu}</div>
                         ))}
@@ -76,20 +90,28 @@ function Sidebar(props) {
                     </div>
 
                     <div className={"attach-container"}>
-                        {atasamente.map((atasament, index) => (
-                            <div key={index} className={'note-content'}
-                                 value={atasament.nume_fisier}>
-                                {
-                                    atasament.tip !== 'Link' ?
-                                        <a href={`http://localhost:3001/${atasament.cale_fisier.replace('\\', '/')}`}
-                                           className={'text-dark-purple'}
-                                           download={atasament.nume_fisier}>{atasament.nume_fisier}</a>
-                                        : <a href={`${atasament.url}`} className={'text-dark-purple'} target="_blank"
-                                             rel="noopener noreferrer">{atasament.nume_fisier}</a>
-                                }
+                        {atasamente?.filter(atasament => atasament != null && atasament.nume_fisier)
+                            .map((atasament, index) => (
+                                <div key={index} className={'note-content'}
+                                     value={atasament.nume_fisier}>
+                                    {
+                                        atasament.tip !== 'Link' ?
+                                            atasament.tip !== 'Imagine' ?
+                                                <a href={`http://localhost:3001/${atasament.cale_fisier}`}
+                                                   className={'text-dark-purple'}
+                                                   download={atasament.nume_fisier}>{atasament.nume_fisier}</a>
+                                                :
+                                                <a href={'#'}
+                                                   className={'text-dark-purple'}
+                                                   onClick={() => openImage(`http://localhost:3001/${atasament.cale_fisier}`)}>
+                                                    {atasament.nume_fisier}</a>
+                                            :
+                                            <a href={`${atasament.url}`} className={'text-dark-purple'} target="_blank"
+                                               rel="noopener noreferrer">{atasament.nume_fisier}</a>
+                                    }
 
-                            </div>
-                        ))}
+                                </div>
+                            ))}
                     </div>
                 </div>
             </div>

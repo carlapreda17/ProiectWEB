@@ -89,7 +89,7 @@ function TextNote() {
         setUrl(event.target.value);
     }
 
-    const salveazaText = async () => {
+    const salveaza = async () => {
         if (!noteText.trim()) {
             alert('Introduceți notita!');
             return;
@@ -120,47 +120,47 @@ function TextNote() {
         } catch (error){
             console.error("Eroare la crearea cererii:", error.message);
         }
+        console.log(fisier)
+        console.log(url)
 
-    }
+        if(fisier || url) {
+            console.log('este atasament')
+            const date = localStorage.getItem('date');
 
-    const adaugaAtasament = async () => {
-        const date = localStorage.getItem('date');
+            const formData = new FormData();
+            formData.append('tipMaterie', selectedTip);
+            formData.append('email', email);
+            formData.append('tip', selectedDocument);
+            formData.append('descriere', descriere);
+            if (fisier) {
+                formData.append('fisier', fisier);
+            }
+            formData.append('materie', selectedMaterie);
+            formData.append('note', noteText);
+            formData.append('url', url);
+            formData.append('date', date);
 
-        // Crearea unui obiect FormData
-        const formData = new FormData();
-        formData.append('tipMaterie', selectedTip);
-        formData.append('email', email);
-        formData.append('tip', selectedDocument);
-        formData.append('descriere', descriere);
-        if (fisier) {
-            formData.append('fisier', fisier);
-        }
-        formData.append('materie', selectedMaterie);
-        formData.append('note', noteText);
-        formData.append('url', url);
-        formData.append('date', date);
-
-        try {
-            const response = await axios.post('http://localhost:3001/info/addAtasament', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
+            try {
+                const response = await axios.post('http://localhost:3001/info/addAtasament', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+                console.log(response);
+                if (response.status === 201) {
+                    alert('Atasamentul a fost adaugat cu succes!');
                 }
-            });
-            console.log(response);
-            if (response.status === 201) {
-                alert('Atasamentul a fost adaugat cu succes!');
-            }
-        } catch (error) {
-            if (error.response && error.response.data) {
-                console.error("Eroare de la server:", error.response.data.message);
-            } else if (error.request) {
-                console.error("Cererea a fost trimisă, dar nu s-a primit niciun răspuns");
-            } else {
-                console.error("Eroare la crearea cererii:", error.message);
+            } catch (error) {
+                if (error.response && error.response.data) {
+                    console.error("Eroare de la server:", error.response.data.message);
+                } else if (error.request) {
+                    console.error("Cererea a fost trimisă, dar nu s-a primit niciun răspuns");
+                } else {
+                    console.error("Eroare la crearea cererii:", error.message);
+                }
             }
         }
     }
-
 
     return (
         <div className={"page-container"}>
@@ -183,8 +183,8 @@ function TextNote() {
                             <select
                                 className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
                                 name="materii" value={selectedMaterie} onChange={handleSelectMaterie}>
-                                {materii.map(materie => (
-                                    <option className={'bg-white'} value={materie.nume}>{materie.nume}</option>
+                                {materii.map((materie, idx) => (
+                                    <option key={idx} className={'bg-white'} value={materie.nume}>{materie.nume}</option>
                                 ))};
                             </select>
                         </div>
@@ -199,8 +199,7 @@ function TextNote() {
                            onChange={handleInputChange}
                            placeholder="Type your notes using Markdown..."
                            rows={10}
-                           cols={50}
-                 ></textarea>
+                           cols={50}></textarea>
                             <div className={"mt-3"}>
                                 <button className={"button button-text px-[1.25rem] py-[0.625rem] w-[10rem]"}
                                         onClick={stergeText}>Sterge
@@ -209,13 +208,9 @@ function TextNote() {
 
                         </div>
                         <div
-                            className={"flex flex-col items-center w-full relative mr-auto ml-auto"}>
+                            className={"items-center w-full relative mr-auto ml-auto"}>
                             <ReactMarkdown id={"text"}
-                                           className={`pl-3 markdown-content mb-[3.25rem] w-full${noteText === '' ? ' no-border' : ''}`}>{noteText}</ReactMarkdown>
-                            <button
-                                className={"absolute mt-3 bottom-0 button button-text px-[1.25rem] py-[0.625rem] w-[10rem]"}
-                                onClick={salveazaText}>Salveaza
-                            </button>
+                                           className={`pl-3 markdown-content w-full${noteText === '' ? ' no-border' : ''}`}>{noteText}</ReactMarkdown>
                         </div>
                     </div>
                 </div>
@@ -250,8 +245,10 @@ function TextNote() {
                     <input className={"mb-5 mobile:w-[15rem]"} type="file" id="fileInput"
                            accept=".docx, .doc, .xlsx, .xls, .pdf, image/*"
                            onChange={handleFileChange} disabled={selectedDocument === 'Link'}/>
-                    <button className={"button-text button mt-4 px-[1.25rem] py-[0.625rem]"}
-                            onClick={adaugaAtasament}>Adaugă document
+                </div>
+                <div className={'text-center'}>
+                    <button className={"button-text button mb-12 px-[1.25rem] py-[0.625rem]"}
+                            onClick={salveaza}>Adaugă document
                     </button>
                 </div>
             </div>
