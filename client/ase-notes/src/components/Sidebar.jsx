@@ -66,13 +66,13 @@ function Sidebar(props) {
             </div>
             <div className={"addNote-section"}>
                 <button onClick={AdaugaNotita}
-                        className={"button button-text py-[0.313rem] px-[3.125rem]"}>Adauga notita
+                        className={"button button-text py-[0.313rem] px-[3.125rem]"}>Adaugă notiță
                 </button>
             </div>
             <div className={"notes-section"}>
                 <div className={"courses dropdown"}>
                     <div className={"titles-container"}>
-                        <span className={"text-base text-dark-purple"}>Notite</span>
+                        <span className={"text-base text-dark-purple"}>Notițe</span>
                         <ArrowDownSVG colorClass={"text-dark-purple"}/>
                     </div>
 
@@ -85,7 +85,7 @@ function Sidebar(props) {
                 </div>
                 <div className={"attach dropdown"}>
                     <div className={"titles-container"}>
-                        <a href={'#'} className={'text-dark-purple'}>Atasamente</a>
+                        <a href={'#'} className={'text-dark-purple'}>Atașamente</a>
                         <ArrowDownSVG colorClass={"text-dark-purple"}></ArrowDownSVG>
                     </div>
 
