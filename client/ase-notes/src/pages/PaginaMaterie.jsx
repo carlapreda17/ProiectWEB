@@ -66,9 +66,7 @@ function PaginaMaterie() {
         setNotite(notiteSortate);
     }, [sortType, sortOrder]);
 
-    const navigateToNotita = () => {
-        navigate('/editNotita')
-    }
+
 
     return (
         <div className={"page-container"}>
@@ -118,7 +116,7 @@ function PaginaMaterie() {
                         </div>
                     </div>
 
-                    <div onClick={navigateToNotita} className={'notes-container-materie'}>
+                    <div className={'notes-container-materie'}>
                         {notite?.map((notita, idx) => <Notita key={idx} notita={notita}/>)}
                     </div>
                 </div>
