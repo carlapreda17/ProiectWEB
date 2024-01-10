@@ -312,12 +312,12 @@ textarea:focus-visible {
 }
 
 /* Main Page Materii */
-.materii-container {
+.materii-container,.setari-container {
   padding: 2.125rem 1.125rem;
 }
 
 @media screen and (min-width: 1400px) {
-  .materii-container {
+  .materii-container,.setari-container {
     width: 80%;
   }
 
@@ -327,7 +327,7 @@ textarea:focus-visible {
 }
 
 @media screen and (max-width: 815px) {
-  .materii-container {
+  .materii-container,.setari-container {
     width: 65%;
   }
 
