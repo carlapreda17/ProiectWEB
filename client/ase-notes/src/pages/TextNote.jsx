@@ -189,7 +189,7 @@ function TextNote() {
                             </select>
                         </div>
                         <div className={"mb-8 flex gap-8 items-center"}>
-                            <input type={"text"} placeholder={"Title"} value={title} onChange={handleTitle}/>
+                            <input type={"text"} placeholder={"Titlu"} value={title} onChange={handleTitle}/>
                         </div>
                     </div>
                     <div className={"text-container"}>
@@ -197,7 +197,7 @@ function TextNote() {
                  <textarea className={"px-2 py-2 h-[25rem] w-full"}
                            value={noteText}
                            onChange={handleInputChange}
-                           placeholder="Type your notes using Markdown..."
+                           placeholder="Scrie notița aici..."
                            rows={10}
                            cols={50}></textarea>
                             <div className={"mt-3"}>
