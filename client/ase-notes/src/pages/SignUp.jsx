@@ -152,20 +152,20 @@ function SignUp(props){
               <div className={"relative"}>
                   <form className={"bg-main-pink p-16 rounded-xl shadow-box"}>
                       <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                          <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                              First Name
+                          <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                              Prenume
                           </label>
-                          <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"First name"}
+                          <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Prenume"}
                                  value={fields["prenume"]} onChange={e => handleChange("prenume", e.target.value)}/>
                       </div>
                       <div id={'prenume-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["prenume"]}</div>
 
                       <div className={'mb-8'}>
                           <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                              <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                                  Last Name
+                              <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                                  Nume
                               </label>
-                              <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Last Name"}
+                              <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Nume"}
                                      value={fields["nume"]} onChange={e => handleChange("nume", e.target.value)}/>
                           </div>
                           <div id={'nume-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["nume"]}</div>
@@ -173,7 +173,7 @@ function SignUp(props){
 
                       <div className={'mb-8'}>
                           <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                              <label className={"label-text mr-3 w-28 laptop:w-24"}>
+                              <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
                                   Email
                               </label>
                               <input type="email" className={'pr-16 laptop:pr-12'} placeholder={"Email"}
@@ -184,10 +184,10 @@ function SignUp(props){
 
                       <div className={'mb-8'}>
                           <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                              <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                                  Password
+                              <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                                  Parola
                               </label>
-                              <input type="password" className={'pr-16 laptop:pr-12'} placeholder={"Password"}
+                              <input type="password" className={'pr-16 laptop:pr-12'} placeholder={"Parola"}
                                      value={fields["parola"]} onChange={e => handleChange("parola", e.target.value)}/>
                           </div>
                           <div id={'parola-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["parola"]}</div>
@@ -195,18 +195,18 @@ function SignUp(props){
 
                       <div className={'mb-8'}>
                           <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                              <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                                  Phone
+                              <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                                  Telefon
                               </label>
-                              <input className={'pr-16 laptop:pr-12'} placeholder={"Phone number"}
+                              <input className={'pr-16 laptop:pr-12'} placeholder={"Telefon"}
                                      value={fields["telefon"]} onChange={e => handleChange("telefon", e.target.value)}/>
                           </div>
                           <div id={'telefon-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["telefon"]}</div>
                       </div>
 
                       <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                          <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                              University
+                          <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                              Facultate
                           </label>
                           <select
                               className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
@@ -217,8 +217,8 @@ function SignUp(props){
                           </select>
                       </div>
                       <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                          <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                              Year
+                          <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                              An
                           </label>
                           <select
                               className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
@@ -230,7 +230,7 @@ function SignUp(props){
                       </div>
                       <div className={"flex justify-center mt-20"}>
                           <button className={"!text-xl form-button button button-text m-tablet:px-20"}
-                                  onClick={handleSubmit}>Submit
+                                  onClick={handleSubmit}>Inregistrare
                           </button>
                       </div>
 

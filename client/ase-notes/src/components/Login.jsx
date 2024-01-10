@@ -26,19 +26,19 @@ function Login({handlePopUp}){
         if(!formFields["email"] && !formFields["parola"])
         {
             formIsValid=false;
-            formErrors["email"] = "Cannot be empty!";
+            formErrors["email"] = "Nu este completat!";
         }
         if(!formFields["parola"])
         {
             formIsValid=false;
-            formErrors["parola"] = "Cannot be empty!";
+            formErrors["parola"] = "Nu este completat!";
         }
 
         if(typeof formFields["email"] !== "undefined")
         {
             if(!mailRegex.test(formFields["email"])){
                 formIsValid=false;
-                formErrors["email"] = "Invalid email!";
+                formErrors["email"] = "Email invalid";
             }
         }
 
@@ -119,17 +119,17 @@ function Login({handlePopUp}){
                 </div>
 
                 <div className={"mb-3"}>
-                    <label className={"label-text mr-3"}>
-                        Password
+                    <label className={"label-text mr-[2.5rem]"}>
+                        Parola
                     </label>
-                    <input className={"tablet:mt-[0.6rem]"} type="password" placeholder={"Password"} value={fields["parola"]}
+                    <input className={"tablet:mt-[0.6rem]"} type="password" placeholder={"Parola"} value={fields["parola"]}
                            onChange={e => handleChange("parola", e.target.value)}
                            onKeyDown={e => e.key === 'Enter' && handleSumbit(e)}
                     />
                     <div className={"error-text pt-1"}>{errors["parola"]}</div>
                 </div>
                     <div className={"mt-8"}>
-                    <button className={"form-button button button-text tablet:px-20"} onClick={handleSumbit}>Submit</button>
+                    <button className={"form-button button button-text tablet:px-20"} onClick={handleSumbit}>Conectare</button>
                     </div>
 
                 {notFound && (
