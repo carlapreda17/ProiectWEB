@@ -8,6 +8,7 @@ const NotitaCurs = require('../database/models/NotitaCurs');
 const AtasamentCurs = require('../database/models/AtasamentCurs');
 const AtasamentSeminar = require('../database/models/AtasamentSeminar');
 const {Materie} = require("../database/modelsRelations");
+const {content} = require("../../client/ase-notes/tailwind.config");
 
 
 router.get('/getNotite',async (req,res)=>{
@@ -105,6 +106,92 @@ router.get('/getNotiteMaterie', async(req, res) => {
     } catch(error) {
         console.error('Error:', error);
         res.status(500).json({success: false, message: 'An error occurred'});
+    }
+});
+
+router.get('/getNotitaCurs', async(req,res)=>{
+    try{
+
+        const {id_notita_curs}=req.query;
+
+        const notiteCurs = await NotitaCurs.findOne({
+            where: {
+                id_notita_curs: id_notita_curs
+            }
+        });
+
+        if (notiteCurs) {
+            res.status(200).json({ success: true, message: {'notita':notiteCurs} });
+        } else {
+            res.status(404).json({ success: false, message: 'Notița nu a fost găsită' });
+        }
+
+    }catch(error)
+    {
+        console.error('Error:', error);
+        res.status(500).json({success: false, message: 'An error occurred'});
+    }
+})
+
+router.get('/getNotitaSeminar', async(req,res)=>{
+    try{
+        const {id_notita_seminar}=req.query;
+
+        const notiteSeminar= await NotitaSeminar.findOne({
+            where: {
+                id_notita_seminar: id_notita_seminar
+            }
+        });
+
+        if (notiteSeminar) {
+            res.status(200).json({ success: true, message: {'notita':notiteSeminar} });
+        } else {
+            res.status(404).json({ success: false, message: 'Notița nu a fost găsită' });
+        }
+
+    }catch(error)
+    {
+        console.error('Error:', error);
+        res.status(500).json({success: false, message: 'An error occurred'});
+    }
+})
+router.put('/updateNotitaCurs/:id', async (req, res) => {
+    try {
+        const notitaId = req.params.id;
+        const {content} = req.body;
+
+        const updatedNotita = await NotitaCurs.update({content}, {
+            where: { id_notita_curs: notitaId },
+
+        })
+        if (updatedNotita[0]) {
+            res.status(201).json({ success: true });
+        } else {
+            res.status(404).json({ success: false, message: 'Notița nu a fost găsită sau nu a fost actualizată' });
+        }
+    } catch (error) {
+        console.error('Eroare la actualizarea notiței:', error);
+        throw error;
+    }
+});
+
+router.put('/updateNotitaSeminar/:id', async (req, res) => {
+    try {
+        const notitaId = req.params.id;
+        const { content } = req.body;
+
+        const updatedNotita = await NotitaSeminar.update({ content }, {
+            where: { id_notita_seminar: notitaId },
+        });
+
+        if (updatedNotita[0]) {
+            res.status(201).json({ success: true });
+        } else {
+            res.status(404).json({ success: false, message: 'Notița nu a fost găsită sau nu a fost actualizată' });
+        }
+    } catch (error) {
+        console.error('Eroare la actualizarea notiței:', error);
+        res.status(500).json({ success: false, message: 'Eroare la actualizarea notiței' });
     }
 });
 

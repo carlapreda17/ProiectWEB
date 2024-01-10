@@ -62,3 +62,53 @@ export async function getMaterie(id_materie) {
         console.error("Eroare la crearea cererii:", error.message);
     }
 }
+
+export async function getNotitaCurs(idNr_notita_curs) {
+    try {
+        return await axios.get('http://localhost:3001/notes/getNotitaCurs', {
+            params: {
+                id_notita_curs: idNr_notita_curs
+            }});
+
+    } catch (error) {
+        console.error("Eroare la crearea cererii:", error.message);
+    }
+}
+
+export async function getNotitaSeminar(idNr_notita_seminar) {
+    try {
+        return await axios.get('http://localhost:3001/notes/getNotitaSeminar', {
+            params: {
+                id_notita_seminar: idNr_notita_seminar
+            }});
+
+    } catch (error) {
+        console.error("Eroare la crearea cererii:", error.message);
+    }
+}
+
+export async function updateNotitaCurs(data) {
+    try {
+        const response = await axios.put(`http://localhost:3001/notes/updateNotitaCurs/${data.id}`, {
+            content: data.content
+
+        });
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.message || 'Eroare la actualizarea notiței');
+    }
+}
+
+export async function updateNotitaSeminar(data) {
+    try {
+        const response = await axios.put(`http://localhost:3001/notes/updateNotitaSeminar/${data.id}`, {
+            content: data.content
+
+        });
+
+        return response.data;
+    } catch (error) {
+        throw new Error(error.response?.data?.message || 'Eroare la actualizarea notiței');
+    }
+}
