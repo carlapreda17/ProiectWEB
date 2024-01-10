@@ -83,34 +83,34 @@ function PaginaMaterie() {
                     <div className={'sorting-container flex justify-between mobile:flex-col mobile:gap-2'}>
                         <div>
                             <label className={"text-base leading-4 text-dark-purple font-bold mr-3 w-28 laptop:w-24"}>
-                                Type
+                                Tip
                             </label>
                             <select
                                 className={'bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-dark-purple pr-16 laptop:pr-12'}
                                 name={'sortType'}
                                 value={sortType}
                                 onChange={(e) => setSortType(e.target.value)}>
-                                <option className={"bg-white"} value="">Choose...</option>
-                                <option className={"bg-white"} value="Course">Course</option>
+                                <option className={"bg-white"} value="">Alege...</option>
+                                <option className={"bg-white"} value="Course">Curs</option>
                                 <option className={"bg-white"} value="Seminar">Seminar</option>
-                                <option className={"bg-white"} value="All">All</option>
+                                <option className={"bg-white"} value="All">Toate</option>
                             </select>
                         </div>
 
                         <div>
                         <label className={"text-base leading-4 text-dark-purple font-bold mr-3 w-28 laptop:w-24"}>
-                                Sort by
+                                Sorteaza dupa
                             </label>
                             <select
                                 className={'bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-dark-purple pr-16 laptop:pr-12'}
                                 name={'sort'}
                                 value={sortOrder}
                                 onChange={(e) => setSortOrder(e.target.value)}>
-                                <option className={"bg-white"} value="">Choose...</option>
-                                <option className={"bg-white"} value="By Date Asc.">By Date Asc.</option>
-                                <option className={"bg-white"} value="By Date Desc.">By Date Desc.</option>
-                                <option className={"bg-white"} value="By Name Asc.">By Name Asc.</option>
-                                <option className={"bg-white"} value="By Name Desc.">By Name Desc.</option>
+                                <option className={"bg-white"} value="">Alege...</option>
+                                <option className={"bg-white"} value="By Date Asc.">Cele mai vechi</option>
+                                <option className={"bg-white"} value="By Date Desc.">Cele mai recente</option>
+                                <option className={"bg-white"} value="By Name Asc.">A-Z</option>
+                                <option className={"bg-white"} value="By Name Desc.">Z-A</option>
                             </select>
                         </div>
                     </div>

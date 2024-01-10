@@ -7,7 +7,7 @@ function Footer(){
         <div className={"page-container bg-main-pink shadow-footer"}>
             <div className={'content-container py-14 flex justify-between m-tablet:py-10 m-tablet:px-8 tablet:px-6 mobile:flex-wrap mobile:gap-y-4'}>
                 <div>
-                    <h3 className={'text-dark-purple tablet:text-2xl'}>Contact Us</h3>
+                    <h3 className={'text-dark-purple tablet:text-2xl'}>Contactaţi-ne</h3>
                     <div className={'mb-2'}>
                         <LinkedinSVG colorClass={'text-background'}
                                      link={'https://www.linkedin.com/in/carla-preda-63668b246/'}
