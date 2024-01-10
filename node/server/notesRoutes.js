@@ -86,8 +86,6 @@ router.get('/getNotiteMaterie', async(req, res) => {
             }
         });
 
-        console.log(nume, id_utilizator)
-
         const notiteSeminar = await NotitaSeminar.findAll({
             where: {
                 id_utilizator: id_utilizator
