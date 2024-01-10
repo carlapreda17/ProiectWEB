@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {useNavigate} from "react-router-dom";
 import ReactMarkdown from 'react-markdown';
 import Navbar from "../components/Navbar";
@@ -120,8 +120,6 @@ function TextNote() {
         } catch (error){
             console.error("Eroare la crearea cererii:", error.message);
         }
-        console.log(fisier)
-        console.log(url)
 
         if(fisier || url) {
             console.log('este atasament')
@@ -146,7 +144,7 @@ function TextNote() {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
-                console.log(response);
+
                 if (response.status === 201) {
                     alert('Atasamentul a fost adaugat cu succes!');
                 }

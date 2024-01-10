@@ -6,8 +6,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import CloseSVG from "../components/SVG/CloseSVG";
 
-
-
 function SignUp(props){
     const [fields, setFields] = useState({});
     const [errors, setErrors] = useState({});

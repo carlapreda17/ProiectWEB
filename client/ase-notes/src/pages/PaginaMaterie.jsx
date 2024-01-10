@@ -1,6 +1,5 @@
 import {useParams} from "react-router-dom";
 import React, {useEffect, useRef, useState} from "react";
-import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Sidebar from "../components/Sidebar";
