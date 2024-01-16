@@ -99,7 +99,7 @@ function PaginaMaterie() {
 
                         <div>
                         <label className={"text-base leading-4 text-dark-purple font-bold mr-3 w-28 laptop:w-24"}>
-                                Sorteaza dupa
+                                Sortează după
                             </label>
                             <select
                                 className={'bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-dark-purple pr-16 laptop:pr-12'}

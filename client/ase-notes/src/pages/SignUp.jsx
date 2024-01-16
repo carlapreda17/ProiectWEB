@@ -150,7 +150,7 @@ function SignUp(props){
               <div className={"relative"}>
                   <form className={"bg-main-pink p-16 rounded-xl shadow-box"}>
                       <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                          <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                          <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
                               Prenume
                           </label>
                           <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Prenume"}
@@ -160,7 +160,7 @@ function SignUp(props){
 
                       <div className={'mb-8'}>
                           <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                              <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                              <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
                                   Nume
                               </label>
                               <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Nume"}
@@ -171,7 +171,7 @@ function SignUp(props){
 
                       <div className={'mb-8'}>
                           <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                              <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                              <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
                                   Email
                               </label>
                               <input type="email" className={'pr-16 laptop:pr-12'} placeholder={"Email"}
@@ -182,7 +182,7 @@ function SignUp(props){
 
                       <div className={'mb-8'}>
                           <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                              <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                              <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
                                   Parola
                               </label>
                               <input type="password" className={'pr-16 laptop:pr-12'} placeholder={"Parola"}
@@ -193,7 +193,7 @@ function SignUp(props){
 
                       <div className={'mb-8'}>
                           <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                              <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                              <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
                                   Telefon
                               </label>
                               <input className={'pr-16 laptop:pr-12'} placeholder={"Telefon"}
@@ -203,19 +203,19 @@ function SignUp(props){
                       </div>
 
                       <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                          <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                          <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
                               Facultate
                           </label>
                           <select
                               className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
                               name="facultate" value={selectedFacultate} onChange={handleSelectFacultate}>
-                              <option className={"bg-white"} value="Cibernetica">Cibernetica</option>
-                              <option className={"bg-white"} value="Informatica Economica">Informatica Economica</option>
-                              <option className={"bg-white"} value="Statistica">Statistica</option>
+                              <option className={"bg-white"} value="Cibernetica">Cibernetică economică</option>
+                              <option className={"bg-white"} value="Informatica Economica">Informatică Economică</option>
+                              <option className={"bg-white"} value="Statistica">Statistică</option>
                           </select>
                       </div>
                       <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                          <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                          <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
                               An
                           </label>
                           <select
@@ -228,7 +228,7 @@ function SignUp(props){
                       </div>
                       <div className={"flex justify-center mt-20"}>
                           <button className={"!text-xl form-button button button-text m-tablet:px-20"}
-                                  onClick={handleSubmit}>Inregistrare
+                                  onClick={handleSubmit}>Înregistrare
                           </button>
                       </div>
 

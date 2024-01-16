@@ -85,7 +85,7 @@ function EditareNotita(){
                 <textarea className={"px-3 py-2 h-[25rem] w-full"} rows="10" cols="50" value={textareaContent}
                           onChange={handleTextareaChange}></textarea>
             </div>
-            <button onClick={salveazaTextul} className={"button button-text py-[0.313rem] px-[3.125rem]"}>Salveaza</button>
+            <button onClick={salveazaTextul} className={"button button-text py-[0.313rem] px-[3.125rem]"}>Salvează</button>
         </div>
     )
 }

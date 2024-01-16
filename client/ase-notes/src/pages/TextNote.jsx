@@ -200,7 +200,7 @@ function TextNote() {
                            cols={50}></textarea>
                             <div className={"mt-3"}>
                                 <button className={"button button-text px-[1.25rem] py-[0.625rem] w-[10rem]"}
-                                        onClick={stergeText}>Sterge
+                                        onClick={stergeText}>Șterge
                                 </button>
                             </div>
 
@@ -214,7 +214,7 @@ function TextNote() {
                 </div>
                 <div className="input-container">
                     <label className={"text-main-pink mb-12 text-2xl font-bold"} htmlFor="fileInput">
-                        Atasamente
+                        Atașamente
                     </label>
                     <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
                         <label className={"text-main-pink text-lg mr-3 laptop:w-28"}>
@@ -236,7 +236,7 @@ function TextNote() {
                               cols={30}/>
                     </div>
                     <div className={"mb-8 flex gap-8 items-center tablet:flex-col tablet:gap-0"}>
-                        <label className={"text-main-pink text-lg mr-3 laptop:w-24 tablet:w-[7rem]"}>Adauga Link</label>
+                        <label className={"text-main-pink text-lg mr-3 laptop:w-24 tablet:w-[7rem]"}>Adaugă Link</label>
                         <input type={"text"} id={'url-input'} placeholder={"URL"} value={url} onChange={handleUrl}
                                disabled={selectedDocument !== 'Link'}/>
                     </div>
