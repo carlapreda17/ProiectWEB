@@ -8,7 +8,7 @@ import SignOutSVG from "./SVG/SignOutSVG";
 import {useNavigate} from "react-router-dom";
 
 function Navbar(props) {
-    const { isHomepage, isSignUp, isMainPage, classes, prenume } = props;
+    const { isHomepage, isSignUp, isMainPage, classes, prenume, handlePopUp } = props;
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -20,6 +20,10 @@ function Navbar(props) {
 
     const navigateToSettings = () =>{
         navigate("/settings")
+    }
+
+    const navigateToLogin = () =>{
+        navigate("/login-page")
     }
 
     return (
@@ -53,7 +57,7 @@ function Navbar(props) {
                                             <li onClick={navigateToSettings} className={'flex w-[9.375rem]'}>
                                                 <a href={'#'}
                                                    className={'flex gap-[1rem] px-5 py-4 w-full items-center pt-0'}>
-                                                    <p className={'text-[1.125rem] grow'}>Setări</p>
+                                                    <p className={'text-[1.125rem] grow'}>Setari</p>
                                                     <div>
                                                         <SettingsSVG />
                                                     </div>
@@ -63,7 +67,7 @@ function Navbar(props) {
                                             <li className={'flex border-t-[1px] border-t-solid border-t-stone-300 w-[9.375rem]'}>
                                                 <a href={'/'} id={'signOut'}
                                                    className={'flex gap-[0.625rem] px-5 py-4 w-full items-center'}
-                                                    onClick={() => localStorage.clear()}>
+                                                   onClick={() => localStorage.clear()}>
                                                     <p className={'text-[1.125rem] grow'}>Deconectare</p>
                                                     <div>
                                                         <SignOutSVG  />
@@ -75,21 +79,18 @@ function Navbar(props) {
                                 )}
                             </div>
                         ) : (
-                            !isSignUp &&
-                            <a className={'mr-3 text-white text-lg'} href="#">
-                                Despre
-                            </a>
+                            isSignUp && (
+                                <button onClick={navigateToLogin} className={'nav-button button !text-lg'}>
+                                    Conectare
+                                </button>
+                            )
                         )}
-                        { isSignUp || isHomepage && (
-                            <button onClick={() => {
-                                navigate('/login')
-                            }} className={'nav-button button !text-lg'}>
-                                Conectare
                         {isHomepage && (
                             <button onClick={handlePopUp} className={'nav-button button !text-lg'}>
                                 Conectare
                             </button>
                         )}
+
                     </div>
                 </div>
             </nav>
