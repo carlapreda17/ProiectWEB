@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import useAuth from "../components/useAuth";
 import {useNavigate} from "react-router-dom";
 import Footer from "../components/Footer";
@@ -6,20 +6,16 @@ import Navbar from "../components/Navbar"
 import Sidebar from "../components/Sidebar";
 import {passwordRegex} from "../utils/constants";
 import axios from "axios";
-import CloseSVG from "../components/SVG/CloseSVG";
 
 function Settings(){
+    const isAuthenticated = useAuth();
+    console.log("isAuthenticated:", isAuthenticated);
+
     const [newPassword, setNewPassword] = useState('');
     const [repeatedPassword, setRepeatedPassword] = useState('');
 
-    const isAuthenticated = useAuth();
-    const navigate=useNavigate();
     const prenume=localStorage.getItem('prenume');
     const email = localStorage.getItem('email');
-
-    // if(!isAuthenticated) {
-    //     navigate('/login');
-    // }
 
     const handleChange = (event) => {
         setNewPassword(event.target.value);
@@ -102,9 +98,9 @@ function Settings(){
                             className={"pr-16 m-tablet:w-full input-settings tablet:w-1/2 laptop:pr-12 w-1/2 rounded-xl py-2 px-4"}
                             value={newPassword} onChange={handleChange}
                         />
-                        <label htmlFor="password" className={"text-sm  text-dark-purple"}>Repetă parola:</label>
+                        <label htmlFor="passwordRepeat" className={"text-sm  text-dark-purple"}>Repetă parola:</label>
                         <input
-                            id="password"
+                            id="passwordRepeat"
                             type="password"
                             className={"pr-16 m-tablet:w-full input-settings tablet:w-1/2 laptop:pr-12 w-1/2 rounded-xl py-2 px-4"}
                             value={repeatedPassword} onChange={handleChangeRepeated}

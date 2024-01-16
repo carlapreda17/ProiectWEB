@@ -246,7 +246,7 @@ function TextNote() {
                 </div>
                 <div className={'text-center'}>
                     <button className={"button-text button mb-12 px-[1.25rem] py-[0.625rem]"}
-                            onClick={salveaza}>Adaugă document
+                            onClick={salveaza}>Adaugă notiță
                     </button>
                 </div>
             </div>

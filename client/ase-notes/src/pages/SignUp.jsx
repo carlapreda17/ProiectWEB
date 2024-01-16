@@ -147,90 +147,90 @@ function SignUp(props){
         <div className={'page-container'}>
             <Navbar isHomepage={false} isSignUp={true} isMainPage={false} classes={'content-container'}></Navbar>
             <div className={"flex justify-center py-16 "}>
-                <div className={"relative"}>
-                    <form className={"bg-main-pink p-16 rounded-xl shadow-box"}>
-                        <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                            <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                                First Name
-                            </label>
-                            <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"First name"}
-                                   value={fields["prenume"]} onChange={e => handleChange("prenume", e.target.value)}/>
-                        </div>
-                        <div id={'prenume-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["prenume"]}</div>
+              <div className={"relative"}>
+                  <form className={"bg-main-pink p-16 rounded-xl shadow-box"}>
+                      <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                          <label className={"label-text mr-3 w-28 laptop:w-24 laptop:mb-2"}>
+                              Prenume
+                          </label>
+                          <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Prenume"}
+                                 value={fields["prenume"]} onChange={e => handleChange("prenume", e.target.value)}/>
+                      </div>
+                      <div id={'prenume-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["prenume"]}</div>
 
-                        <div className={'mb-8'}>
-                            <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                                <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                                    Last Name
-                                </label>
-                                <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Last Name"}
-                                       value={fields["nume"]} onChange={e => handleChange("nume", e.target.value)}/>
-                            </div>
-                            <div id={'nume-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["nume"]}</div>
-                        </div>
+                      <div className={'mb-8'}>
+                          <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                              <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
+                                  Nume
+                              </label>
+                              <input type="text" className={'pr-16 laptop:pr-12'} placeholder={"Nume"}
+                                     value={fields["nume"]} onChange={e => handleChange("nume", e.target.value)}/>
+                          </div>
+                          <div id={'nume-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["nume"]}</div>
+                      </div>
 
-                        <div className={'mb-8'}>
-                            <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                                <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                                    Email
-                                </label>
-                                <input type="email" className={'pr-16 laptop:pr-12'} placeholder={"Email"}
-                                       value={fields["email"]} onChange={e => handleChange("email", e.target.value)}/>
-                            </div>
-                            <div id={'email-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["email"]}</div>
-                        </div>
+                      <div className={'mb-8'}>
+                          <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                              <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
+                                  Email
+                              </label>
+                              <input type="email" className={'pr-16 laptop:pr-12'} placeholder={"Email"}
+                                     value={fields["email"]} onChange={e => handleChange("email", e.target.value)}/>
+                          </div>
+                          <div id={'email-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["email"]}</div>
+                      </div>
 
-                        <div className={'mb-8'}>
-                            <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                                <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                                    Password
-                                </label>
-                                <input type="password" className={'pr-16 laptop:pr-12'} placeholder={"Password"}
-                                       value={fields["parola"]} onChange={e => handleChange("parola", e.target.value)}/>
-                            </div>
-                            <div id={'parola-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["parola"]}</div>
-                        </div>
+                      <div className={'mb-8'}>
+                          <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                              <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
+                                  Parolă
+                              </label>
+                              <input type="password" className={'pr-16 laptop:pr-12'} placeholder={"Parola"}
+                                     value={fields["parola"]} onChange={e => handleChange("parola", e.target.value)}/>
+                          </div>
+                          <div id={'parola-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["parola"]}</div>
+                      </div>
 
-                        <div className={'mb-8'}>
-                            <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                                <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                                    Phone
-                                </label>
-                                <input className={'pr-16 laptop:pr-12'} placeholder={"Phone number"}
-                                       value={fields["telefon"]} onChange={e => handleChange("telefon", e.target.value)}/>
-                            </div>
-                            <div id={'telefon-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["telefon"]}</div>
-                        </div>
+                      <div className={'mb-8'}>
+                          <div className={"flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                              <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
+                                  Telefon
+                              </label>
+                              <input className={'pr-16 laptop:pr-12'} placeholder={"Telefon"}
+                                     value={fields["telefon"]} onChange={e => handleChange("telefon", e.target.value)}/>
+                          </div>
+                          <div id={'telefon-error'} className={"error-text pt-4 pl-40 hidden"}>{errors["telefon"]}</div>
+                      </div>
 
-                        <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
-                            <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                                University
-                            </label>
-                            <select
-                                className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
-                                name="facultate" value={selectedFacultate} onChange={handleSelectFacultate}>
-                                <option className={"bg-white"} value="Cibernetică Economică">Cibernetică Economică</option>
-                                <option className={"bg-white"} value="Informatică Economică">Informatică Economică</option>
-                                <option className={"bg-white"} value="Statistică Economică">Statistică Economică</option>
-                            </select>
-                        </div>
-                        <div className={"mb-8 flex gap-8 items-center justify-center laptop:gap-1"}>
-                            <label className={"label-text mr-3 w-28 laptop:w-24"}>
-                                Year
-                            </label>
-                            <select
-                                className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
-                                name="an_facultate" value={selectedAn} onChange={handleSelectAn}>
-                                <option className={"bg-white"} value="1">1</option>
-                                <option className={"bg-white"} value="2">2</option>
-                                <option className={"bg-white"} value="3">3</option>
-                            </select>
-                        </div>
-                        <div className={"flex justify-center mt-20"}>
-                            <button className={"!text-xl form-button button button-text m-tablet:px-20"}
-                                    onClick={handleSubmit}>Submit
-                            </button>
-                        </div>
+                      <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                          <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
+                              Facultate
+                          </label>
+                          <select
+                              className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
+                              name="facultate" value={selectedFacultate} onChange={handleSelectFacultate}>
+                              <option className={"bg-white"} value="Cibernetică Economică">Cibernetică economică</option>
+                              <option className={"bg-white"} value="Informatică Economică">Informatică Economică</option>
+                              <option className={"bg-white"} value="Statistică Economică">Statistică</option>
+                          </select>
+                      </div>
+                      <div className={"mb-8 flex gap-8 items-center justify-between laptop:gap-1 tablet:justify-center"}>
+                          <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
+                              An
+                          </label>
+                          <select
+                              className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
+                              name="an_facultate" value={selectedAn} onChange={handleSelectAn}>
+                              <option className={"bg-white"} value="1">1</option>
+                              <option className={"bg-white"} value="2">2</option>
+                              <option className={"bg-white"} value="3">3</option>
+                          </select>
+                      </div>
+                      <div className={"flex justify-center mt-20"}>
+                          <button className={"!text-xl form-button button button-text m-tablet:px-20"}
+                                  onClick={handleSubmit}>Înregistrare
+                          </button>
+                      </div>
 
                     </form>
                 </div>

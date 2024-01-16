@@ -6,9 +6,12 @@ import Sidebar from "../components/Sidebar";
 import {getMaterie, getNotiteMaterie} from "../utils/functions";
 import Notita from "../components/Notita";
 import {useNavigate} from "react-router-dom";
+import useAuth from "../components/useAuth";
 
 function PaginaMaterie() {
+    const isAuthenticated = useAuth();
     const [materie, setMaterie] = useState(null);
+    const [numeMaterie, setNumeMaterie] = useState('');
     const [notite, setNotite] = useState([]);
     const notiteInitialeRef = useRef([]);
 
@@ -21,10 +24,13 @@ function PaginaMaterie() {
     const navigate=useNavigate();
 
     useEffect(() => {
+        if(!isAuthenticated) return ;
+
         if(id_materie) {
             getMaterie(id_materie).then(response => {
                 if(response) {
                     setMaterie(response.data.message.materie);
+                    setNumeMaterie(response.data.message.nume_materie);
                 }
             });
 
@@ -35,12 +41,14 @@ function PaginaMaterie() {
                 }
             })
         }
-    }, []);
+    }, [isAuthenticated]);
+
+    console.log(notite)
 
     useEffect(() => {
         if(!notiteInitialeRef.current.length) return;
 
-        let notiteSortate = [...notiteInitialeRef.current];
+        let notiteSortate = [...notiteInitialeRef.current]
 
         if(sortType === 'Course') {
             notiteSortate = notiteSortate.filter(notita => notita.id_notita_curs);
@@ -106,11 +114,11 @@ function PaginaMaterie() {
                                 name={'sort'}
                                 value={sortOrder}
                                 onChange={(e) => setSortOrder(e.target.value)}>
-                                <option className={"bg-white"} value="">Alege...</option>
-                                <option className={"bg-white"} value="By Date Asc.">Cele mai vechi</option>
-                                <option className={"bg-white"} value="By Date Desc.">Cele mai recente</option>
-                                <option className={"bg-white"} value="By Name Asc.">A-Z</option>
-                                <option className={"bg-white"} value="By Name Desc.">Z-A</option>
+                                <option className={"bg-white"} value="">Choose...</option>
+                                <option className={"bg-white"} value="By Date Asc.">By Date Asc.</option>
+                                <option className={"bg-white"} value="By Date Desc.">By Date Desc.</option>
+                                <option className={"bg-white"} value="By Name Asc.">By Name Asc.</option>
+                                <option className={"bg-white"} value="By Name Desc.">By Name Desc.</option>
                             </select>
                         </div>
                     </div>

@@ -43,7 +43,7 @@ function Homepage(props){
                 </div>
             </div>
             <div className={'background-svg bg-background w-full'}>
-                <div className={'content-container bg-transparent py-14 m-tablet:px-8 tablet:px-6'}>
+                <div id={'about-section'} className={'content-container bg-transparent py-14 m-tablet:px-8 tablet:px-6'}>
                     <h2 className={'text-dark-purple text-center tablet:text-3xl'}>Despre noi</h2>
                     <div className={'mb-5'}>
                         <h4 className={'text-dark-purple text-2xl tablet:text-xl'}>Bine ai venit la GirlGnosis - Unde Puterea și Educația se intersectează!</h4>

@@ -339,9 +339,7 @@ textarea:focus-visible {
     width: 100%;
   }
 
-  #overlay-photo > button {
-    top: 6.5%;
-  }
+
 }
 
 @media screen and (max-width: 700px) {
@@ -360,20 +358,12 @@ textarea:focus-visible {
     border-bottom: 2px solid #F875AA;
   }
 
-  #overlay-photo > button {
-    top: 4%;
-  }
-
   #attach-image-container {
     top: 8%;
   }
 }
 
 @media screen and (max-width: 505px) {
-  #overlay-photo > button {
-    top: 5%;
-  }
-
   #attach-image-container {
     right: 20%;
   }
@@ -422,8 +412,14 @@ textarea:focus-visible {
 
 }
 
+.markdown-notita > p{
+  font-size: 1rem;
+  text-align: start;
+}
+
 .textarea-container{
   margin-top: 4rem;
+  margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;

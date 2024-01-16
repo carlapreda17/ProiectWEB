@@ -1,5 +1,6 @@
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import ReactMarkdown from "react-markdown";
 
 function Notita(props) {
     const {notita} = props;
@@ -15,14 +16,12 @@ function Notita(props) {
         {
             navigate(`/editNotita?seminar=${notita.id_notita_seminar}`)
         }
-
-
     }
 
     return (
-        <div onClick={navigateToNotita} className={'notita cursor-pointer w-[30%] h-28 p-4 rounded-md m-tablet:w-[48%]'}>
+        <div onClick={navigateToNotita} className={'notita cursor-pointer w-[30%] h-40 p-4 rounded-md m-tablet:w-[48%]'}>
             <p className={'text-center text-main-pink italic font-bold'}>{notita.titlu}</p>
-            <p className={'mt-4 text-base line-clamp-2 text-wrap text-start'}>{text}</p>
+            <ReactMarkdown className={'markdown-notita mt-4 !ext-sm line-clamp-2 text-wrap text-start'}>{text}</ReactMarkdown>
         </div>
     )
 }
