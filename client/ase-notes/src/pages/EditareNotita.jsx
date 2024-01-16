@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
-import useAuth from "../components/useAuth";
 import {useLocation} from "react-router-dom";
-import {getMaterie, getNotiteMaterie} from "../utils/functions";
 import {getNotitaCurs,getNotitaSeminar,updateNotitaCurs, updateNotitaSeminar} from "../utils/functions";
 
 function EditareNotita(){
