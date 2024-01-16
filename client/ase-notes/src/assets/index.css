@@ -367,6 +367,9 @@ textarea:focus-visible {
   #attach-image-container {
     right: 20%;
   }
+  .input-settings, .button-settings{
+    width: 100% !important;
+  }
 }
 /* Main Page Materii End */
 

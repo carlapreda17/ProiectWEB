@@ -44,7 +44,7 @@ function Navbar(props) {
                                             <li className={'flex w-[9.375rem]'}>
                                                 <a href={"/main-page"}
                                                    className={'flex gap-[1rem] w-full items-center px-5 py-4'}>
-                                                    <p className={'text-[1.125rem] grow'}>Home</p>
+                                                    <p className={'text-[1.125rem] grow'}>Acasa</p>
                                                     <div>
                                                         <HouseSVG />
                                                     </div>
@@ -53,7 +53,7 @@ function Navbar(props) {
                                             <li onClick={navigateToSettings} className={'flex w-[9.375rem]'}>
                                                 <a href={'#'}
                                                    className={'flex gap-[1rem] px-5 py-4 w-full items-center pt-0'}>
-                                                    <p className={'text-[1.125rem] grow'}>Settings</p>
+                                                    <p className={'text-[1.125rem] grow'}>Setări</p>
                                                     <div>
                                                         <SettingsSVG />
                                                     </div>
@@ -62,9 +62,9 @@ function Navbar(props) {
                                             </li>
                                             <li className={'flex border-t-[1px] border-t-solid border-t-stone-300 w-[9.375rem]'}>
                                                 <a href={'/'} id={'signOut'}
-                                                   className={'flex gap-[1rem] px-5 py-4 w-full items-center'}
+                                                   className={'flex gap-[0.625rem] px-5 py-4 w-full items-center'}
                                                     onClick={() => localStorage.clear()}>
-                                                    <p className={'text-[1.125rem] grow'}>Sign out</p>
+                                                    <p className={'text-[1.125rem] grow'}>Deconectare</p>
                                                     <div>
                                                         <SignOutSVG  />
                                                     </div>
@@ -75,19 +75,19 @@ function Navbar(props) {
                                 )}
                             </div>
                         ) : (
-                            !isSignUp || !isMainPage || !isHomepage &&
-                            <button className={'mr-3 text-white text-lg'}
-                            onClick={() => {
-                                document.getElementById('about-section').scrollIntoView({ behavior: "smooth"});
-                            }}>
-                                About
-                            </button>
+                            !isSignUp &&
+                            <a className={'mr-3 text-white text-lg'} href="#">
+                                Despre
+                            </a>
                         )}
                         { isSignUp || isHomepage && (
                             <button onClick={() => {
                                 navigate('/login')
                             }} className={'nav-button button !text-lg'}>
-                                Log In
+                                Conectare
+                        {isHomepage && (
+                            <button onClick={handlePopUp} className={'nav-button button !text-lg'}>
+                                Conectare
                             </button>
                         )}
                     </div>
