@@ -46,23 +46,31 @@ router.post('/login', async(req, res) => {
     }
 });
 
-router.get('/authenticated', async(req, res) => {
+router.put('/changePassword', async(req, res) => {
     try {
-        const token = req.headers['authorization'].split(' ')[1];
-        console.log(token);
-        const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-        console.log(decoded);
+        const {email, newPassword} = req.body;
+
         const user = await Utilizator.scope(null).findOne({
             where: {
-                id_utilizator: decoded.id
+                email: email
             }
         });
-        const {prenume} = user;
-        return res.status(200).json({success: true, message: "User authenticated", data: {'prenume': prenume}});
+
+        const samePassword = bcrypt.compareSync(newPassword, user.dataValues.parola);
+        if(samePassword) {
+            return res.status(403).json({success: false, message: "New password cannot be the same as the old one.", data: {}});
+        } else {
+            const salt = bcrypt.genSaltSync(10);
+            const newHashedPassword = bcrypt.hashSync(newPassword, salt);
+            await user.update({parola: newHashedPassword});
+
+            return res.status(200).json({success: true, message: "Password changed.", data:{}});
+        }
     } catch(error) {
         console.error('Error:', error);
         res.status(500).json({success: false, message: 'An error occurred'});
     }
+
 });
 
 module.exports = router;

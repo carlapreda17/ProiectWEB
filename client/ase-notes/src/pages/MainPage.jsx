@@ -16,7 +16,6 @@ function MainPage(){
     const isAuthenticated = useAuth();
 
     const prenume=localStorage.getItem('prenume');
-    const nume=localStorage.getItem('nume');
     const facultate=localStorage.getItem('facultate');
     const an=localStorage.getItem('an');
     const email=localStorage.getItem('email');

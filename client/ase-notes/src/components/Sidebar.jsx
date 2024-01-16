@@ -1,7 +1,6 @@
 import UserSVG from "./SVG/UserSVG";
 import ArrowDownSVG from "./SVG/ArrowDownSVG";
 import React, {useEffect, useState} from "react";
-import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import {getAtasamente, getNotite} from "../utils/functions";
 
@@ -70,7 +69,7 @@ function Sidebar(props) {
                 </button>
             </div>
             <div className={"notes-section"}>
-                <div className={"courses dropdown"}>
+                <div className={"courses dropdown tablet:w-full"}>
                     <div className={"titles-container"}>
                         <span className={"text-base text-dark-purple"}>Notițe</span>
                         <ArrowDownSVG colorClass={"text-dark-purple"}/>
@@ -83,7 +82,7 @@ function Sidebar(props) {
                         ))}
                     </div>
                 </div>
-                <div className={"attach dropdown"}>
+                <div className={"attach dropdown tablet:w-full"}>
                     <div className={"titles-container"}>
                         <a href={'#'} className={'text-dark-purple'}>Atașamente</a>
                         <ArrowDownSVG colorClass={"text-dark-purple"}></ArrowDownSVG>
