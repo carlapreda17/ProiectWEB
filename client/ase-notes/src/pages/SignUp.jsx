@@ -209,9 +209,9 @@ function SignUp(props){
                           <select
                               className={"bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-main-pink pr-16 laptop:pr-12"}
                               name="facultate" value={selectedFacultate} onChange={handleSelectFacultate}>
-                              <option className={"bg-white"} value="Cibernetica">Cibernetică economică</option>
-                              <option className={"bg-white"} value="Informatica Economica">Informatică Economică</option>
-                              <option className={"bg-white"} value="Statistica">Statistică</option>
+                              <option className={"bg-white"} value="Cibernetică Economică">Cibernetică economică</option>
+                              <option className={"bg-white"} value="Informatică Economică">Informatică Economică</option>
+                              <option className={"bg-white"} value="Statistică Economică">Statistică</option>
                           </select>
                       </div>
                       <div className={"mb-8 flex gap-8 items-center justify-center laptop:gap-1"}>
@@ -232,8 +232,8 @@ function SignUp(props){
                           </button>
                       </div>
 
-                  </form>
-              </div>
+                    </form>
+                </div>
             </div>
 
             <Footer/>
