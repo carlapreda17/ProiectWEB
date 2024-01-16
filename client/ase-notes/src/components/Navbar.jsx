@@ -8,7 +8,7 @@ import SignOutSVG from "./SVG/SignOutSVG";
 import {useNavigate} from "react-router-dom";
 
 function Navbar(props) {
-    const { isHomepage, isSignUp, isMainPage, classes, prenume, handlePopUp } = props;
+    const { isHomepage, isSignUp, isMainPage, classes, prenume } = props;
 
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -75,13 +75,18 @@ function Navbar(props) {
                                 )}
                             </div>
                         ) : (
-                            !isSignUp &&
-                            <a className={'mr-3 text-white text-lg'} href="#">
+                            !isSignUp || !isMainPage || !isHomepage &&
+                            <button className={'mr-3 text-white text-lg'}
+                            onClick={() => {
+                                document.getElementById('about-section').scrollIntoView({ behavior: "smooth"});
+                            }}>
                                 About
-                            </a>
+                            </button>
                         )}
-                        {isHomepage && (
-                            <button onClick={handlePopUp} className={'nav-button button !text-lg'}>
+                        { isSignUp || isHomepage && (
+                            <button onClick={() => {
+                                navigate('/login')
+                            }} className={'nav-button button !text-lg'}>
                                 Log In
                             </button>
                         )}

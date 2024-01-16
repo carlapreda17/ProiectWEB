@@ -112,3 +112,43 @@ export async function updateNotitaSeminar(data) {
         throw new Error(error.response?.data?.message || 'Eroare la actualizarea notiței');
     }
 }
+
+export async function getAtasamenteNotita(email, id_notita_curs, id_notita_seminar) {
+    try {
+        return await axios.get('http://localhost:3001/notes/getAtasamentePerNotita', {
+            params: {
+                email: email,
+                id_notita_curs: id_notita_curs,
+                id_notita_seminar: id_notita_seminar
+            }
+        });
+    } catch (error) {
+        console.error("Eroare la crearea cererii:", error.message);
+    }
+}
+
+export const openImage = (src) => {
+    const container = document.getElementById('attach-image-container');
+    if(container) {
+        container.style.display = 'block';
+        const img = container.children[0].children[0];
+        img.src = src;
+    }
+
+    const overlay = document.getElementById('overlay-photo');
+    if(overlay) {
+        overlay.style.display = 'block';
+    }
+}
+
+export function closeImageAttachment() {
+    const container = document.getElementById('attach-image-container');
+    if(container) {
+        container.style.display = 'none';
+    }
+
+    const overlay = document.getElementById('overlay-photo');
+    if(overlay) {
+        overlay.style.display = 'none';
+    }
+}

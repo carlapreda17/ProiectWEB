@@ -6,9 +6,12 @@ import Sidebar from "../components/Sidebar";
 import {getMaterie, getNotiteMaterie} from "../utils/functions";
 import Notita from "../components/Notita";
 import {useNavigate} from "react-router-dom";
+import useAuth from "../components/useAuth";
 
 function PaginaMaterie() {
+    const isAuthenticated = useAuth();
     const [materie, setMaterie] = useState(null);
+    const [numeMaterie, setNumeMaterie] = useState('');
     const [notite, setNotite] = useState([]);
     const notiteInitialeRef = useRef([]);
 
@@ -21,10 +24,13 @@ function PaginaMaterie() {
     const navigate=useNavigate();
 
     useEffect(() => {
+        if(!isAuthenticated) return ;
+
         if(id_materie) {
             getMaterie(id_materie).then(response => {
                 if(response) {
                     setMaterie(response.data.message.materie);
+                    setNumeMaterie(response.data.message.nume_materie);
                 }
             });
 
@@ -35,7 +41,9 @@ function PaginaMaterie() {
                 }
             })
         }
-    }, []);
+    }, [isAuthenticated]);
+
+    console.log(notite)
 
     useEffect(() => {
         if(!notiteInitialeRef.current.length) return;
@@ -83,34 +91,34 @@ function PaginaMaterie() {
                     <div className={'sorting-container flex justify-between mobile:flex-col mobile:gap-2'}>
                         <div>
                             <label className={"text-base leading-4 text-dark-purple font-bold mr-3 w-28 laptop:w-24"}>
-                                Type
+                                Tip
                             </label>
                             <select
                                 className={'bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-dark-purple pr-16 laptop:pr-12'}
                                 name={'sortType'}
                                 value={sortType}
                                 onChange={(e) => setSortType(e.target.value)}>
-                                <option className={"bg-white"} value="">Choose...</option>
-                                <option className={"bg-white"} value="Course">Course</option>
+                                <option className={"bg-white"} value="">Alege...</option>
+                                <option className={"bg-white"} value="Course">Curs</option>
                                 <option className={"bg-white"} value="Seminar">Seminar</option>
-                                <option className={"bg-white"} value="All">All</option>
+                                <option className={"bg-white"} value="All">Toate</option>
                             </select>
                         </div>
 
                         <div>
                         <label className={"text-base leading-4 text-dark-purple font-bold mr-3 w-28 laptop:w-24"}>
-                                Sort by
+                                Sortează după
                             </label>
                             <select
                                 className={'bg-white text-base border-solid rounded-2xl pl-2 py-1.5 text-dark-purple pr-16 laptop:pr-12'}
                                 name={'sort'}
                                 value={sortOrder}
                                 onChange={(e) => setSortOrder(e.target.value)}>
-                                <option className={"bg-white"} value="">Choose...</option>
-                                <option className={"bg-white"} value="By Date Asc.">By Date Asc.</option>
-                                <option className={"bg-white"} value="By Date Desc.">By Date Desc.</option>
-                                <option className={"bg-white"} value="By Name Asc.">By Name Asc.</option>
-                                <option className={"bg-white"} value="By Name Desc.">By Name Desc.</option>
+                                <option className={"bg-white"} value="">Alege...</option>
+                                <option className={"bg-white"} value="By Date Asc.">Dată Asc.</option>
+                                <option className={"bg-white"} value="By Date Desc.">Dată Desc.</option>
+                                <option className={"bg-white"} value="By Name Asc.">Nume Asc.</option>
+                                <option className={"bg-white"} value="By Name Desc.">Nume Desc.</option>
                             </select>
                         </div>
                     </div>

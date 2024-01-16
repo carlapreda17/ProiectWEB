@@ -2,9 +2,11 @@ import UserSVG from "./SVG/UserSVG";
 import ArrowDownSVG from "./SVG/ArrowDownSVG";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {getAtasamente, getNotite} from "../utils/functions";
+import {getAtasamente, getNotite, openImage} from "../utils/functions";
+import useAuth from "./useAuth";
 
 function Sidebar(props) {
+    const isAuthenticated = useAuth();
     const prenume=localStorage.getItem('prenume');
     const nume=localStorage.getItem('nume');
     const facultate=localStorage.getItem('facultate');
@@ -15,6 +17,8 @@ function Sidebar(props) {
     const [atasamente, setAtasamente]=useState([]);
 
     useEffect(()=>{
+        if(!isAuthenticated) return;
+
         getNotite(email).then(response=> {
             if(response) {
                 setNotite(response.data.message.notite);
@@ -29,26 +33,12 @@ function Sidebar(props) {
                 }
             }
         });
-    },[]);
+    },[isAuthenticated]);
 
     const navigate=useNavigate();
 
     const AdaugaNotita= ()=>{
         navigate('/text-note')
-    }
-
-    const openImage = (src) => {
-        const container = document.getElementById('attach-image-container');
-        if(container) {
-            container.style.display = 'block';
-            const img = container.children[0].children[0];
-            img.src = src;
-        }
-
-        const overlay = document.getElementById('overlay-photo');
-        if(overlay) {
-            overlay.style.display = 'block';
-        }
     }
 
     return (
@@ -78,7 +68,9 @@ function Sidebar(props) {
                     <div className={"notes-container"}>
                         {notite?.map((notita, index) => (
                             <div key={index} className={'note-content text-dark-purple'}
-                                 value={notita.titlu}>{notita.titlu}</div>
+                                 value={notita.titlu}>
+                                <a href={`/editNotita?${notita.id_notita_seminar ? 'seminar' : 'curs'}=${notita.id_notita_seminar ? notita.id_notita_seminar : notita.id_notita_curs}`}>{notita.titlu}</a>
+                            </div>
                         ))}
                     </div>
                 </div>

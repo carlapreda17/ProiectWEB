@@ -9,7 +9,7 @@ import axios from "axios";
 import useAuth from "../components/useAuth";
 import Materie from "../components/Materie";
 import Sidebar from "../components/Sidebar";
-import {getAtasamente, getMaterii, getNotite} from "../utils/functions";
+import {closeImageAttachment, getAtasamente, getMaterii, getNotite} from "../utils/functions";
 import CloseSVG from "../components/SVG/CloseSVG";
 
 function MainPage(){
@@ -24,13 +24,9 @@ function MainPage(){
     const [atasamente, setAtasamente]=useState([]);
     const [materii, setMaterii]=useState([]);
 
-    const navigate=useNavigate();
-
-    if(!isAuthenticated) {
-        navigate('/login');
-    }
-
     useEffect( () => {
+        if(!isAuthenticated) return;
+
         getMaterii(facultate, an).then(response=> {
             if(response) {
                 setMaterii(response.data.message.materii);
@@ -51,19 +47,9 @@ function MainPage(){
                 }
             }
         });
-    },[]);
+    },[isAuthenticated]);
 
-    function closeImageAttachment() {
-        const container = document.getElementById('attach-image-container');
-        if(container) {
-            container.style.display = 'none';
-        }
 
-        const overlay = document.getElementById('overlay-photo');
-        if(overlay) {
-            overlay.style.display = 'none';
-        }
-    }
 
     return(
         <div className={"page-container relative"}>

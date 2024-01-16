@@ -71,6 +71,43 @@ router.get('/getAtasamente', async(req, res) => {
     }
 });
 
+router.get('/getAtasamentePerNotita', async(req, res) => {
+    try {
+        const { email, id_notita_curs = null, id_notita_seminar = null } = req.query;
+
+        const { dataValues: { id_utilizator } } = await Utilizator.findOne({
+            where: {
+                email:email
+            }
+        });
+
+        let atasamente;
+        if(id_notita_curs !== null) {
+            const id = Number(id_notita_curs);
+            atasamente = await AtasamentCurs.findAll({
+                where: {
+                    id_utilizator: id_utilizator,
+                    id_notita_curs: id
+                }
+            });
+        }
+
+        if(id_notita_seminar !== null) {
+            const id = Number(id_notita_seminar);
+            atasamente = await AtasamentSeminar.findAll({
+                where: {
+                    id_utilizator: id_utilizator,
+                    id_notita_seminar: id
+                }
+            });
+        }
+        return res.status(201).json({success: true, message: {'atasamente': atasamente}});
+    } catch(error) {
+        console.error('Error:', error);
+        res.status(500).json({success: false, message: 'An error occurred'});
+    }
+});
+
 router.get('/getNotiteMaterie', async(req, res) => {
     try {
         const {id_materie, email} = req.query;
@@ -98,9 +135,20 @@ router.get('/getNotiteMaterie', async(req, res) => {
                 id_utilizator: id_utilizator
             }
         });
-        notiteSeminar.filter(notita => notita.nume_materie===nume);
-        notiteCurs.filter(notita => notita.nume_materie===nume);
-        const notite = notiteSeminar.concat(notiteCurs);
+
+        const filteredSeminar = notiteSeminar.filter((notita) => {
+            const {dataValues: {nume_materie}} = notita;
+
+            return nume_materie===nume;
+        });
+
+        const filteredCurs = notiteCurs.filter((notita) => {
+            const {dataValues: {nume_materie}} = notita;
+
+            return nume_materie===nume;
+        });
+
+        const notite = filteredSeminar.concat(filteredCurs);
 
         return res.status(201).json({success: true, message: {'notite': notite}});
     } catch(error) {

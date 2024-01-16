@@ -145,7 +145,7 @@ function SignUp(props){
 
     return(
         <div className={'page-container'}>
-            <Navbar isHomepage={false} isSignUp={true} classes={'content-container'}></Navbar>
+            <Navbar isHomepage={false} isSignUp={true} isMainPage={false} classes={'content-container'}></Navbar>
             <div className={"flex justify-center py-16 "}>
               <div className={"relative"}>
                   <form className={"bg-main-pink p-16 rounded-xl shadow-box"}>
@@ -214,7 +214,7 @@ function SignUp(props){
                               <option className={"bg-white"} value="Statistica">Statistica</option>
                           </select>
                       </div>
-                      <div className={"mb-8 flex gap-8 items-center laptop:flex-col laptop:gap-1"}>
+                      <div className={"mb-8 flex gap-8 items-center justify-center laptop:gap-1"}>
                           <label className={"label-text mr-3 w-28 laptop:w-24"}>
                               Year
                           </label>
