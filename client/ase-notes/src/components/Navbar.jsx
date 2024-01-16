@@ -22,6 +22,10 @@ function Navbar(props) {
         navigate("/settings")
     }
 
+    const navigateToLogin = () =>{
+        navigate("/login-page")
+    }
+
     return (
         <div className={'bg-main-pink shadow-nav z-10 sticky'}>
             <nav className={'navbar ' + classes + ' m-tablet:px-8 tablet:px-6'}>
@@ -75,16 +79,18 @@ function Navbar(props) {
                                 )}
                             </div>
                         ) : (
-                            !isSignUp &&
-                            <a className={'mr-3 text-white text-lg'} href="#">
-                                Despre
-                            </a>
+                            isSignUp && (
+                                <button onClick={navigateToLogin} className={'nav-button button !text-lg'}>
+                                    Conectare
+                                </button>
+                            )
                         )}
                         {isHomepage && (
                             <button onClick={handlePopUp} className={'nav-button button !text-lg'}>
                                 Conectare
                             </button>
                         )}
+
                     </div>
                 </div>
             </nav>
