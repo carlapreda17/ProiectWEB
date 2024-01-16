@@ -48,7 +48,7 @@ function PaginaMaterie() {
     useEffect(() => {
         if(!notiteInitialeRef.current.length) return;
 
-        let notiteSortate = [...notiteInitialeRef.current];
+        let notiteSortate = [...notiteInitialeRef.current]
 
         if(sortType === 'Course') {
             notiteSortate = notiteSortate.filter(notita => notita.id_notita_curs);
@@ -114,11 +114,11 @@ function PaginaMaterie() {
                                 name={'sort'}
                                 value={sortOrder}
                                 onChange={(e) => setSortOrder(e.target.value)}>
-                                <option className={"bg-white"} value="">Alege...</option>
-                                <option className={"bg-white"} value="By Date Asc.">Dată Asc.</option>
-                                <option className={"bg-white"} value="By Date Desc.">Dată Desc.</option>
-                                <option className={"bg-white"} value="By Name Asc.">Nume Asc.</option>
-                                <option className={"bg-white"} value="By Name Desc.">Nume Desc.</option>
+                                <option className={"bg-white"} value="">Choose...</option>
+                                <option className={"bg-white"} value="By Date Asc.">By Date Asc.</option>
+                                <option className={"bg-white"} value="By Date Desc.">By Date Desc.</option>
+                                <option className={"bg-white"} value="By Name Asc.">By Name Asc.</option>
+                                <option className={"bg-white"} value="By Name Desc.">By Name Desc.</option>
                             </select>
                         </div>
                     </div>

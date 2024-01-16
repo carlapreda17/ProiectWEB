@@ -214,7 +214,7 @@ function SignUp(props){
                               <option className={"bg-white"} value="Statistică Economică">Statistică</option>
                           </select>
                       </div>
-                      <div className={"mb-8 flex gap-8 items-center justify-center laptop:gap-1"}>
+                      <div className={"mb-8 flex gap-8 items-center justify-between laptop:gap-1 tablet:justify-center"}>
                           <label className={"label-text mr-3 w-28 laptop:w-16 laptop:mb-2"}>
                               An
                           </label>
