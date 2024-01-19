@@ -1,0 +1,10 @@
+1. In locul/folderul in care vreti sa clonati obiectul folositi comanda aceasta:
+git clone https://github.com/carlapreda17/ProiectWEB.git
+ - iar daca folositi o cheie SSH aceasta:
+git clone git@github.com:carlapreda17/ProiectWEB.git
+
+2. Pentru a deschide backend-ul navigati in folderul node ( cd node ) si folositi comanda:
+node index.js
+
+3. Pentru a deschide frontend-ul navigati in folderul ase-notes ( cd client/ase-notes ) si folositi comanda:
+npm start
